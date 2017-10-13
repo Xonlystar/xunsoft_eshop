@@ -1,0 +1,35 @@
+
+.saleRetail_saleOrder_add_kindItem{
+	padding-bottom: 14px;
+	margin-bottom: 15px;
+	background-color: rgb(255,255,255);
+	word-break: break-all;
+}
+
+.saleRetail_saleOrder_add_kindItem .title{
+	font-size: 17px;
+	color:#2A85C3;
+	padding-top: 10px;
+}
+
+
+.saleRetail_saleOrder_selectMemberCard_item{
+	margin-bottom:15px;
+	padding-bottom:15px;
+	background-color:rgb(255,255,255);
+}
+
+.saleRetail_saleOrder_selectMemberCard_item .img-responsive{
+	margin: auto;
+}
+
+
+
+
+.saleRetail_saleOrder_addSettlement_label{
+	font-size: 30px;
+	background: black;
+	color:white;
+	text-align: center;
+	padding: 15px;
+}

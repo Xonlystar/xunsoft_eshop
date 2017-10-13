@@ -1,0 +1,142 @@
+<div class="pages">
+  <div data-page="purchase_common_filter" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+             <i class="icon iconfont icon-fanhui"></i>
+          </a>
+        </div>
+        <div class="center sliding">筛选</div>
+        <div class="right">
+          <a v-on:click="clear" href="#" class="link">
+           
+          </a>
+          <a v-on:click="save" href="#" class="link">
+            <i class="icon iconfont icon-save1"></i> 
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="page-content">
+      <div class="content-block-title">单据日期</div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+             <!--  <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div> -->
+              <div class="item-inner">
+                <div class="item-title label">开始日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeFrom" id="startDate" type="text" placeholder="开始日期">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+             <!--  <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div> -->
+              <div class="item-inner">
+                <div class="item-title label">结束日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeTo" id="endDate" type="text" placeholder="结束日期">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      
+      <div class="list-block "  >
+        <ul>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select v-model="request.supplierId" id="supplierId">
+                <option v-for="item in response.suppliers"  value="{{item.companyId}}">   {{item.companyName}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">采购供应商</div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select v-model="request.status" id="status">
+                <option v-for="item in response.orderState"  value="{{item.id}}">   {{item.name}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">单据状态</div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+  <div class="list-block "  >
+        <ul>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select v-model="request.creatorId" id="creatorId">
+                <option v-for="item in response.users"  value="{{item.employeeId}}">   {{item.employeeName}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">制单人</div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select v-model="request.sponsorId" id="sponsorId">
+                <option v-for="item in response.users"  value="{{item.employeeId}}">   {{item.employeeName}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">经手人</div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select v-model="request.auditorId" id="auditorId">
+                <option v-for="item in response.users"  value="{{item.employeeId}}">   {{item.employeeName}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">审核人</div>
+                </div>
+              </div>
+            </a>
+          </li>
+           
+
+        </ul>
+
+
+        
+      </div>
+
+
+
+
+<div class="content-block">
+   <a v-on:click="clear" href="#" class="button form-from-json"> 清空已选条件</a>
+</div>
+
+
+
+    </div>
+  </div>
+</div>

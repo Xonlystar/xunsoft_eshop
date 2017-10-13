@@ -1,0 +1,127 @@
+<div class="pages">
+  <div data-page="warehouse_profitLossOrder_update" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+            <i class="icon icon-back"></i>
+            退出
+          </a>
+        </div>
+        <div class="center sliding">益损单修改({{request.profitLossOrderNo}})</div>
+        <div class="right">
+          <a v-on:click="save" href="#" class="link">
+            保存
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content pull-to-refresh-content">
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+      
+      <div class="content-block-title">益损信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div href="#" class="item-content">
+              <div class="item-media">
+                <i class="fa fa-key"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">原始单号</div>
+                <div class="item-input">
+                  <input v-model="request.sourceOrderNo"  type="text" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div href="#" class="item-content">
+              <div class="item-media">
+                <i class="fa fa-clock-o"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">益损日期</div>
+                <div class="item-input">
+                  <input v-model="request.profitLossDate | date" id="profitLossDate" type="text" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea class="resizable" maxlength="100" v-model="request.description" placeholder="备注"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--菜单栏-->
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <div class="row no-gutter">
+            <div class="col-auto">
+            <select-order-kind :data.sync="request.detailList" edit="warehouse/profitLossOrder/editKind.ios.html"></select-order-kind>
+          </div>
+          <div v-on:click="scanKind" class="col-auto">
+            <select-barcode :data.sync="request.detailList" order="31" edit="warehouse/profitLossOrder/editKindPrice.ios.html"></select-barcode>
+          </div>
+          <div  data-order="asc" class="col-auto">
+            <sort-money :data.sync="request.detailList" prop="profitLossMoney"></sort-money>
+          </div>
+          <div data-order="asc" class="col-auto">
+            <sort-amount :data.sync="request.detailList" prop="profitLossAmount"></sort-amount>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block-title">
+      货品信息(总数:{{totalProfitLossAmount}},总额:{{totalprofitLossMoney | currency}})
+    </div>
+    <div>
+      <div class="content-block">
+        <div class="row">
+          <div class="col-auto">
+              <div class="warehouse_profitLossOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 0">
+                  <warehouse-profitloss-detail v-on:delete="delete" :list="request.detailList" :detail="item"></warehouse-profitloss-detail>
+              </div>
+          </div>
+          <div class="col-auto">
+              <div class="warehouse_profitLossOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 1">
+                  <warehouse-profitloss-detail v-on:delete="delete" :list="request.detailList" :detail="item"></warehouse-profitloss-detail>
+              </div>
+          </div>
+          <div class="col-auto">
+              <div class="warehouse_profitLossOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 2">
+                  <warehouse-profitloss-detail v-on:delete="delete" :list="request.detailList"  :detail="item"></warehouse-profitloss-detail>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="request.detailList.length==0">
+        <order-plus></order-plus>
+      </div>
+    </div>
+    <div class="content-block-title">经手人</div>
+    <div class="content-block inset">
+      <div class="content-block-inner">
+        <select-user :source="response.users"
+          :data.sync="request.sponsorId" max="1">
+        </select-user>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,63 @@
+
+<div class="pages">
+    <div data-page="main_dashBoard" class="page">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    
+                </div>
+                <div class="center sliding">
+                    {{title}}
+                </div>
+                <div class="right">
+                    <a href="account/user.ios.html" class="link">
+                        <div class="main_dashBoard_userLogo">
+                            <img class="img-responsive img-circle" :src="userLogo" />   
+                        </div>                 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+         <div class="content-block">
+           <div class="row">
+             <div class="col-auto bg-theme">
+                <div class="main_dashBoard_dashboard">
+                   <p class="text-left">本月入货</p>
+                   <div class="text-right">{{response.monthReceiveTotal}}</div>
+                   <p class="text-left">本周入货</p>
+                   <div class="text-right">{{response.weekReceiveTotal}}</div>
+               </div>
+             </div>
+             <div class="col-auto bg-theme">
+                <div class="main_dashBoard_dashboard">
+                    <p class="text-left">本月出货</p>
+                    <div class="text-right">{{response.monthSaleTotal}}</div>
+                    <p class="text-left">本周出货</p>
+                    <div class="text-right">{{response.weekSaleTotal}}</div>
+                </div>
+             </div>
+             <div class="col-auto bg-theme">
+                <div class="main_dashBoard_dashboard">
+                    <p class="text-left">本月收入</p>
+                    <div class="text-right">{{response.monthReceiptMoney | currency }}</div>
+                    <p class="text-left">本周收入</p>
+                    <div class="text-right">{{response.weekReceiptMoney | currency }}</div> 
+                </div>                
+             </div>
+             <div class="col-auto bg-theme">
+                <div class="main_dashBoard_dashboard">
+                    <p class="text-left">本月支出</p>
+                    <div class="text-right">{{response.monthPayMoney | currency }}</div>
+                    <p class="text-left">本周支出</p>
+                    <div class="text-right">{{response.weekPayMoney | currency }}</div>    
+                </div>             
+             </div>
+           </div>
+         </div>
+        </div>
+        
+    </div>
+</div>   

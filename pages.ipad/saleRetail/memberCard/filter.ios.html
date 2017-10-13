@@ -1,0 +1,158 @@
+<div class="pages">
+	<div data-page="saleRetail_memberCard_filter" class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link">
+						返回
+					</a>
+				</div>
+				<div class="center sliding">筛选</div>
+				<div class="right">
+					<a v-on:click="clear" href="#" class="link">
+						清空
+					</a>
+					<a v-on:click="save" href="#" class="link">
+						确定
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+			<div class="content-block-title">建卡日期范围</div>
+			<div class="list-block inset">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">起始日期</div>
+								<div class="item-input">
+									<input v-model="request.openDateFrom" id="startDate" type="text" placeholder="起始日期">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">截止日期</div>
+								<div class="item-input">
+									<input v-model="request.openDateTo" id="endDate" type="text" placeholder="截止日期">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">最近消费金额范围</div>
+			<div class="list-block inset">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-key"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">最小金额</div>
+								<div class="item-input">
+									<input v-model="request.recentMoneyFrom" type="text" placeholder="最小金额">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-key"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">最大金额</div>
+								<div class="item-input">
+									<input v-model="request.recentMoneyTo" type="text" placeholder="最大金额">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">其他信息</div>
+			<div class="list-block inset">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-book"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									卡号
+								</div>
+								<div class="item-input">
+									<input v-model="request.memberCardNo" type="text" class="" placeholder="卡号">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-user-circle"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									姓名
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_MemberName" type="text" class="" placeholder="姓名">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									最近消费日期
+								</div>
+								<div class="item-input">
+									<input v-model="request.recentDate" id="recentDate" type="text" placeholder="最近消费日期">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">经手人</div>
+			<div class="content-block inset">
+				<div class="content-block-inner">
+					<select-user :source="response.users" :data.sync="request.sponsorId" max="1">
+					</select-user>
+				</div>
+			</div>
+
+			<div class="content-block-title">性别</div>
+			<div class="content-block inset">
+				<div class="content-block-inner">
+					<select-sex :data.sync="request.member_Sex">
+					</select-sex>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

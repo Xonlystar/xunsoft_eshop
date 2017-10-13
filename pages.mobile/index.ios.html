@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>E售易</title>
+    <link rel="stylesheet" href="../lib/framework7/mobilecss/framework7.ios.css">
+    <link rel="stylesheet" href="../lib/framework7/mobilecss/framework7.ios.colors.css">
+    <link rel="stylesheet" href="../lib/awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/saleBatch.ios.css">
+    <link rel="stylesheet" href="css/account.ios.css">
+    <link rel="stylesheet" href="css/app.ios.css">
+    <link rel="stylesheet" href="css/kind.ios.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+</head>
+
+<body>
+
+    <div class="panel-overlay"></div>
+    <!-- 侧滑菜单 -->
+    <div class="panel panel-left panel-cover" id="user">
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                我的信息
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-envelope fa-1x"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                反馈信息
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-wrench"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                软件设置
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-handshake-o"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                功能介绍
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-facebook"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                关于讯商
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-cloud-download"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                检查更新
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-key"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                修改密码
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-content item-link">
+                        <div class="item-media-flag">
+                            <i class="fa fa-sign-out"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                退出登录
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 主界面 -->
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages toolbar-fixed navbar-fixed">
+                <div class="page no-toolbar no-navbar" data-page="index">
+                    <div class="page-content">
+                        <p>启动</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--基础库-->
+    <script type="text/javascript" src="../lib/vue/vue1.js"></script>
+    <script type="text/javascript" src="../lib/framework7/js/framework7.js"></script>
+    <script type="text/javascript" src="../lib/underscore/underscore.min.js"></script>
+    <script type="text/javascript" src="../lib/echarts/echarts.js"></script>
+    <script type="text/javascript" src="../lib/vue/filter.js"></script>
+    <script type="text/javascript" src="../lib/vue/component.mobile.js"></script>
+
+    <script type="text/javascript" src="js/app.ios.js"></script>
+
+    <!--服务-->
+    <script type="text/javascript" src="../services/common.js"></script>
+    <script type="text/javascript" src="../services/accountService.js"></script>
+    <script type="text/javascript" src="../services/baseInfoService.js"></script>
+    <script type="text/javascript" src="../services/purchaseService.js"></script>
+    <script type="text/javascript" src="../services/saleBatchService.js"></script>
+    <script type="text/javascript" src="../services/saleRetailService.js"></script>
+    <script type="text/javascript" src="../services/warehouseService.js"></script>
+    <script type="text/javascript" src="../services/kindService.js"></script>
+    <script type="text/javascript" src="../services/transferService.js"></script>
+    <script type="text/javascript" src="../services/financeService.js"></script>
+    <script type="text/javascript" src="../services/settingService.js"></script>
+    <script type="text/javascript" src="../services/reportService.js"></script>
+
+    <script type="text/javascript" src="../services/accountService.js"></script>
+    <script type="text/javascript" src="../services/checkVersionService.js"></script>
+    <script type="text/javascript" src="../services/pinyin.js"></script>
+
+    <!--销售-->
+    <script type="text/javascript" src="js/saleRetail/sale.js"></script>
+    <script type="text/javascript" src="js/saleRetail/memberCard.js"></script>
+    <script type="text/javascript" src="js/saleBatch/common.js"></script>
+    <script type="text/javascript" src="js/saleBatch/saleOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/deliverOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/receiptOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/returnOrder.js"></script>
+    <script type="text/javascript" src="js/saleRetail/sale.js"></script>
+    <script type="text/javascript" src="js/saleBatch/supplier.js"></script>
+    <script type="text/javascript" src="js/saleBatch/customer.js"></script>
+
+    <!--采购-->
+    <script type="text/javascript" src="js/purchase/purchaseOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/payOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/receiptOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/returnOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/common.js"></script>
+
+    <script type="text/javascript" src="js/kind/kind.js"></script>
+
+    <!--库存-->
+    <script type="text/javascript" src="js/warehouse/shopStock.js"></script>
+    <script type="text/javascript" src="js/warehouse/checkStockOrder.js"></script>
+    <script type="text/javascript" src="js/warehouse/common.js"></script>
+    <script type="text/javascript" src="js/warehouse/profitLessOrder.js"></script>
+    <script type="text/javascript" src="js/warehouse/shopTransfer.js"></script>
+    <script type="text/javascript" src="js/home.js"></script>
+
+    <script type="text/javascript" src="js/account/user.js"></script>
+    <script type="text/javascript" src="js/account/login.js"></script>
+
+
+    <!-- 设置 -->
+    <script type="text/javascript" src="js/setting/feedback.js"></script>
+    <script type="text/javascript" src="js/setting/default.js"></script>
+    <script type="text/javascript" src="js/setting/option.js"></script>
+
+    <!--云报表  -->
+    <script type="text/javascript" src="js/report/saleRank.js"></script>
+    <script type="text/javascript" src="js/report/fundReport.js"></script>
+
+    <script type="text/javascript" src="../cordova.js"></script>
+
+</body>
+
+</html>

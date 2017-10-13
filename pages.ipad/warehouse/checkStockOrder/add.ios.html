@@ -1,0 +1,112 @@
+<div class="pages">
+  <div data-page="warehouse_checkStockOrder_add" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a  v-on:click="back" href="#" class="link"> 
+             <i class="icon icon-back"></i>
+              退出
+            </a>
+        </div>
+        <div class="center sliding">盘点单录入</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+              保存
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+          <div class="content-block-title">盘点基本信息</div>
+          <div class="list-block inset">
+            <ul>
+               <li>
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title label">盘点级别</div>
+                      <div class="item-input">
+                        <select v-model="request.checkStockLevelId"  >
+                         <option value="0">全部</option>
+                         <option value="1">SKU</option>
+                         <option value="2">货号盘点</option>         
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+               </li>
+               <li>
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title label">盘点日期</div>
+                      <div class="item-input">
+                        <input v-model="request.checkStockDate | date" closeOnSelect="true" id="checkStockDate" type="text" />
+                      </div>
+                    </div>
+                  </div>
+               </li>       
+               <li>
+                 <div class="item-content">
+                     <div class="item-media">
+                           <i class="fa fa-jpy"></i>  
+                     </div>
+                     <div class="item-inner">
+                          <div class="item-title label">备注</div>
+                          <div class="item-input">
+                            <input type="text" v-model='request.description' />
+                          </div>
+                     </div>
+                </div>
+               </li>           
+            </ul>
+          </div>  
+          <!--菜单栏-->
+          <div class="content-block inset">
+            <div class="content-block-inner">
+              <warehouse-checkstock-menu :list="request.detailList"></warehouse-checkstock-menu>
+            </div>
+          </div>
+          <div class="content-block-title"> 
+          货品信息(盘点总数:{{totalCheckStockAmount}})
+          </div>
+          <div  class="content-block">  
+            <div class="row">
+            <div class="col-auto">
+                <div class="wareshouse_checkStockOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 0">
+                  <warehouse-checkstock-detail :list="request.detailList" :detail="item"></warehouse-checkstock-detail>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="wareshouse_checkStockOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 1">
+                  <warehouse-checkstock-detail :list="request.detailList" :detail="item"></warehouse-checkstock-detail>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="wareshouse_checkStockOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 2">
+                  <warehouse-checkstock-detail :list="request.detailList" :detail="item"></warehouse-checkstock-detail>
+                </div>
+            </div>
+          </div>
+          </div>
+     
+          <div v-if="request.detailList.length==0">
+            <order-plus></order-plus>
+          </div>  
+
+          <div class="content-block-title">经手人</div>
+          <div class="content-block inset">
+            <div class="content-block-inner">
+              <select-user :source="response.users"
+                           :data.sync="request.sponsorId" max="1">
+              </select-user>
+            </div>
+          </div>   
+    </div> 
+  </div> 
+ </div>

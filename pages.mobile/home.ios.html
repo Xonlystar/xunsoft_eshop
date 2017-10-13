@@ -1,0 +1,297 @@
+<div data-page="data-home" class="page no-navbar home">
+
+    <div class="page-content">
+
+        <!--数据看板-->
+        <div class="swiper-custom" id="homeReport" v-show="curr==0||curr==1||curr==2">
+            <div class="swiper-container swiper-self">
+                <div class="home-user">
+                    <a href="#" v-on:click="jump('setting/option.ios.html')" style="float:right"><i class="icon iconfont icon-set"></i></a>
+                    <a href="#" data-panel="left" style="float:left" class="open-panel"><i class="icon iconfont icon-category"></i></a>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="(row,key) in 5">
+                        <p class='text-center swiper-title' v-if="curr==0">销售总额:{{response.mobileSaleBatch[key].totalCount}}笔</p>
+                        <p class='text-center swiper-title' v-if="curr==1">采购总额:{{response.mobilePurchase[key].totalCount}}笔</p>
+                        <p class='text-center swiper-title' v-if="curr==2">库存数量</p>
+
+                        <p class='text-center swiper-content' v-if="curr==0">{{response.mobileSaleBatch[key].payMoney | currency}}</p>
+                        <p class='text-center swiper-content' v-if="curr==1">{{response.mobilePurchase[key].payMoney | currency}}</p>
+                        <p class='text-center swiper-content' v-if="curr==2">{{response.mobileWarehouse[key].totalCount}}</p>
+
+                        <p class='text-center swiper-bottom' v-if="curr==0">{{response.mobileSaleBatch[key].name}}</p>
+                        <p class='text-center swiper-bottom' v-if="curr==1">{{response.mobilePurchase[key].name}}</p>
+                        <p class='text-center swiper-bottom' v-if="curr==2">{{response.mobileWarehouse[key].name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <!--数据看板结束-->
+
+        <div class="report-top" v-show="curr==3">
+            <div class="text-center report-title">云报表</div>
+            <div class="buttons-row">
+                <a href="#0" class="tab-link active button" v-on:click="loadReport(0,$event)">日</a>
+                <a href="#1" class="tab-link button " v-on:click="loadReport(1,$event)">周</a>
+                <a href="#2" class="tab-link button" v-on:click="loadReport(2,$event)">月</a>
+                <a href="#3" class="tab-link button " v-on:click="loadReport(3,$event)">季</a>
+                <a href="#4" class="tab-link button" v-on:click="loadReport(4,$event)">年</a>
+            </div>
+            <div class="row report-content">
+                <div class="col-30 text-center">
+                    <p>
+                        <span class="item-title">{{response.report.name}}毛利</span>
+                        <div class="item-after" style="font-size:20px;">{{response.report.gross|currency ""}}</div>
+                    </p>
+                    <p>
+                        <span class="item-title">退货额</span>
+                        <div class="item-after">{{response.report.return_money}}</div>
+                    </p>
+                </div>
+                <div class="col-70">
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">销售单</div>
+                                    <div class="item-after">{{response.report.sale_count}}</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">销售额</div>
+                                    <div class="item-after">{{response.report.sale_money|currency ""}}</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">收款额</div>
+                                    <div class="item-after">{{response.report.receipt_money|currency ""}}</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">欠款额</div>
+                                    <div class="item-after">{{response.report.Arrears_money|currency ""}}</div>
+                                </div>
+                            </li>
+                            <ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-animated-wrap">
+            <div class="tabs">
+                <div id="salBatch" class="tab active">
+                    <div class="content-block">
+                        <div class="row no-gutter">
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleRetail/saleOrder/add.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-cart fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">零售单</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleBatch/saleOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-bag fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">销售订单</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleBatch/deliverOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-cart fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">出货单</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleBatch/returnOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-truck fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">客户退货单</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleBatch/receiptOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-jpy fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">收款单</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('customer/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-user-circle fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">客户管理</p>
+                                </a>
+                            </div>
+
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('saleRetail/memberCard/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-user fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">会员管理</p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--  采购订单  开始 -->
+                <div class="tab" id="purchase" class="page no-swipeback">
+                    <!--菜单区域-->
+                    <div class="content-block">
+                        <div class="row no-gutter">
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('purchase/purchaseOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-cart fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">采购订单</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('purchase/receiveOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-cart-plus fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">收货单</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('purchase/returnOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-truck fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">退货单</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('purchase/payOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-jpy fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">付款单</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('supplier/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-user-secret fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">供应商</p>
+                                </a>
+                            </div>
+                            <div class="col-33 no"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 采购订单 结束 -->
+                <!--库存数据 开始-->
+                <div class="tab" id="warehouse" class="page no-swipeback">
+                    <!--菜单区域-->
+                    <div class="content-block">
+                        <div class="row no-gutter">
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('warehouse/shopStock/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-cart fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">店铺库存</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('warehouse/checkStockOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-cart-plus fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">库存盘点</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('warehouse/profitLossOrder/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-shopping-basket fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">店铺损益</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('warehouse/shopTransfer/list.ios.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-truck fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">库存调拨</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" id="cloudReport" class="page no-swipeback">
+                    <div class="content-block">
+                        <div class="row no-gutter">
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('report/saleRank/index.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-truck fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">销售排行</p>
+                                </a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" v-on:click="jump('report/fundReport/index.html')">
+                                    <div class="text-center">
+                                        <i class="fa fa-cart-plus fa-3x"></i>
+                                    </div>
+                                    <p class="text-center">资金报表</p>
+                                </a>
+                            </div>
+                            <div class="col-33 no"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-tab" class="toolbar tabbar toolbar-bottom tabbar-labels" style="font-size: 15px;">
+        <div class="toolbar-inner">
+            <a href="#salBatch" class="tab-link active">
+                <i class="fa fa-normal fa-commenting"></i>
+                <span class="tabbar-label">销售</span>
+            </a>
+            <a href="#purchase" class="tab-link">
+                <i class="fa fa-normal fa-shopping-cart"></i>
+                <span class="tabbar-label">进货</span>
+            </a>
+            <a href="#warehouse" class="tab-link">
+                <i class="fa fa-normal fa-shopping-bag"></i>
+                <span class="tabbar-label">店铺</span>
+            </a>
+            <a href="#cloudReport" class="tab-link">
+                <i class="fa fa-normal fa-file-text"></i>
+                <span class="tabbar-label">报表</span>
+            </a>
+        </div>
+    </div>
+
+</div>

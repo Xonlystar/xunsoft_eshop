@@ -1,0 +1,105 @@
+<div class="pages">
+    <div data-page="kind_selectKind" class="page">
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init" data-custom-search="true">
+            <div class="searchbar-input">
+                <input v-model="request.query.kindName" type="search" placeholder="货品名称">
+                <a href="#" class="searchbar-clear"></a>
+            </div> <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+
+        </form>
+        <div class="searchbar-overlay"></div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i>
+
+                    </a>
+                </div>
+                <div class="center sliding">商品选择({{response.total}})</div>
+                <div class="right">
+                    <a v-on:click="query" href="#" class="link"> <i class="icon iconfont icon-filter"></i>
+                    </a>
+                    <a v-on:click="add" href="#" class="link">
+                        <i class="icon iconfont icon-add"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="toolbar toolbar-bottom">
+            <div class="toolbar-inner">
+                <div class="col-50"> <a href="#">已选商品:{{response.selectedTotal}}</a>
+
+                </div>
+                <div class="col-50"> <a href="#" v-on:click="save" class="link">完成</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="page-content pull-to-refresh-content">
+            <!-- About Popup -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="list-block" id="kindSelectList" style="margin: 0px">
+                <ul>
+                    <li v-for="item in response.data">
+                        <a href="" class="item-link item-content" v-on:click="showModel(item)">
+                            <div class="item-media">
+                                <kind-img :kind-id="item.kindId"></kind-img>
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title-row" style="width:100%">
+                                    <div class="item-title" style="height:30px;line-height:30px;">{{item.kindName}}
+                                        <span v-show="item.selectAmount" class="kind-item-selectAmount">{{item.selectAmount}}</span>
+                                        <!-- <i v-on:click="showModel(item)" class="icon iconfont icon-points float-right" style="color: black;margin-right: 15px;"></i> -->
+                                        <img src="../img/points.png" v-on:click="showModel(item)" style="height: 20px;width: 24px;vertical-align: middle; float: right;margin-right: 15px;">
+                                    </div>
+                                    <div class="item-subtitle" style="font-size: 12px;height:50px;line-height:40px;">品牌: {{item.brandName}}
+                                    </div>
+                                    <!-- <div class="item-subtitle" style="font-size: 12px;">货号: {{item.kindNo}}</div> -->
+                                    <div class="item-subtitle" style="font-size: 12px;margin-bottom:15px; ">
+                                        <span v-if="response.curr==1" style="width: 120px;"> 单价: {{item.priceList | kindPrice "purchase-price" | currency}} </span>
+                                        <span v-if="response.curr==0" style="width: 120px;"> 单价: {{item.priceList | kindPrice response.key | currency}} </span>
+                                        <span v-if="response.curr!=2" style="margin-left: 10px;"> 吊牌价: {{item.priceList | kindPrice "sale-price" | currency}}</span></div>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- <div>
+                        <div class="content-block">
+                          <table border="1" style="width:100%;height:100%; text-align: center;border-collapse:collapse;">
+                              <tbody>
+                                <tr>
+                                <td rowspan="2">货号</td>
+                                <td rowspan="2">颜色</td>
+                                <td :colspan="response.kindDetail.sizeList.length">尺码</td>
+                              </tr>
+                              <tr>
+                                <td v-for="size in response.kindDetail.sizeList">{{size.sizeText}}</td>
+                              </tr>
+                              <tr>
+                                <td :rowspan="response.kindDetail.colorList.length">{{response.kindDetail.kindNo}}</td>
+                                <td style="width:50px;">{{response.kindDetail.colorList[0].colorName}}</td>
+                                <td v-for="repeat in response.kindDetail.sizeList"><input type="text"></td>
+                              </tr>
+                              <tr v-for="(index,color) in response.kindDetail.colorList" v-if="index!=0">
+                                <td>{{color.colorName}}</td>
+                                <td v-for="repeat in response.kindDetail.sizeList"><input type="text"></td>
+                              </tr>
+                              </tbody>
+                               
+                            </table>
+                            <a href="#" v-if="response.selectdSizeList.length!=0" v-on:click="add(response.selectdSizeList)" class="button button-big button-green">添加</a>
+                        </div> -->
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <load-more-normal :total="response.total" :data="response.data" v-on:load="load"></load-more-normal>
+            </div>
+
+        </div>
+    </div>
+</div>

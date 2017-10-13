@@ -1,0 +1,82 @@
+<div class="pages">
+  <div data-page="saleBatch_receiptOrder_selectAccount" class="page">
+
+  	<div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+	        <a href="#" class="back link"> 
+	          <i class="icon icon-back"></i>
+              返回
+	        </a>
+        </div>
+        <div class="center sliding">收款账户</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+              确认
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <div v-if="response.selectAccounts.length>0">
+        <div class="content-block-title">已选收款账户</div>
+        <div class="list-block inset">
+          <ul>
+            <li v-for="item in response.selectAccounts">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    {{item.accountName}}
+                  </div>
+                  <div class="item-after">
+                    {{item.receiptMoney | currency}}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+    	<div class="content-block-title">收款账户</div>
+    	<div class="content-block">
+    		<select-account :source="response.accounts" 
+                             :data.sync="request.accountId"
+                             max="5"></select-account>
+    	</div>
+
+
+    	<div class="content-block-title">收款信息</div>
+    	<div class="content-block">
+    		<div class="list-block">
+	  			<ul>
+	  				<li class="item-content">
+	  					<div class="item-media">
+	  						<i class="fa fa-jpy"></i>
+	  					</div>
+	  					<div class="item-inner">
+					        <div class="item-input">
+					            <input v-model="request.receiptMoney" type="number" placeholder="金额">
+					        </div>
+	  					</div>
+	  				</li>
+	  				<li class="item-content">
+	  					<div class="item-media">
+	  						<i class="fa fa-sticky-note"></i>
+	  					</div>
+	  					<div class="item-inner">
+					        <div class="item-input">
+					            <textarea v-model="request.description" class="resizable" placeholder="备注"></textarea>
+					        </div>
+	  					</div>
+	  				</li>
+	  			</ul>
+	  		</div>
+    	</div>
+    </div>
+
+  </div>
+</div>

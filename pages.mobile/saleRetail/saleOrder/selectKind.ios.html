@@ -1,0 +1,66 @@
+<div class="pages">
+    <div data-page="kind_select" class="page">
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init" data-custom-search="true">
+            <div class="searchbar-input">
+                <input v-model="request.query.barNo" type="search" placeholder="货品名称、条形码、货号">
+                <a href="#" class="searchbar-clear">
+                </a>
+            </div>
+            <a  href="#" v-on:click="select" class="searchbar-cancel">检索</a>
+        </form>
+
+        <div class="searchbar-overlay"></div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link"> 
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">选择货品({{response.total}})</div>
+                <div class="right"></div>
+            </div>
+        </div>
+        
+        <div class="page-content pull-to-refresh-content">
+            <!-- About Popup -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="list-block media-list">
+                <ul>
+                    <li v-for="item in response.data">
+                         <label class="label-checkbox item-content" v-on:click="selectKind(item)">
+                            <input type="checkbox" id ="{{item.barNo}}" >
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-media"><kind-img :kind-id="item.kindId"></kind-img></div>
+                            <div class="item-inner">
+                              <div class="item-title-row">
+                                <div class="item-title">{{item.barNo}}</div>
+                                <div class="item-after">{{item.salePrice | currency}}</div>
+                              </div>
+                              <div class="item-subtitle">品牌: {{item.brandName}} | 库存:<span v-if="item.inventory<0" style="color: red">{{item.inventory}}</span><span v-if="item.inventory>=0" style="color:green">{{item.inventory}}</span></div>
+                              <div class="item-subtitle">名称: {{item.kindName}} | 货号:{{item.kindNo}}</div>
+                              <div class="item-subtitle">颜色:{{item.colorName }}| 尺码: {{item.sizeText}}
+                              </div>
+                            </div>
+                          </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="toolbar toolbar-bottom">
+            <div class="toolbar-inner">
+                <div class="col-50"> <a href="#">已选商品:{{response.selectedTotal}}</a>
+
+                </div>
+                <div class="col-50"> <a href="#" v-on:click="save" class="link">完成</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,201 @@
+<div class="pages">
+  <div data-page="saleBatch_saleOrder_detail" class="page">
+  
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link"> 
+               <i class="icon iconfont icon-fanhui"></i>
+          </a>
+        </div>
+        <div class="center sliding">销售订单详情</div>
+        <div class="right">
+          <a href="saleBatch/common/print.ios.html?orderType=saleOrder&orderId={{response.data.saleOrderId}}" class="link"> 
+            <i class="icon iconfont icon-print"></i>
+          </a>
+          <a href="#"  v-on:click="edit" class="link"> 
+            <i class="icon iconfont icon-edit"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content">
+      
+
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <div class="list-block" style="margin:0px 0">
+              <ul>
+                  <li >
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">{{response.data.saleOrderNo}}</div>
+                        <div class="item-after"></div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
+        </div>
+
+         <div class="list-block" style="margin:8px 0">
+                <ul>
+                     <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title">客户</div>
+                            <div class="item-after">{{response.data.customerName}}</div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title">日期</div>
+                            <div class="item-after">{{response.data.placeDate | date}}</div>
+                          </div>
+                        </div>
+                      </li>
+                 </ul>
+         </div>
+
+        <div class="card-header" style="min-height: 0px;padding:5px 10px;">商品信息</div>
+
+        <div class="card-content">
+            <!-- 货品信息开始 -->
+             <div class="list-block media-list" style="margin:0 0">
+                <ul style="padding-left:0px;">
+                  <li v-for="item in response.data.detailList" class="swipeout">
+                    <div class="swipeout-content">  
+                      <a v-on:click="detail($event,item)" class="item-content">
+                        <div class="item-media">
+                          <div>
+                            <kind-img :kind-id="item.kindId" :color-id="item.colorId" :allow-scale=false></kind-img>
+                          </div>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">{{item.kindName}}({{item.kindNo}})</div>
+                            <div class="item-after"></div> 
+                          </div>
+                          <div class="item-subtitle"> 
+                          </div>
+                         <div class="item-text">
+                            <div class="row no-gutter">
+                                <span  class="col-33">品牌:{{item.brandName}}</span>
+                                <span  class="col-33">颜色:{{item.colorName}}</span>
+                                <span  class="col-33">尺码:{{item.sizeText}}</span>
+                            </div>
+                            <div class="row no-gutter"> 
+                             <span  class="col-33" >数量:{{item.saleAmount}}</span> 
+                             <span  class="col-33">销售价:{{(item.wholesalePrice )|currencys}}</span> 
+                             <span  class="col-33">金额:{{(item.saleMoney )|currencys}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+             </div>
+            <!--  货品信息结束 -->
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+              <ul>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">销售总数</div>
+                          <div class="item-after">{{response.data.detailSummary.saleAmount}}</div>
+                        </div>
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">销售总额</div>
+                          <div class="item-after">{{response.data.detailSummary.saleMoney | currencys}}</div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">定金</div>
+                          <div class="item-after">{{response.data.advanceMoney | currencys}}</div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">订单交期</div>
+                          <div class="item-after">{{response.data.deliverDate | date}}</div>
+                        </div>
+                      </div>
+                    </li>
+               </ul>
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+              <ul>
+                  <li >
+                   <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">
+                          备注
+                        </div>
+                        <div class="item-after">
+                          {{response.data.description}}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+              <ul>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">制单人</div>
+                        <div class="item-after">{{response.data.creatorName}}</div>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">制单时间</div>
+                        <div class="item-after">{{response.data.createTime | dateTime}}</div>
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+        </div>
+         <!-- 销售出货开始  -->
+          <div class="list-block" style="margin:8px 0" v-if="response.data.isDeliver">
+              <ul>
+                  <li>
+                      <div class="item-content" v-on:click="toDeliverOrder">
+                          <div style="margin:auto;">
+                              <a href="#" style="color: red;">销售出货</a>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+         <!--  销售出货结束 -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="pages">
+	<div data-page="purchase_common_print" class="page">
+		<div class="navbar">
+	      <div class="navbar-inner">
+	        <div class="left">
+	            <a href="#" class="back link"> 
+	               <i class="icon iconfont icon-fanhui"></i> 
+	            </a>
+	        </div>
+	        <div class="center sliding">打印预览</div>
+	        <div class="right">
+	             <a v-on:click="print" href="#" class="link"> 
+	               <i class="icon iconfont icon-print"></i>
+	            </a>
+	        </div>
+	      </div>
+	    </div>  
+
+	    <div class="page-content">
+	    	<div>
+	    		<div class="row" style="margin-top: 10px;">
+	    			<div class="col-auto" style="width: 25%">
+	    				&nbsp;
+	    			</div>
+	    			<div class="col-auto" v-html="response.printStr" style="width: 50%">
+	    				
+	    			</div>
+	    			<div class="col-auto" style="width: 25%">
+	    				&nbsp;
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+</div>

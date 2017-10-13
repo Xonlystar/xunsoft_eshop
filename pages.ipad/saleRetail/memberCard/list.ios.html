@@ -1,0 +1,84 @@
+<!-- 会员卡页面 -->
+<div class="pages">
+	<div data-page="saleRetail_memberCard_list" class="page">
+
+		<!--搜索栏-->
+		<form class="searchbar searchbar-init" data-custom-search="true">
+			<div class="searchbar-input">
+				<input v-model="request.query.memberCardNo" type="search" placeholder="会员卡号">
+				<a href="#" class="searchbar-clear">
+				</a>
+			</div>
+			<a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+		</form>
+
+		<div class="searchbar-overlay"></div>
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link">
+						返回
+					</a>
+				</div>
+				<div class="center sliding">会员卡({{response.total}})</div>
+				<div class="right">
+					<a v-on:click="query" href="#" class="link">
+						筛选
+					</a>
+					<a href="saleRetail/memberCard/add.ios.html" class="link">
+						录入
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content pull-to-refresh-content">
+
+			<div class="pull-to-refresh-layer">
+				<div class="preloader"></div>
+				<div class="pull-to-refresh-arrow"></div>
+			</div>
+
+			<div>
+				<div class="list-block media-list inset">
+					<ul>
+						<li v-for="item in response.data" class="swipeout">
+							<div class="swipeout-content">
+								<a href="saleRetail/memberCard/detail.ios.html?memberCardId={{item.memberCardId}}" class="item-link item-content">
+									<div class="item-media">
+										<img :src="item.userLogo">
+									</div>
+									<div class="item-inner" style="border-bottom:1px solid #ddd;">
+										<div class="item-title-row">
+											<div class="item-title">{{item.member_MemberName}}</div>
+											<div class="item-after">{{item.tradeSummary_TotalConsumption | currency}}</div>
+										</div>
+										<div class="item-subtitle">
+											<div>卡号:<span>{{item.memberCardNo}}</span></div>
+										</div>
+										<div class="item-text">
+											<div>建卡日期:<span>{{item.createTime | date}}</span></div>
+											<div>出生日期:<span>{{item.member_Birthday | date}}</span></div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="swipeout-actions-left">
+								<a v-on:click="enable('6',item)" v-if="item.isEnable==1" class="swipeout-close bg-red" href="#">禁用</a>
+								<a v-on:click="update(item)" class="swipeout-close bg-green" href="#">编辑</a>
+								<a v-on:click="delete(item)" class="swipeout-close bg-red" href="#">删除</a>
+								<a v-on:click="enable('5',item)" v-if="item.isEnable==0" class="swipeout-close bg-green" href="#">启用</a>
+								<a class="swipeout-close" href="#">取消</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,144 @@
+<div class="pages">  
+
+  <div data-page="saleRetail_saleOrder_editKindPrice" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+               <i class="icon icon-back"></i>
+                返回
+            </a>
+        </div>
+        <div class="center sliding">编辑货品</div>
+        <div class="right">
+            <a v-on:click="saveKind" href="#" class="link"> 
+              确认修改
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="content-block-title">销售信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-jpy"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  售价
+                </div>
+                <div class="item-input">
+                  <input v-on:blur="calculate" type="number" v-model="request.retailPrice">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-shopping-basket"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  数量
+                </div>
+                <div class="item-input">
+                  <input v-on:blur="calculate" type="number" v-model="request.saleAmount">
+                </div>
+              </div>
+            </div>
+          </li> 
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea v-model="request.description" placeholder="备注" maxlength="200" class="resizable"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>          
+        </ul>
+        <div class="list-block-label">
+          <div>
+            <div class="text-right">
+              吊牌价:<span>{{request.salePrice | currency}}</span>
+              &nbsp;
+              应收金额:<span>{{request.saleMoney | currency}}</span>
+              &nbsp;
+              实收金额:<span>{{request.actualMoney | currency}}</span>
+              &nbsp;
+              折扣率:<span>{{request.discountRate | discountRate}}</span>
+              &nbsp;
+              库存:<span>{{request.inventory}}</span>
+            </div>
+            <p class="text-right">
+              赠送数量:<span>{{request.gratisAmount}}</span>
+              &nbsp;
+              赠品数量:<span>{{request.giftsNum}}</span>
+              &nbsp;
+              折扣金额:<span>{{request.performanceMoney | currency}}</span>
+              &nbsp;
+              返现金额:<span>{{request.cashMoney | currency}}</span>
+              &nbsp;
+              现金券额:<span>{{request.cashTicket | currency}}</span>
+              &nbsp;
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block-title">
+        已选促销活动
+      </div>
+      <div class="list-block inset">
+        <div v-for="item in request.activityList" class="list-group">
+          <ul>
+            <li class="list-group-title">{{item.activityName}} | {{item.validDateFrom | date}}至{{item.validDateTo | date}}</li>
+            <li v-for="item in item.detailList">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    {{item.ruleClassName}}
+                  </div>
+                  <div class="item-after">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- <div class="content-block-title">
+        可选促销活动
+      </div>
+      <div class="list-block inset">
+        <div v-for="item in response.activity" class="list-group">
+          <ul>
+            <li class="list-group-title">{{item.activityName}} | {{item.validDateFrom | date}}至{{item.validDateTo | date}}</li>
+            <li v-for="rule in item.detailList">
+              <label class="label-radio item-content" v-on:click="selectActivity(item,rule)">
+                <input type="radio" name="{{item.activityId}}">
+                <div class="item-inner">
+                  <div class="item-title">
+                    {{rule.ruleClassName}}
+                  </div>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

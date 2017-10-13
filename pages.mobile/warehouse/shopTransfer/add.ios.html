@@ -1,0 +1,144 @@
+<div class="pages">
+    <div data-page="warehouse_shopTransfer_add" class="page">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> 
+                    </a>
+                </div>
+                <div class="center sliding">调拨单录入</div>
+                <div class="right">
+                    <a v-on:click="save" href="#" class="link"> <i class="icon iconfont icon-save1"></i> 
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 内容区开始 -->
+        <div class="page-content">
+            <div class="list-block accordion-list" style="margin: 5px 0;">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">日期</div>
+                                <div class="item-input">
+                                    <input v-model="request.transferDate | date" type="text" id="transferDate">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block-title">调拨商品</div>
+            <div class="list-block ">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                            <select v-model="request.fromWarehouseId" id="fromWarehouseId">
+                                <option v-for="item in response.transfers" value="{{item.shopId}}">{{item.shopName}}</option>
+                            </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">调出仓库</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                            <select v-model="request.toWarehouseId" id="toWarehouseId">
+                                <option v-for="item in response.transfers" value="{{item.shopId}}">{{item.shopName}}</option>
+                            </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">调入仓库</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">选择商品</div>
+                                <div href="#" class="link" v-on:click="scanKind" style="margin-right: 200px;">
+                                    <select-barcode :data.sync="request.detailList" order="11" edit="warehouse/shopTransfer/editKindPrice.ios.html"></select-barcode>
+                                </div>
+                                <select-order-kind :data.sync="request.detailList" edit="warehouse/shopTransfer/editKind.ios.html" v-on:select="selectKind"></select-order-kind>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block-title">商品信息(总数:{{request.detailList | arraySum 'transferAmount'}})</div>
+            <div class="list-block media-list">
+                <ul>
+                    <li v-for="item in request.detailList" class="swipeout">
+                        <div class="swipeout-content">
+                            <a href="#" class="item-content" v-on:click="editKind(item)">
+                                <div class="item-media">
+                                    <div>
+                                        <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+                                    </div>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{item.kind.kindName}}({{item.kind.kindNo}})</div>
+                                        <div class="item-after">
+                                            <edit-kind :data.sync="request" :kind="item" edit="warehouse/shopTransfer/editKindPrice.ios.html"></edit-kind>
+                                        </div>
+                                    </div>
+                                    <div class="item-text" style="font-size: 13px;">
+                                        <div> <span style="display: inline-block;width: 100px;">数量:{{item.transferAmount}}</span> 
+                                        </div>
+                                        <div> <span style="display: inline-block;width: 100px;">颜色:{{item.colorName}} </span>  
+                                            <span style="margin-left: 20px;">尺码:{{item.sizeText}}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <div v-if="request.detailList.length==0">
+                    <div class="content-block">
+                        <div class="content-block-inner">
+                            <div class="text-center">
+                                <!-- <i class="fa fa-cart-plus fa-3x"></i> 选择的商品 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-block ">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">备注</div>
+                                <div class="item-input">
+                                    <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                            <select v-model="request.sponsorId" id="sponsorId">
+                                <option v-for="item in response.users" value="{{item.userId}}">{{item.employeeName}}</option>
+                            </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">采购人</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

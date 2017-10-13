@@ -1,0 +1,57 @@
+<div class="pages">
+	<div data-page="setting_feedback" class="page">
+		<div class="navbar">
+	      <div class="navbar-inner">
+	        <div class="left">
+	            <a   href="#" class="back link"> 
+	             <i class="icon icon-back"></i>
+	              返回
+	            </a>
+	        </div>
+	        <div class="center sliding">问题反馈</div>
+	        <div class="right">
+	       		<a  href="setting/feedbackList.ios.html" class="link"> 
+	              我的反馈
+	            </a>
+	            <a v-on:click="save" href="#" class="link"> 
+	              提交
+	            </a>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="page-content">
+	      <div class="content-block-title">欢迎您给我们提出意见和建议，您的问题我们会在工作日内尽快回复！</div>
+          <div class="list-block inset">
+          	<ul>
+          		<li>
+          			<div class="item-content">
+				        <div class="item-media">
+				        	<i class="fa fa-header"></i>
+				        </div>
+				        <div class="item-inner">
+				          <div class="item-title label">标题:</div>
+				          <div class="item-input">
+				           <input type="text" v-model="request.title">
+				          </div>
+				        </div>
+				    </div>
+          		</li>
+          		<li>
+          			<div class="item-content">
+				        <div class="item-media">
+				        	<i class="fa fa-edit"></i>
+				        </div>
+				        <div class="item-inner">
+				          <div class="item-title label">问题:</div>
+				          <div class="item-input">
+				            <textarea class="resizable" maxlength="200" v-model="request.content"></textarea>
+				          </div>
+				        </div>
+				    </div>
+          		</li>
+          	</ul>
+          </div>  
+	    </div>
+	</div>	
+</div>

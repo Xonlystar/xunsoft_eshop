@@ -1,0 +1,172 @@
+<div class="pages">
+  <div data-page="warehouse_checkStockOrder_detail" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link"> 
+           <i class="icon icon-back"></i>
+           返回
+          </a>
+        </div>
+        <div class="center sliding">库存订单详情</div>
+        <div class="right">
+          <a href="warehouse/common/print.ios.html?orderType=checkStock&orderId={{response.data.checkStockOrderId}}" class="link"> 
+           打印
+          </a>
+          <a href="warehouse/checkStockOrder/add.ios.html?checkStockOrderId={{response.data.checkStockOrderId}}" class="link"> 
+           复制
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content pull-to-refresh-content">
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+         <div class="card">
+          <div class="card-header">库存基本信息</div>
+          <div class="card-content">
+              <div class="card-content-inner">
+                <div class="list-block">
+                  <ul>
+                    <li>
+                      <div href="#" class="item-content">
+                        <div class="item-media">
+                           <i class="fa fa-key"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title">盘点单号</div>
+                          <div class="item-after">{{response.data.checkStockOrderNo}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div href="#" class="item-content">
+                        <div class="item-media">
+                           <i class="fa fa-key"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title">  盘点级别</div>
+                          <div class="item-after">{{response.data.checkStockLevelId | Level}}</div>
+                        </div>
+                      </div>
+                    </li>                                      
+                    <li>
+                      <div href="#" class="item-content">
+                        <div class="item-media">
+                           <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title">  盘点日期</div>
+                          <div class="item-after">{{response.data.checkStockDate | date}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li v-if="response.data.sponsorName">
+                      <div href="#" class="item-content">
+                        <div class="item-media">
+                           <i class="fa fa-user"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title">  经手人</div>
+                          <div class="item-after">{{response.data.sponsorName}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li v-if="response.data.creatorName">
+                      <div class="item-content">
+                        <div class="item-media">
+                            <i class="fa fa-user-circle"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title"> 制单人</div>
+                          <div class="item-after">{{response.data.creatorName}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li v-if="response.data.submitTime">
+                      <div class="item-content">
+                        <div class="item-media">
+                           <i class="fa fa-clock-o"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title"> 提交时间</div>
+                          <div class="item-after">{{response.data.submitTime | dateTime}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li v-if="response.data.auditorName">
+                      <div class="item-content">
+                        <div class="item-media">
+                            <i class="fa fa-user-circle"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title">审核人</div>
+                          <div class="item-after">{{response.data.auditorName}}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li v-if="response.data.auditTime">
+                      <div class="item-content">
+                        <div class="item-media">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title"> 审核时间</div>
+                          <div class="item-after">{{response.data.auditTime | dateTime}}</div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="card">
+          <div class="card-header">盘点货品信息</div>
+          <div class="card-content">
+              <div class="card-content-inner">
+                <div class="list-block media-list">
+                  <ul>                      
+                    <li v-for="item in response.data.detailList">
+                      <a href="kind/kindDetail.ios.html?kindId={{item.kindId}}" class="item-content item-link">
+                        <div class="item-media">
+                          <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">{{item.kindName}}</div>
+                            <div class="item-after">  
+                              {{(item.checkStockMoney-item.taxMoney)|currency}}
+                            </div>
+                          </div>
+                          <div class="item-subtitle">                           
+                            {{item.brandName}}
+                          </div>
+                          <div class="item-text">
+                            <div>
+                              货号:<span>{{item.kindNo}}</span>  |
+                              颜色:<span>{{item.colorName}}</span>  |
+                              尺码:<span>{{item.sizeText}}</span>  |
+                              单位:<span>{{item.unitName}}</span>
+                            </div>
+                            <div>
+                              账面数量:<span>{{item.accountAmount}}</span>  |
+                              盘点数量:<span>{{item.checkAmount}} </span> 
+                              盈亏数量:<span>{{item.profitLossAmount}}</span> 
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

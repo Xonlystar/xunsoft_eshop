@@ -1,0 +1,83 @@
+
+<div class="pages">
+  <div data-page="warehouse_profitLossOrder_list" class="page">
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true" data-search-list=".list-block-search">
+        <div class="searchbar-input">
+            <input v-model="request.query.profitLossOrderNo" type="search" placeholder="益损单号">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+    <div class="searchbar-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+                返回
+            </a>
+        </div>
+        <div class="center sliding">损益单({{response.total}})</div>
+        <div class="right">
+             <a v-on:click="query" href="#" class="link">
+                筛选
+             </a>
+             <a href="warehouse/profitlossOrder/add.ios.html" class="link"> 
+                开单
+             </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content pull-to-refresh-content">
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <div>
+            <div class="list-block media-list inset">       
+                <ul>
+                   <li class="swipeout"  v-for="item in response.data" >     
+                    <div class="swipeout-content">  
+                      <a href="warehouse/profitlossOrder/detail.ios.html?profitLossOrderId={{item.profitLossOrderId}}"
+                          class="item-content item-link">
+                          <div class="item-media">
+                            <order-flag :flag="item.flag"></order-flag>
+                          </div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">{{item.profitLossOrderNo}}</div>  
+                                <div class="item-after">{{item.detailSummary.profitLossMoney | currency}}</div>
+                            </div>
+                            <div class="item-subtitle">  
+                              <div>益损日期:<span>{{item.profitLossDate | date}}</span></div>
+                            </div>    
+                            <div class="item-text">
+                              <div>制单人:{{item.creatorName}}/{{item.createTime | dateTime}}</div>
+                            </div>
+                          </div> 
+                      </a>
+                    </div>
+                    <div class="swipeout-actions-left">
+                      <a v-on:click="updateState('1',item)" v-if="item.flag=='L'"  href="#" class="bg-green swipeout-close">提交</a>
+                      <a v-on:click="updateState('2',item)" v-if="item.flag=='T'" href="#" class="bg-red swipeout-close">取消提交</a>
+                      <a v-on:click="updateState('3',item)" v-if="item.flag=='T'" href="#" class="swipeout-close">审核</a>
+                      <a v-on:click="updateState('4',item)" v-if="item.flag=='S'" href="#" class="bg-red swipeout-close">取消审核</a>
+                      <a  v-on:click="update(item)" v-if="item.flag=='L'"  class="bg-green swipeout-close">编辑</a>
+                      <a v-on:click="delete(item)"  v-if="item.flag=='L'" href="#" class="bg-red confirm-ok-cancel">删除</a>
+                      <a href="warehouse/common/print.ios.html?orderType=profitLoss&orderId={{item.profitLossOrderId}}" class="bg-lightblue">打印</a>
+                      <a class="swipeout-close" href="#">取消</a>
+                    </div>
+                   </li>
+                </ul>
+            </div>
+            <div>
+                <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

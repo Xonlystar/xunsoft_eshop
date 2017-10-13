@@ -1,0 +1,151 @@
+
+<div class="pages">
+  <div data-page="kind_selectKind" class="page">
+
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.query.kindName" type="search" placeholder="货品名称">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+        <div class="center sliding">货品选择({{response.total}})</div>
+        <div class="right">
+          <a v-on:click="query" href="#" class="link"> 
+            筛选
+          </a>
+          <a v-on:click="add" href="#" class="link"> 
+            录入
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div>
+        <div class="content-block">          
+          <div class="row">
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 0" class="kind_selectKind_kindItem">
+                  <div>
+                    <div>
+                      <kind-img :kind-id="item.kindId"></kind-img>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{{item.brandName}}/{{item.kindName}}</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-60">
+                      <div class="button button-round">
+                        {{item.priceList | kindPrice "sale-price" | currency}}
+                      </div>
+                    </div>
+                    <div class="col-40">
+                      <div v-on:click="select(item)" class="text-center">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 1" class="kind_selectKind_kindItem">
+                  <div>
+                    <div>
+                      <kind-img :kind-id="item.kindId"></kind-img>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{{item.brandName}}/{{item.kindName}}</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-60">
+                      <div class="button button-round">
+                        {{item.priceList | kindPrice "sale-price" | currency}}
+                      </div>
+                    </div>
+                    <div class="col-40">
+                      <div v-on:click="select(item)" class="text-center">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 2" class="kind_selectKind_kindItem">
+                  <div>
+                    <div>
+                      <kind-img :kind-id="item.kindId"></kind-img>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{{item.brandName}}/{{item.kindName}}</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-60">
+                      <div class="button button-round">
+                        {{item.priceList | kindPrice "sale-price" | currency}}
+                      </div>
+                    </div>
+                    <div class="col-40">
+                      <div v-on:click="select(item)" class="text-center">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 3" class="kind_selectKind_kindItem">
+                  <div>
+                    <div>
+                      <kind-img :kind-id="item.kindId"></kind-img>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{{item.brandName}}/{{item.kindName}}</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-60">
+                      <div class="button button-round">
+                        {{item.priceList | kindPrice "sale-price" | currency}}
+                      </div>
+                    </div>
+                    <div class="col-40">
+                      <div v-on:click="select(item)" class="text-center">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div>
+           <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+<div class="pages">
+    <div data-page="saleBatch_saleOrder_add" class="page">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a v-on:click="back" href="#" class="link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">销售订单录入</div>
+                <div class="right">
+                    <a v-on:click="save" href="#" class="link">
+                        <i class="icon iconfont icon-save1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+
+            <div class="content-block-title">销售信息</div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                            <select v-model="request.customerId" id="customerId"> <option v-for="item in response.customers" value="{{item.companyId}}"> {{item.companyName}}</option> </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        客户
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    日期
+                                </div>
+                                <div class="item-input">
+                                    <input id="placeDate" v-model="request.placeDate | date" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="list-block" style="text-align: right;min-height: 44px;">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">
+                                    选择商品
+                                </div>
+                                <div href="#" class="link" v-on:click="scanKind" style="margin-right: 200px;">
+                                    <select-barcode :data.sync="request.detailList" order="21" edit="saleBatch/saleOrder/editKindPrice.ios.html"></select-barcode>
+                                </div>
+                                <select-order-kind :data.sync="request" edit="saleBatch/saleOrder/editKind.ios.html" v-on:select="selectKind"></select-order-kind>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div v-if="request.detailList.length!=0" class="content-block-title">
+                货品信息(总数:{{request.detailList | arraySum 'saleAmount'}},总额:{{request.detailList | arraySum 'saleMoney'}})
+            </div>
+
+            <div class="list-block media-list" v-if="request.detailList.length!=0">
+                <ul>
+                    <li v-for="item in request.detailList" class="swipeout">
+                        <div class="swipeout-content">
+                            <a href="#" class="item-content" v-on:click="editKind(item)">
+                                <div class="item-media">
+                                    <div>
+                                        <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+                                    </div>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">
+                                            {{item.kind.kindName}}({{item.kind.kindNo}})
+                                        </div>
+                                        <div class="item-after">
+                                            <edit-kind :data.sync="request.detailList" :kind="item" edit="saleBatch/saleOrder/editKindPrice.ios.html"></edit-kind>
+                                        </div>
+                                    </div>
+                                    <div class="item-text">
+                                        <div class="row no-gutter">
+                                            <span class="col-33">品牌:{{item.brandName}}</span>
+                                            <span class="col-33">颜色:{{item.colorName}}</span>
+                                            <span class="col-33">尺码:{{item.sizeText}}</span>
+                                        </div>
+                                        <div class="row no-gutter">
+                                            <span class="col-33">数量:{{item.saleAmount}}</span>
+                                            <span class="col-33">单价:{{(item.wholesalePrice )|currencys}}</span>
+                                            <span class="col-33">金额:{{(item.saleMoney )|currencys}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title">其他信息</div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    订金
+                                </div>
+                                <div class="item-input">
+                                    <input v-model="request.advanceMoney" type="number" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    订单交期
+                                </div>
+                                <div class="item-input">
+                                    <input id="deliverDate" v-model="request.deliverDate | date" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    备注
+                                </div>
+                                <div class="item-input">
+                                    <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                            <select v-model="request.userId" id="userId">
+                      <option v-for="item in response.users" value="{{item.userId}}"> {{item.employeeName}}</option>
+                  </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        经手人
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

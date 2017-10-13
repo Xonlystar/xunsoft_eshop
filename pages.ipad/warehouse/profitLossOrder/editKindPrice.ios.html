@@ -1,0 +1,60 @@
+<div class="pages">
+  <div class="page" data-page="warehouse_profitLossOrder_editKindPrice">
+     <!--导航栏-->
+    <div class="navbar">
+        <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+             <i class="icon icon-back"></i>
+               返回
+            </a>
+        </div>
+        <div class="center sliding">修改信息</div>
+        <div class="right">
+             <a v-on:click="save" href="#" class="link"> 
+                确认修改
+             </a>
+        </div>
+      </div>
+      </div>
+      <!--内容区-->
+      <div class="page-content">
+         <div class="content-block-title">益损信息</div>
+         <div  class="list-block inset">
+            <ul>
+              <li>
+                <div class="item-content">
+                   <div class="item-media">
+                      <i class="fa fa-shopping-basket"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">数量</div>
+                      <div class="item-input">
+                        <input type="number" v-model="request.profitLossAmount" >
+                      </div>
+                   </div>
+                </div>
+              </li>                  
+              <li>
+               <div class="item-content">
+                   <div class="item-media">
+                      <i class="fa fa-sticky-note"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">备注</div>
+                      <div class="item-input">
+                        <input type="text" v-model="request.description" placeholder="备注">
+                      </div>
+                   </div>
+                </div>
+              </li>                     
+            </ul> 
+            <div class="list-block-label">
+              库存：<span>{{request.inventory}}</span> &nbsp;&nbsp; 
+              成本：<span>{{request.retailPrice | currency}}</span> &nbsp;&nbsp; 
+              金额:<span>{{request.profitLossMoney | currency}}</span>
+            </div>    
+         </div>    
+      </div>
+  </div>
+</div>

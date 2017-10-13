@@ -1,0 +1,201 @@
+<div class="pages">
+  <div data-page="purchase_purchaseOrder_editKind" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+             <i class="fa fa-arrow-left"></i>
+          </a>
+        </div>
+        <div class="center sliding">编辑货品</div>
+        <div class="right">
+          <a v-on:click="save" href="#" class="link">
+            <i class="fa fa-check" ></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="page-content">
+      <div v-if="response.selectedKind.length>0">
+        <div class="content-block-title">
+          已选货品
+        </div>
+        <div class="list-block" style="margin-bottom: 20px;">
+          <div class="list-block">
+            <ul>
+              <li class="item-content" v-for="item in response.selectedKind">
+                <div class="item-inner">
+                  <div class="item-title">
+                    颜色:<span>{{item.kind.colorName}}</span> |
+                    尺码:<span>{{item.kind.sizeText}}</span>
+                  </div>
+                  <div class="item-after">
+                    <span class="badge">{{item.purchaseAmount}}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="list-block">
+        <ul>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select name="car" multiple v-model="request.colorId">
+                <option v-for="item in response.kindDetail.colorList"  value="{{item.colorId}}"> {{item.colorName}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">货品颜色</div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+              <select name="car" multiple v-model="request.sizeId">
+                <option v-for="item in response.kindDetail.sizeList"  value="{{item.sizeId}}"> {{item.sizeText}}</option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">货品尺码</div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      
+      <div class="content-block-title">
+        采购信息 
+            <span style="float: right;">吊牌价:{{request.salePrice | currency}}</span>
+            &nbsp;&nbsp;
+           <span style="float: right;margin-right: 10px; ">金额:{{request.purchaseMoney | currency}}</span>
+       
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  数量
+                </div>
+                <div class="item-input">
+                  <input type="number" v-on:keyup="calculate"  v-model="request.purchaseAmount">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  采购价
+                </div>
+                <div class="item-input">
+                  <input type="number" v-on:keyup="calculate" v-model="request.purchasePrice">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  折扣率%
+                </div>
+                <div class="item-input">
+                  <input type="number" v-on:keyup="calculate" v-model="request.discountRate">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+       <!--  <div class="list-block-label">
+          <p class="text-right">
+            吊牌价:<span>{{request.salePrice | currency}}</span>
+            &nbsp;&nbsp;
+            金额:<span>{{request.purchaseMoney | currency}}</span>
+          </p>
+        </div> -->
+      </div>
+      <div class="content-block-title">
+        税务信息 <span style="float: right;">税额:{{request.taxMoney | currency}}</span>
+               &nbsp;&nbsp;
+               <span style="float: right;margin-right: 10px; ">金额(去税):{{(request.purchaseMoney-request.taxMoney) | currency}}</span>
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  税率%
+                </div>
+                <div class="item-input">
+                  <input v-model="request.taxRate" type="number" v-on:keyup="calculate">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+       <!--  <div class="list-block-label">
+          <p class="text-right">
+            税额:<span>{{request.taxMoney | currency}}</span>
+            &nbsp;&nbsp;
+            金额(去税):<span>{{(request.purchaseMoney-request.taxMoney) | currency}}</span>
+          </p> -->
+        </div>
+      </div>
+      <div class="content-block-title">
+        其他
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  商品交期
+                </div>
+                <div class="item-input">
+                  <input id="deliverDate" placeholder="交期" type="text" v-model="request.deliverDate">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="content-block-title">
+        商品基本信息
+      </div>
+      <div class="list-block media-list ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <kind-info :kind="response.kindDetail"></kind-info>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

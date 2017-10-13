@@ -1,0 +1,72 @@
+<div class="pages">
+    <div data-page="customer_list" class="page">
+
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init" data-custom-search="true">
+            <div class="searchbar-input">
+                <input type="search" placeholder="客户名称" v-model="query">
+                <a href="#" class="searchbar-clear">
+                </a>
+            </div>
+        </form>
+
+        <!-- 标题title -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">客户({{response.total}})</div>
+                <div class="right">
+
+                    <a href="customer/add.ios.html" class="link">
+                        <i class="icon iconfont icon-add"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content pull-to-refresh-content">
+
+            <!-- 刷新组件 -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+            <div class="list-block media-list">
+                <div v-for="row in computedList">
+                    <div class="content-block-title" v-if="row.value&&row.value.length>0">{{row.time}}</div>
+                    <ul>
+                        <li v-for="item in  row.value" v-on:click="detail(item)">
+                            <a href="#" class="item-link item-content" v-on:tapHold="showMenu(item)">
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{item.companyName}}</div>
+                                        <!-- <div class="item-after">
+                                            <span style="float:right; margin-right: 20px; border: 1px;">
+                                          <span v-if="item.isEnable==1"  style=" color:#2d8bf5;border:1px solid #2d8bf5;">已启用</span>
+                                            <span v-if="item.isEnable!=1" style="color:#272822;border:1px solid #272822;">已禁用</span>
+                                            </span>
+                                        </div> -->
+                                    </div>
+                                    <div class="item-subtitle" style="color: #8e8e93;text-align:center;">
+                                        <span v-if="item.contactList[0].telephone" v-on:click="call(item.contactList[0],$event)"><i style="color: #999;font-size: 12px;" class="icon iconfont icon-phone"></i>
+                                            {{item.contactList[0].telephone }}</span>
+                                        <span style="float:left"> {{item.companyRegisterTypeName}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <load-more :total="response.total" :data="computedList" v-on:load="load"></load-more>
+            </div>
+        </div>
+    </div>
+</div>

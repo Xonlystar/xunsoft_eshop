@@ -1,0 +1,50 @@
+<div class="pages">
+  <div class="page" data-page="warehouse_checkStockOrder_editKindPrice">
+     <!--导航栏-->
+    <div class="navbar">
+        <div class="navbar-inner">
+        <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+        <div class="center sliding">修改信息</div>
+         <div class="right"> 
+       <a v-on:click="save" href="#" class="link"> <i class="icon iconfont icon-save1"></i> </a> 
+      </div> 
+      </div>
+      </div>
+      <!--内容区-->
+      <div class="page-content">
+          <div class="content-block-title">盘点信息</div>
+         <div  class="list-block">
+            <ul>
+               <li>
+               <div class="item-content">
+                   <div class="item-media">
+                        <i class="fa fa-shopping-basket"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">数量</div>
+                        <div class="item-input">
+                          <input type="number"  min="1" max="99999" v-model="request.checkAmount"  name="name" placeholder="数量">
+                      </div>
+                   </div>
+                </div>
+               </li>                  
+            <li>
+               <div class="item-content">
+                   <div class="item-media">
+                         <i class="fa fa-sticky-note"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">备注</div>
+                        <div class="item-input">
+                          <input type="text" v-model="request.description"  name="name" placeholder="备注">
+                      </div>
+                   </div>
+                </div>
+            </li>                     
+            </ul>     
+         </div>    
+      </div>
+  </div>
+</div>

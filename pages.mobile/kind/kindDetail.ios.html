@@ -1,0 +1,172 @@
+ <div class="pages">
+  <div data-page="kind_kindDetail" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+                  <i class="icon iconfont icon-fanhui"></i>
+            </a>
+        </div>
+       <div class="center sliding">商品明细</div>
+        <div class="right">
+       </div>
+
+      </div>
+    </div>  
+ 
+  <div class="page-content" >
+      <div class="tabs">
+       <!--货品基本信息-->
+
+                <div class="list-block media-list">
+                    <ul>
+                      <li class="item-link item-content">
+                        
+                          <div class="item-media">
+                              <div>
+                             <a href="#" >  
+                                <kind-img :kind-id="request.item.kindId" :color-id="request.item.colorId" :allow-scale=true></kind-img>  </a>
+                              </div>  
+                            </div>
+                          <div class="item-inner">
+                            <div class="item">
+                              <div class="item-title">{{request.item.kindName}}</div>
+                            </div>
+                             <div class="item" style="font-size: 12px; margin-top: 5px;" >
+                             品牌:    {{request.item.brandName}}</div>
+                             <div class="item" style="font-size: 12px;">
+                             货号:    {{request.item.kindNo}}</div>
+                          </div>
+                     <!--    </a> -->
+                      </li>
+                    </ul>
+                 </div>
+
+         <!--  货品信息结束 -->
+
+ <!--  颜色/尺码/单位 开始 -->
+ <div class="list-block" >
+               <ul>
+                      <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">颜色</div>   
+                                 <div class="item-after">{{request.item.colorName}}</div>
+                            </div>
+                           </div>
+                     </li> 
+                     <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">尺码</div>   
+                                 <div class="item-after">{{request.item.sizeText}}</div>
+                            </div>
+                           </div>
+                     </li> 
+                      <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">单位</div>   
+                                 <div class="item-after">{{request.item.unitName}}</div>
+                            </div>
+                           </div>
+                       </li> 
+               </ul>
+      </div>
+      
+  <!-- 颜色/尺码/单位 结束 -->
+
+      <div class="list-block" >
+               <ul>
+
+                 <li>
+                    <div class="item-content">
+                       <div class="item-inner">
+                          <div class="item-title">数量</div>   
+                          <div class="item-after">{{request.Amount}}</div>
+                        </div>
+                    </div>
+                 </li>
+             
+                 <li v-show="!(response.type=='shopTransfer'||response.type=='profitLessOrder'||response.type=='checkStockOrder')">
+                    <div class="item-content">
+                       <div class="item-inner">
+                          <div class="item-title">单价</div>   
+                          <div class="item-after">{{request.Price|currency}}</div>
+                        </div>
+                    </div>
+                 </li>
+
+                 <li v-show="!(response.type!==shopTransfer'||response.type=='checkStockOrder')">
+                    <div class="item-content">
+                       <div class="item-inner">
+                          <div class="item-title">吊牌价</div>   
+                          <div class="item-after">{{request.salePrice|currency}}</div>
+                        </div>
+                    </div>
+                </li>
+              </ul>
+      </div>
+
+
+
+        <div class="list-block" v-show="!(response.type=='shopTransfer'||response.type=='profitLessOrder'||response.type=='checkStockOrder')">
+                   <ul>
+                        <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">折扣率</div>   
+                                 <div class="item-after" v-if="request.item.discountRate>0">
+                                    {{request.item.discountRate}}%</div>
+                            </div>
+                           </div>
+                       </li>      
+
+                        <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">税率</div>   
+                                 <div class="item-after" v-if="request.item.taxRate>0">{{request.item.taxRate}}%</div>
+                            </div>
+                           </div>
+                       </li>     
+
+                        <li>
+                          <div class="item-content">
+                           <div class="item-inner">
+                                 <div class="item-title">税额</div>   
+                                 <div class="item-after" v-if="request.item.taxMoney>0">{{request.item.taxMoney|currency}}</div>
+                            </div>
+                           </div>
+                       </li>     
+                   </ul>
+                </div>
+
+
+             <div class="list-block">
+                   <ul>
+                         <li>
+                            <div class="item-content">
+                             <div class="item-inner">
+                                   <div class="item-title">备注</div>   
+                                   <div class="item-after">{{request.item.description}}</div>
+                              </div>
+                             </div>
+                         </li> 
+                   </ul>
+                </div>
+
+
+         </div>
+
+
+
+
+       
+      </div>
+    </div> 
+ 
+
+  </div>
+ </div>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>E售易</title>
+    <link rel="stylesheet" href="../lib/framework7/css/framework7.material.css">
+    <link rel="stylesheet" href="../lib/framework7/css/framework7.material.colors.css">
+    <link rel="stylesheet" href="../lib/awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/app.android.css">
+    <link rel="stylesheet" href="css/kind.android.css">
+    <link rel="stylesheet" href="css/purchase.android.css">
+    <link rel="stylesheet" href="css/saleBatch.android.css">
+    <link rel="stylesheet" href="css/saleRetail.android.css">
+    <link rel="stylesheet" href="css/warehouse.android.css">
+  </head>
+  <body>
+    <div class="statusbar-overlay"></div>
+    <div class="views">
+      <div class="view view-left">
+        <div class="pages">
+          <div data-page="left_index" class="page navbar-fixed  bg-gray">
+            <div class="navbar  bg-gray">
+              <img class="img-responsive" src="../img/logo.png" />
+            </div>
+            <div class="page-content">
+              <div class="left_index_menu_wrap">
+                <div>
+                  <div>
+                    <a class="menu_icon" href="purchase/default.ios.html" data-view=".view-main">
+                      <i class="fa fa-shopping-cart fa-5x"></i>
+                    </a>
+                    <div class="menu_title">进货</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <a class="menu_icon" href="saleBatch/default.ios.html" data-view=".view-main">
+                      <i class="fa fa-shopping-bag fa-5x"></i>
+                    </a>
+                    <div class="menu_title">销售</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <a class="menu_icon" href="warehouse/default.ios.html" data-view=".view-main">
+                      <i class="fa fa-building fa-5x"></i>
+                    </a>
+                     <div class="menu_title">库存</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <a class="menu_icon" href="setting/default.ios.html" data-view=".view-main">
+                      <i class="fa fa-cog fa-5x"></i>
+                    </a>
+                    <div class="menu_title">设置</div>
+                  </div>
+                </div>      
+              </div>        
+            </div>
+          </div>
+        </div>        
+      </div>
+      <div class="view view-main navbar-fixed">
+        <div class="pages">
+            <div data-page="main_index" class="page">
+
+              <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">
+                        
+                    </div>
+                    <div class="center sliding"></div>
+                    <div class="right">
+                       
+                    </div>
+                </div>
+              </div>
+
+              <div class="page-content">
+                  <div>正在加载初始化....</div>
+              </div>
+
+            </div>
+        </div> 
+      </div>
+    </div>
+
+    <div class="login-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">My App</div>
+            <form>
+              <div class="list-block">
+                <ul>
+                  <li class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">Username</div>
+                      <div class="item-input">
+                        <input type="text" name="username" placeholder="Your username">
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">Password</div>
+                      <div class="item-input">
+                        <input type="password" name="password" placeholder="Your password">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="list-block">
+                <ul>
+                  <li><a href="#" class="item-link list-button">Sign In</a></li>
+                </ul>
+                <div class="list-block-label">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p><a href="#" class="close-login-screen">Close Login Screen</a></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="../lib/framework7/js/framework7.js"></script>
+    <script type="text/javascript" src="../lib/underscore/underscore.min.js"></script>
+    <!-- <script type="text/javascript" src="../lib/vue/vue.min.js"></script> -->
+    <script type="text/javascript" src="../lib/echarts/echarts.js"></script>
+    <script type="text/javascript" src="../lib/vue/vue1.js"></script>
+    <script type="text/javascript" src="../lib/vue/filter.js"></script>
+    <script type="text/javascript" src="../lib/vue/component.js"></script>
+    
+    <script type="text/javascript" src="js/app.android.js"></script>
+    
+
+    <!--服务-->
+    <script type="text/javascript" src="../services/common.js"></script>
+    <script type="text/javascript" src="../services/baseInfoService.js"></script>
+    <script type="text/javascript" src="../services/purchaseService.js"></script>
+    <script type="text/javascript" src="../services/saleBatchService.js"></script>
+    <script type="text/javascript" src="../services/saleRetailService.js"></script>
+    <script type="text/javascript" src="../services/warehouseService.js"></script>
+    <script type="text/javascript" src="../services/kindService.js"></script>
+    <script type="text/javascript" src="../services/transferService.js"></script>
+    <script type="text/javascript" src="../services/financeService.js"></script>
+
+    <!--采购-->
+    <script type="text/javascript" src="js/purchase/common.js"></script>
+    <script type="text/javascript" src="js/purchase/purchaseOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/receiveOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/returnOrder.js"></script>
+    <script type="text/javascript" src="js/purchase/payOrder.js"></script>
+
+    <!--销售-->
+    <script type="text/javascript" src="js/saleBatch/common.js"></script>
+    <script type="text/javascript" src="js/saleBatch/deliverOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/receiptOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/returnOrder.js"></script>
+    <script type="text/javascript" src="js/saleBatch/saleOrder.js"></script>
+    <script type="text/javascript" src="js/saleRetail/saleOrder.js"></script>
+    <script type="text/javascript" src="js/saleRetail/memberCard.js"></script>
+    
+    <!--库存-->
+    <script type="text/javascript" src="js/warehouse/common.js"></script>
+    <script type="text/javascript" src="js/warehouse/checkStockOrder.js"></script>
+    <script type="text/javascript" src="js/warehouse/profitLossOrder.js"></script>
+    <script type="text/javascript" src="js/warehouse/shopStock.js"></script>
+
+    <!--商品-->
+    <script type="text/javascript" src="js/kind/kind.js"></script>
+
+    <!--用户-->
+    <script type="text/javascript" src="js/account/login.js"></script>
+    <script type="text/javascript" src="js/account/user.js"></script>
+
+  </body>
+</html> 

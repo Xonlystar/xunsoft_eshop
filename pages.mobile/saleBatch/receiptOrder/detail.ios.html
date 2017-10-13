@@ -1,0 +1,337 @@
+<div class="pages">
+  <div data-page="saleBatch_receiptOrder_detail" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link"> 
+            <i class="icon iconfont icon-fanhui"></i> 
+          </a>
+        </div>
+        <div class="center sliding">收款单详情</div>
+        <div class="right">
+          <a href="saleBatch/common/print.ios.html?orderType=receiptOrder&orderId={{response.data.receiptOrderId}}" class="link"> 
+            <i class="icon iconfont icon-print"></i> 
+          </a>
+          <a href="#" v-on:click="edit" class="link">
+            <i class="icon iconfont icon-edit"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+      
+      <div class="list-block" style="margin:0px 0">
+            <ul>
+                <li >
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">{{response.data.receiptOrderNo}}</div>
+                      <div class="item-after"></div>
+                    </div>
+                  </div>
+                </li>
+             </ul>
+      </div>
+      
+      <div class="list-block">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">收款日期</div>
+                <div class="item-after">{{response.data.receiptDate | date}}</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">付款客户</div>
+                <div class="item-after">{{response.data.customerName}}</div>
+              </div>
+            </div>
+          </li>
+          <li>
+              <div class="item-content">
+               
+                <div class="item-inner">
+                  <div class="item-title">收款类型</div>
+                  <div class="item-after">{{response.data.costTypeName}}</div>
+                </div>
+              </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="list-block">
+        <ul>
+
+            <!--  其他信息 开始 --> 
+            <li class="accordion-item">
+              <a href="#" class="item-content item-link"> 
+                <div class="item-inner"> 
+                  <div class="item-title">
+                   其他信息
+                  </div> 
+                </div>
+              </a> 
+                <div v-if="response.data.sponsorName" class="accordion-item-content"> 
+                  <div class="item-content"> 
+                    <div class="item-inner"> 
+                      <div class="item-title">经手人</div>
+                      <div class="item-after">{{response.data.sponsorName}}</div>
+                    </div> 
+                  </div> 
+                </div> 
+                <div v-if="response.data.submitTime" class="accordion-item-content"> 
+                  <div class="item-content"> 
+                    <div class="item-inner"> 
+                      <div class="item-title">提交时间</div>
+                      <div class="item-after">{{response.data.submitTime | dateTime}}</div>
+                    </div> 
+                  </div> 
+                </div> 
+                <div  v-if="response.data.auditorName" class="accordion-item-content"> 
+                    <div class="item-content"> 
+                      <div class="item-inner"> 
+                        <div class="item-title">审核人</div>
+                        <div class="item-after">{{response.data.auditorName}}</div>
+                      </div> 
+                    </div> 
+                </div> 
+                <div  v-if="response.data.auditTime" class="accordion-item-content">
+                  <div class="item-content"> 
+                    <div class="item-inner"> 
+                      <div class="item-title">审核日期</div>
+                      <div class="item-after">{{response.data.auditTime | dateTime}}</div>
+                    </div> 
+                  </div> 
+                </div>
+            </li> 
+            <!-- 其他信息 结束 -->
+        </ul>
+      </div>
+      
+      <div class="card" style="margin: 0px;">
+        <div class="card-header">收款单据信息</div>
+        <div class="card-content">
+          <div class="card-content-inner">
+            <div class="list-block media-list">
+              <div v-for="item in response.data.sourceDetailList" class="list-group">
+                <ul>
+                  <li v-if="item.sourceTypeId===5">
+                    <a href="saleBatch/deliverOrder/detail.ios.html?orderId={{item.sourceId}}" class="item-link item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title">单据号码：{{item.sourceNo}}</div>
+                          <div class="item-after">{{item.sourceDate | date}}</div>
+                        </div>
+                        <div class="item-subtitle">单据类型：{{item.sourceTypeName}}</div>
+                        <div class="item-text">
+                          <p>
+                            本次收款金额：{{item.receiptMoney | currencys}} |
+                            单据金额：{{item.sumMoney | currencys}}
+                          </p>
+                          <p v-if="item.description">
+                            备注：{{item.description}}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li v-if="item.sourceTypeId===6">
+                    <a href="saleBatch/returnOrder/detail.ios.html?orderId={{item.sourceId}}" class="item-link item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title">单据号码：{{item.sourceNo}}</div>
+                          <div class="item-after">{{item.sourceDate | date}}</div>
+                        </div>
+                        <div class="item-subtitle">单据类型：{{item.sourceTypeName}}</div>
+                        <div class="item-text">
+                          <p>
+                            本次收款金额：{{item.receiptMoney | currencys}} |
+                            单据金额：{{item.sumMoney | currencys}}
+                          </p>
+                          <p v-if="item.description">
+                              备注：{{item.description}}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>                     
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="link">
+            付款总额:
+            <span>
+              {{receiptPayMoney | currency}} | {{response.data.sourceDetailList | arraySum 'receiptMoney' | currencys}}
+            </span>
+          </a>
+         
+          <a href="#" class="link">
+            单据总额:
+            <span>
+              {{totalSumMoney | currency}} |　{{response.data.sourceDetailList | arraySum 'sumMoney' | currencys}}
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- <div class="card">
+        <div class="card-header">收款单据信息</div>
+        <div class="card-content"> 
+          <div class="card-content-inner">
+            <div class="list-block media-list">
+              <ul>
+                <li v-for="item in response.data.sourceDetailList">
+                  <a v-if="item.sourceTypeId==5" href="saleBatch/deliverOrder/detail.ios.html?orderId={{item.sourceId}}" class="item-content item-link">
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">
+                          {{item.sourceNo}}
+                        </div>
+                        <div class="item-after">{{item.sourceDate | date}}</div>
+                      </div>
+                      <div class="item-subtitle">
+                        {{item.sourceTypeName}}
+                      </div>
+                      <div class="item-text">
+                        <div>
+                          单据金额:<span>{{item.sumMoney | currency}}</span> |
+                          本次收款:<span>{{item.receiptMoney | currency}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <a v-if="item.sourceTypeId==6" href="saleBatch/returnOrder/detail.ios.html?orderId={{item.sourceId}}" class="item-content item-link">
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">
+                          {{item.sourceNo}}
+                        </div>
+                        <div class="item-after">{{item.sourceDate | date}}</div>
+                      </div>
+                      <div class="item-subtitle">
+                        {{item.sourceTypeName}}
+                      </div>
+                      <div class="item-text">
+                        <div>
+                          单据金额:<span>{{item.sumMoney | currency}}</span> |
+                          本次收款:<span>{{item.receiptMoney | currency}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>   
+          </div>      
+        </div>
+        <div class="card-footer">
+          <a href="#" class="link">
+            单据金额:
+            <span>{{response.data.sourceDetailList 
+            | arraySum 'sumMoney' | currency}}</span>
+          </a>
+         
+          <a href="#" class="link">
+            收款总额:
+            <span>{{response.data.sourceDetailList 
+            | arraySum 'receiptMoney' | currency}}</span>
+          </a>
+        </div>
+      </div> -->
+      
+      <div class="card" style="margin: 0px;">
+          <div class="card-header">收款账户信息</div>
+          <div class="card-content">
+              <div class="card-content-inner">
+                <div class="list-block media-list">
+                  <div v-for="item in response.data.detailList" class="list-group">
+                    <ul>
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">账户名称：{{item.accountName}}</div>
+                              <div class="item-after"></div>
+                            </div>
+                            <div class="item-subtitle">账户代码：{{item.accountCode}}</div>
+                            <div class="item-text" style="min-height: 55px;"> 
+                              <p>
+                                收款金额：{{item.receiptMoney | currencys}} | 
+                                手续费：{{item.feeMoney | currencys}} | 
+                                支出金额：{{item.accountingMoney | currencys}}
+                              </p>
+                              <div v-if="item.description">
+                                备注：{{item.description}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="link">收款总额:<span>{{response.data.detailList 
+            | arraySum 'receiptMoney' | currencys}}</span></a>
+            <a href="#" class="link">总手续费:<span><span>{{response.data.detailList 
+            | arraySum 'feeMoney' | currencys}}</span></a>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="link">收入总额:<span>{{response.data.detailList 
+            | arraySum 'accountingMoney' | currencys}}</span></a>
+          </div>
+      </div>
+      
+     <!--  <div class="card">
+        <div class="card-header">收款账户信息</div>
+        <div class="card-content">  
+          <div class="card-content-inner">
+            <div class="list-block media-list">
+              <ul>
+                <li v-for="item in response.data.detailList" class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">
+                        账户名称:{{item.accountName}}
+                      </div>
+                    </div>
+                    <div class="item-subtitle">
+                      账户代码:{{item.accountCode}}
+                    </div>
+                    <div class="item-text">
+                      <div>收款金额:<span>{{item.receiptMoney | currency}}</span></div>
+                      <div v-if="item.description">备注:{{item.description}}</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>  
+          </div>       
+        </div>        
+        <div class="card-footer">
+          <a href="#" class="link">
+            收款总额:
+            <span>{{response.data.detailList 
+            | arraySum 'receiptMoney' | currency}}</span>
+          </a>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>

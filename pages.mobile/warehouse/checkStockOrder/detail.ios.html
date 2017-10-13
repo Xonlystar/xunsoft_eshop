@@ -1,0 +1,137 @@
+<div class="pages">
+  <div data-page="warehouse_checkStockOrder_detail" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+       <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+        <div class="center sliding">库存订单详情</div>
+  <div class="right">
+           <a href="warehouse/common/print.ios.html?orderType=checkStock&orderId={{response.data.checkStockOrderId}}" class="link"> 
+            <i class="icon iconfont icon-print"></i>
+          </a>
+          <a href="#"  v-on:click="edit" class="link"> 
+            <i class="icon iconfont icon-edit"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+ <div class="page-content pull-to-refresh-content">
+                 <div class="list-block" style="margin:0px 0">
+                        <ul>
+                            <li >
+                              <div class="item-content">
+                                <div class="item-inner">
+                                <div class="item-after">{{response.data.checkStockOrderNo}}</div>
+                                  <div class="item-after"></div>
+                                </div>
+                              </div>
+                            </li>
+                         </ul>
+                  </div>
+  <div class="list-block" style="margin:8px 0">
+                        <ul>
+                             <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">盘点级别</div>
+                                    <div class="item-after">{{response.data.checkStockLevelId | Level}}</div>
+                                  </div>
+                                </div>
+                              </li>
+                               <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">盘点仓库</div>
+                                    <div class="item-after">{{response.data.warehouseName}}</div>
+                                  </div>
+                                </div>
+                              </li>
+
+                              <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">盘点日期</div>
+                                   <div class="item-after">{{response.data.checkStockDate | date}}</div>
+                                  </div>
+                                </div>
+                              </li>
+
+                         </ul>
+                  </div>
+
+
+
+
+  <div class="card-header" style="min-height: 0px;padding:5px 10px;">商品信息</div>
+                    <div class="card-content">
+                        <!-- 货品信息开始 -->
+                         <div class="list-block media-list" style="margin:0 0">
+                            <ul style="padding-left:0px;">
+                              <li v-for="item in response.data.detailList" class="swipeout">
+                                <div class="swipeout-content">  
+                                  <a v-on:click="detail($event,item)" class="item-content">
+                                    <div class="item-media">
+                                      <div>
+                                        <kind-img :kind-id="item.kindId" :color-id="item.colorId" :allow-scale=false></kind-img>
+                                      </div>
+                                    </div>
+                                    <div class="item-inner">
+                                      <div class="item-title-row">
+                                        <div class="item-title">{{item.kindName}}({{item.kindNo}})</div>
+                                        <div class="item-after"> > </div> 
+                                      </div>
+                                      <div class="item-subtitle"> 
+                                       {{item.brandName}}
+                                      </div>
+                                     <div class="item-text" style="font-size: 13px">
+                                        <div>
+                                          <span style="display: inline-block;width: 100px;">
+                                          数量:{{item.checkAmount}}
+                                          </span>  
+                                        </div>
+                                        <div>
+                                          <span style="display: inline-block;width: 100px;">账面数量:{{item.accountAmount}}</span> 
+                                          <span style="margin-left: 20px;">盈亏数量:{{item.profitLossAmount}}</span> 
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </li>
+                            </ul>
+                        </div>
+                   </div>
+                  <div class="list-block" style="margin:8px 0">
+                        <ul>
+                            
+                              <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">  经手人</div>
+                          <div class="item-after">{{response.data.sponsorName}}</div>
+                                  </div>
+                                </div>
+                              </li>
+                                <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">备注</div>
+                          <div class="item-after">{{response.data.description}}</div>
+                                  </div>
+                                </div>
+                              </li>
+  <li>
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title"> 制单人</div>
+                          <div class="item-after">{{response.data.creatorName}}</div>
+                                  </div>
+                                </div>
+                              </li>
+                         </ul>
+                  </div>
+  </div>
+</div>

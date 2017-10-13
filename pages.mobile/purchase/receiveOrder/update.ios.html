@@ -1,0 +1,193 @@
+<div class="pages">
+  <div data-page="purchase_receiveOrder_update" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+              <i class="icon iconfont icon-fanhui"></i> 
+          </a>
+        </div>
+        <div class="center sliding">收货单修改</div>
+        <div class="right">
+          <a v-on:click="save" href="#" class="link">
+            <i class="icon iconfont icon-save1"></i> 
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+     <div class="list-block accordion-list" style="margin: 5px 0;"> 
+        <ul> 
+         <li> <a href="#" class="item-link smart-select" data-navbar-theme="white" > 
+                  <select v-model="request.supplierId" id="supplierId">
+                    <option v-for="item in response.suppliers" value="{{item.companyId}}"> {{item.companyName}}</option> </select> 
+           <div class="item-content"> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              供应商
+             </div> 
+            </div> 
+           </div> </a> </li> 
+        </ul> 
+     </div> 
+
+
+      
+      <div class="content-block-title">
+         收货单基本信息
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">收货日期</div>
+                <div class="item-input">
+                    <input v-model="request.receiveDate| date" closeOnSelect="true" id="receiveDate" type="text" />
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">本次付款</div>
+                <div class="item-input">
+                  <input type="number" v-model='request.advanceMoney' />
+                </div>
+              </div>
+            </div>
+         </li>
+         
+
+           <li>
+                <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+                  <select v-model="request.accountId" id="accountId">
+                    <option v-for="item in response.accounts"  value="{{item.accountId}}">   {{item.accountName}}</option>
+                  </select>
+                  <div class="item-content">
+                    <div class="item-inner">
+                       <div class="item-title">结算账户</div>
+                    </div>
+                  </div>
+                </a>
+           </li>
+
+
+        </ul>
+      </div>
+
+
+ 
+    <div class="list-block" style="text-align: right;min-height: 44px;"> 
+      <ul> 
+       <li> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title">
+           选择商品
+          </div> 
+          <div href="#" class="link" v-on:click="scanKind" style="margin-right: 200px;"> 
+           <select-barcode :data.sync="request.detailList" order="11" edit="purchase/purchaseOrder/editKindPrice.ios.html"></select-barcode> 
+          </div> 
+          <select-order-kind :data.sync="request.detailList" edit="purchase/purchaseOrder/editKind.ios.html"  v-on:select="selectKind"></select-order-kind> 
+         </div> 
+        </div> 
+        </li> 
+        </ul> 
+    </div>
+
+
+      <div class="content-block-title">
+        货品信息(总数:<span>{{request.detailList | arraySum 'receiveAmount'}}</span>,总额:{{totalReceiveMoney | currencys}})
+      </div>
+      
+      <div class="list-block media-list">
+        <ul>
+          <li v-for="item in request.detailList" class="swipeout">
+            <div class="swipeout-content">
+              <a href="#" class="item-content">
+                <div class="item-media">
+                  <div>
+                    <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+                  </div>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">{{item.kind.kindName}}({{item.kind.kindNo}})</div>
+                      <div class="item-after">
+                       <span style="margin-right:5px"></span>  
+                       <edit-kind :data.sync="request" :kind="item" edit="purchase/receiveOrder/editKindPrice.ios.html"></edit-kind> 
+                      </div>
+                </div>
+
+                    <div class="item-text" >
+                          <div class="row no-gutter">
+                              <span class="col-33">品牌:{{item.kind.brandName}}</span>
+                              <span class="col-33">颜色:{{item.colorName}}</span>
+                              <span class="col-33">尺码:{{item.sizeText}}</span>
+                          </div>
+                          <div class="row no-gutter">
+                              <span class="col-33">数量:{{item.receiveAmount}}</span>
+                              <span class="col-33">收货价:{{item.receivePrice|currencys}}</span>
+                              <span class="col-33">总额:{{item.receiveMoney|currencys}} </span>
+                          </div>
+                    </div>
+                </div>
+              </a>
+            </div>
+        
+          </li>
+        </ul>
+        <div v-if="request.detailList.length==0">
+          <div class="content-block">
+            <div class="content-block-inner">
+              <div class="text-center">
+              <!--   <i class="fa fa-cart-plus fa-3x"></i> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">备注</div>
+                <div class="item-input">
+                  <input type="text" v-model='request.description' />
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="list-block">
+          <ul>
+             <li>
+                  <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+                    <select v-model="request.sponsorId" id="sponsorId"> 
+                      <option v-for="item in response.users"  value="{{item.employeeId}}">   {{item.employeeName}}</option>
+                    </select>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">收货人</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+          </ul>
+      </div>
+
+     
+
+
+    </div>
+
+</div>
+</div>

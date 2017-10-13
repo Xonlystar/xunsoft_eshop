@@ -1,0 +1,88 @@
+
+<div class="pages">
+
+  <div data-page="saleBatch_receiptOrder_list" class="page">
+
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.query.receiptOrderNo" type="search" placeholder="收款单号">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+        <div class="center sliding">收款单({{response.total}})</div>
+        <div class="right">
+          <a v-on:click="query" href="#" class="link"> 
+            筛选
+          </a>
+          <a href="saleBatch/receiptOrder/add.ios.html" class="link"> 
+            开单
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div>
+        <div class="list-block media-list inset">
+          <ul>
+            <li v-for="item in response.data" class="swipeout">
+              <div class="swipeout-content">
+                <a href="saleBatch/receiptOrder/detail.ios.html?orderId={{item.receiptOrderId}}" class="item-link item-content">
+                  <div class="item-media">
+                    <order-flag :flag="item.flag"></order-flag>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">{{item.receiptOrderNo}}</div>
+                      <div class="item-after">{{item.detailSummary.receiptMoney | currency}}</div>
+                    </div>
+                    <div class="item-subtitle">
+                      <div>{{item.customerName}}</div>
+                    </div>
+                    <div class="item-text">
+                      <div>收款日期:<span>{{item.receiptDate | date}}</span></div>
+                      <div>创建信息:<span>{{item.creatorName}}/{{item.createTime | dateTime}}</span></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="swipeout-actions-left">
+                <a v-on:click="updateState('1',item)" v-if="item.flag=='L'" class="swipeout-close bg-green" href="#">提交</a>
+                <a v-on:click="updateState('2',item)" v-if="item.flag=='T'" class="swipeout-close bg-red" href="#">取消提交</a>
+                <a v-on:click="updateState('3',item)" v-if="item.flag=='T'" class="swipeout-close bg-green" href="#">审核</a>
+                <a v-on:click="updateState('4',item)" v-if="item.flag=='S'" class="swipeout-close bg-red" href="#">取消审核</a>
+                <a v-on:click="update(item)" v-if="item.flag=='L'" class="swipeout-close bg-green" href="#">编辑</a>
+                <a v-on:click="delete(item)" v-if="item.flag=='L'" class="swipeout-close bg-red" href="#">删除</a>
+                <a class="swipeout-close" href="saleBatch/common/print.ios.html?orderType=receiptOrder&orderId={{item.receiptOrderId}}">打印</a>
+                <a class="swipeout-close" href="#">取消</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

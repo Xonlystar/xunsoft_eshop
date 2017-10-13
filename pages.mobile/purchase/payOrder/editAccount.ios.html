@@ -1,0 +1,111 @@
+<div class="pages">
+    <div data-page="purchase_payOrder_editAccount" class="page">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                      <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">付款账户</div>
+                <div class="right">
+                    <a href="#" v-on:click="save" class="link">
+                        <i class="icon iconfont icon-save1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div v-if="response.selectAccounts.length>0">
+                <div class="content-block-title">已选收款账户</div>
+                <div class="list-block ">
+                    <ul>
+                        <li v-for="item in response.selectAccounts">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{item.accountName}}
+                                    </div>
+                                    <div class="item-after">
+                                        {{item.accountingMoney | currency}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="list-block ">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white" >
+                            <select name="car" multiple v-model="request.accountId">
+                                <option v-for="item in response.accounts"  value="{{item.accountId}}">   {{item.accountName}}</option>
+                            </select>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">付款账户</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="content-block-title">付款信息</div>
+            
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    付款金额
+                                </div>
+                                <div class="item-input">
+                                    <input v-model="request.payMoney"
+                                    placeholder="付款金额" type="number"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    手续费
+                                </div>
+                                <div class="item-input">
+                                    <input placeholder="手续费" v-model="request.feeMoney" type="number"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">
+                                    备注
+                                </div>
+                                <div class="item-input">
+                                    <textarea class="resizable" placeholder="备注" maxlength="100"
+                                    v-model="request.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="list-block-label">
+                    <p class="text-right">
+                        本次付款总金额:<span>{{accountingMoney | currency}}</span>
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

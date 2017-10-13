@@ -1,0 +1,112 @@
+<div class="pages">
+	<div data-page="kind_add" class="page">
+		<div class="navbar">
+	      <div class="navbar-inner">
+	        <div class="left">
+	            <a href="#" class="back link"> 
+	               <i class="icon icon-back"></i>
+              	   返回
+	            </a>
+	        </div>
+	        <div class="center sliding">录入货品</div>
+	        <div class="right">
+	            <a v-on:click="save" href="#" class="link"> 
+	                保存
+	            </a>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="page-content">
+
+	    	<div>
+			    <div class="content-block-title">货品信息</div>
+			    <div class="list-block inset">
+			    	<ul>
+			    		<li>
+			    			<div class="item-content">
+			    				<div class="item-inner">
+						          <div class="item-title label">货号</div>
+						          <div class="item-input">
+						            <input v-model="request.kindNo" type="text" placeholder="货号" maxlength="36">
+						          </div>
+						        </div>
+			    			</div>
+			    		</li>
+			    		<li>
+			    			<div class="item-content">
+			    				<div class="item-inner">
+						          <div class="item-title label">名称</div>
+						          <div class="item-input">
+						            <input v-model="request.kindName" type="text" placeholder="名称" maxlength="25">
+						        </div>
+			    			</div>
+			    		</li>
+			    	</ul>
+			    </div>
+		    </div>
+
+	    	<div>
+		    	<div class="content-block-title">货品品牌</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			          <select-brand :source="response.brands" :data.sync="request.brandId" max="1" ></select-brand>
+			        </div>
+			    </div>
+		    </div>
+
+			    <div class="content-block-title">货品分类</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			        	<select-kind-class :source="response.kindClasses" :data.sync="request.kindClassId" max="1" :brand-id="request.kindClassId"></select-kind-class>
+			        </div> 
+			    </div>
+
+		    <div>
+			    <div class="content-block-title">货品单位</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			          <select-unit :source="response.units"
+			                       :data.sync="request.unitId" max="1"></select-unit>
+			        </div>
+			    </div>
+		    </div>
+
+		    <div>
+			    <div class="content-block-title">货品尺码组</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			          <select-size-group :source="response.sizeGroups"
+			                       :data.sync="request.sizeGroupId" max="1">
+			          </select-size-group>
+			        </div>
+			    </div>
+		    </div>
+
+		     <div v-if="request.sizeGroupId">
+		    	<div class="content-block-title">货品尺码</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			          <select-size :source="response.sizes" 
+			                       :data.sync="request.size"
+			                       :size-group-id="request.sizeGroupId" 
+			                       max="30">
+			          </select-size>
+			        </div>
+			    </div>
+		    </div>
+
+		    <div>
+		    	<div class="content-block-title">货品颜色</div>
+		    	<div class="content-block inset">
+			        <div class="content-block-inner">
+			          <select-color :source="response.colors"
+			                       :data.sync="request.color" max="30">
+			          </select-color>
+			        </div>
+			    </div>
+		    </div>
+
+	    </div>
+	</div>	
+</div>

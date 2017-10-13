@@ -1,0 +1,193 @@
+<div class="pages">
+  <div data-page="saleBatch_returnOrder_detail" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon iconfont icon-fanhui"></i>
+            </a>
+        </div>
+        <div class="center sliding">客户退货单详情</div>
+        <div class="right">
+            <a href="saleBatch/common/print.ios.html?orderType=returnOrder&orderId={{response.data.returnOrderId}}" class="link"> 
+              <i class="icon iconfont icon-print"></i>
+            </a>
+            <a v-on:click="edit" class="link"> 
+               <i class="icon iconfont icon-edit"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+  
+     
+    <div class="page-content pull-to-refresh-content">
+
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div class="list-block" style="margin:0px 0">
+              <ul>
+                  <li >
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">{{response.data.returnOrderNo}}</div>
+                        <div class="item-after"></div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
+        </div>
+
+         <div class="list-block" style="margin:8px 0">
+                <ul>
+                     <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title">客户</div>
+                            <div class="item-after">{{response.data.customerName}}</div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title">日期</div>
+                            <div class="item-after">{{response.data.returnDate | date}}</div>
+                          </div>
+                        </div>
+                      </li>
+                 </ul>
+         </div>
+
+      <div class="card-header" style="min-height: 0px;padding:5px 10px;">商品信息</div>
+
+        <div class="card-content">
+            <!-- 货品信息开始 -->
+             <div class="list-block media-list" style="margin:0 0">
+                <ul style="padding-left:0px;">
+                  <li v-for="item in response.data.detailList" class="swipeout">
+                    <div class="swipeout-content">  
+                      <a v-on:click="detail($event,item)" class="item-content">
+                        <div class="item-media">
+                          <div>
+                            <kind-img :kind-id="item.kindId" :color-id="item.colorId" :allow-scale=false></kind-img>
+                          </div>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">{{item.kindName}}({{item.kindNo}})</div>
+                            <div class="item-after"></div> 
+                          </div>
+                          <div class="item-subtitle"> 
+                          </div>
+                         <div class="item-text" >
+                            <div class="row no-gutter">
+                                <span class="col-33">品牌:{{item.brandName}}</span>
+                                <span class="col-33">颜色:{{item.colorName}}</span>
+                                <span class="col-33">尺码:{{item.sizeText}}</span>
+                            </div>
+                            <div class="row no-gutter"> 
+                             <span class="col-33" >数量:{{item.returnAmount}}</span> 
+                             <span class="col-33">退货价:{{(item.wholesalePrice )|currencys}}</span>
+                             <span class="col-33">金额:{{(item.returnMoney )|currencys}}</span> 
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+             </div>
+            <!--  货品信息结束 -->
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+          <ul>
+          <li class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      退货总量
+                    </div>
+                    <div class="item-after">
+                      {{response.data.detailSummary.returnAmount}}
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      退货总额
+                    </div>
+                    <div class="item-after">
+                      {{response.data.detailSummary.returnMoney | currencys}}
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      结算账户
+                    </div>
+                    <div class="item-after">
+                      {{response.data.accountName}}
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      本次退款
+                    </div>
+                    <div class="item-after">
+                      {{response.data.advanceMoney | currencys}}
+                    </div>
+                  </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+              <ul>
+                  <li >
+                   <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">
+                          备注
+                        </div>
+                        <div class="item-after">
+                          {{response.data.description}}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
+        </div>
+
+        <div class="list-block" style="margin:8px 0">
+              <ul>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">制单人</div>
+                        <div class="item-after">{{response.data.creatorName}}</div>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">制单时间</div>
+                        <div class="item-after">{{response.data.createTime | dateTime}}</div>
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+        </div>
+
+    </div>
+  </div>
+</div>

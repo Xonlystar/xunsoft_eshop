@@ -1,0 +1,34 @@
+<div class="pages">
+  <div data-page="warehouse_common_print" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+        <div class="center sliding">打印预览</div>
+        <div class="right">
+          <a v-on:click="print" href="#" class="link" style="color: #fff"> 
+               <i class="fa fa-print"></i> 
+          </a>
+        </div>
+      </div>
+    </div>  
+
+    <div class="page-content">
+      <div>
+          <div class="row">
+            <div class="col-auto">
+              &nbsp;
+            </div>
+            <div class="col-auto" v-html="response.printStr">
+              
+            </div>
+            <div class="col-auto">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

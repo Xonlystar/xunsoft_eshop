@@ -1,0 +1,144 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_add" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+                    <a href="#"  class="back link">
+            <i class="icon iconfont icon-fanhui"></i>
+          </a>
+        </div>
+        <div class="center sliding">POS开单</div>
+        <div class="right">
+          <a href="saleRetail/saleOrder/list.ios.html" class="link"><i class="fa fa-file-text"></i></a>
+          <a v-on:click="save" href="#" class="link">
+            <i class="icon iconfont icon-save1"></i>
+          </a>         
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="page-content">
+      <div class="content-block-title">销售信息</div>
+      <div class="list-block accordion-list">
+        <ul>
+          <li>
+            <a class="item-link">
+                <div class="item-content" v-on:click="selectMember">
+                  <div class="item-inner">
+                      <div class="item-title">
+                        会员
+                      </div> 
+                                    <div class="item-after">
+                           <span v-if="request.memberCard_MemberName"> {{request.memberCardNo}}/{{request.memberCard_MemberName}}
+                           </span> 
+                      </div>
+                  </div>
+                </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="list-block" style="text-align: right;min-height: 44px;"> 
+        <ul> 
+         <li> 
+          <div class="item-content"> 
+           <div class="item-inner"> 
+            <div class="item-title">
+             选择商品
+            </div> 
+             <div href="#" class="link" style="margin-right: 200px;">
+             <select-barcode :data.sync="request.detailList" style="float: left" order="11" edit="saleRetail/saleOrder/editKindPrice.ios.html"></select-barcode> 
+             
+            </div> 
+            <a v-on:click="scanKind" class="select_product_a">&nbsp;  </a>
+           </div> 
+            </div>
+         </li>
+        </ul> 
+      </div>
+
+      
+
+      <div class="list-block media-list" v-if="request.detailList.length!=0"> 
+        <ul> 
+         <li v-for="item in request.detailList" class="swipeout"> 
+          <div class="swipeout-content"> 
+            <a href="#" class="item-content" v-on:click="editKind(item)"> 
+              <!-- 折扣图标 -->
+              <img src="../img/sale.png" alt="" v-if="(item.saleMoney-item.actualMoney) > 0" class="item-sale-img">
+              <div class="item-media"> 
+               <div> 
+                <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img> 
+               </div> 
+              </div> 
+              <div class="item-inner"> 
+               <div class="item-title-row"> 
+                <div class="item-title">
+                 {{item.kindName}}({{item.barNo}})
+                </div> 
+                
+               </div> 
+               <div class="item-text" > 
+                <div class="row no-gutter">
+                    <span class="col-33">品牌:{{item.brandName}}</span>
+                    <span class="col-33">颜色:{{item.colorName}}</span>
+                    <span class="col-33">尺码:{{item.sizeText}}</span>
+                </div>
+                <div class="row no-gutter"> 
+                   <span class="col-33">数量:{{item.saleAmount}}</span>
+                   <span class="col-33">单价:{{(item.retailPrice )|currencys}}</span> 
+                   <span class="col-33">金额:{{(item.saleMoney )|currencys}}</span>
+                </div> 
+               </div> 
+              </div> 
+            </a> 
+          </div> 
+         </li> 
+        </ul> 
+                <div v-if="request.detailList.length!=0" class="list-block-label">
+         <div style="float: right;">
+             总数:<span>{{request.detailList | arraySum 'saleAmount'}}</span>,
+             应收金额:<span>{{request.detailList | arraySum 'saleMoney'}}</span> ,
+             实收金额:<span>{{request.detailList | arraySum 'actualMoney'}}</span> 
+         </div>
+        </div>
+      </div> 
+
+      
+
+            <div class="list-block">
+        <ul>
+          <li> 
+                        <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                  <select v-model="request.userId" id="userId">
+                      <option v-for="item in response.users" value="{{item.userId}}"> {{item.employeeName}}</option>
+                  </select> 
+               <div class="item-content"> 
+                <div class="item-inner"> 
+                 <div class="item-title label">
+                  操作员
+                 </div> 
+                </div> 
+               </div>
+             </a> 
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                    备注
+                </div>
+                <div class="item-input">
+                    <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+ </div>
+</div>

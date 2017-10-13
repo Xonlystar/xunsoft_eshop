@@ -1,0 +1,59 @@
+<html>
+ <head></head>
+ <body>
+  <div class="pages"> 
+   <div data-page="setting_feedbackList" class="page"> 
+    <div class="navbar"> 
+     <div class="navbar-inner"> 
+      <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+      <div class="center sliding">
+       我的反馈({{response.total}})
+      </div> 
+      <div class="right"> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="page-content"> 
+     <div class="pull-to-refresh-layer"> 
+      <div class="preloader"></div> 
+      <div class="pull-to-refresh-arrow"></div> 
+     </div> 
+     <div v-for="item in response.data" class="list-block " style="font-size:13px; margin: 0px;"> 
+      <ul> 
+       <li> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title label" style="width: 90% ;white-space:inherit">
+           标题: {{item.title}}
+          </div> 
+          <div class="item-after">
+            {{item.status | Solve}} 
+          </div> 
+         </div> 
+        </div> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title label" style="width: 100%;white-space:inherit">
+           问题:{{item.content}}
+          </div> 
+         </div> 
+        </div> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-after">
+            {{item.createTime}} 
+          </div> 
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+     <div> 
+      <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+ </body>
+</html>

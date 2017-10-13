@@ -1,0 +1,141 @@
+
+<div class="pages">
+  <div data-page="saleBatch_returnOrder_update" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              退出
+            </a>
+        </div>
+        <div class="center sliding">客户退货单修改</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+              保存
+            </a>
+        </div>
+      </div>
+    </div>  
+    <div class="page-content">
+      <div class="content-block-title">客户</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-customer :source="response.customers" 
+                           :data.sync="request.customerId"
+                           max="1" edit-status=true></select-customer>
+        </div>
+      </div>
+
+      <div class="content-block-title">退货信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  退货日期
+                </div>
+                <div class="item-input">
+                  <input id="returnDate" v-model="request.returnDate | date" type="text" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-jpy"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  本次退款
+                </div>
+                <div class="item-input">
+                  <input v-model="request.advanceMoney" type="number" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea placeholder="备注" v-model="request.description" class="resizable"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="content-block-title">结算账户</div>
+        <div class="content-block inset">
+          <div class="content-block-inner">
+            <select-account :source="response.accounts" 
+                            :data.sync="request.accountId"
+                            max="1"></select-account>
+          </div>
+        </div>
+      </div>
+
+      <!--菜单-->
+      <div class="content-block inset">
+        <div class="content-block-inner">
+         <salebatch-return-menu :list.sync="request.detailList"></salebatch-return-menu>
+        </div>
+      </div>
+
+      <div class="content-block-title">
+        货品信息(总数:{{request.detailList | arraySum 'returnAmount'}},总额:{{request.detailList | arraySum 'returnMoney' | currency}})
+      </div>
+      <div class="content-block">
+        <div class="row">
+          <div class="col-auto">
+            <div class="saleBatch_returnOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 0">
+              <salebatch-return-detial v-on:delete="delete" :list="request.detailList" :detail="item"></salebatch-return-detial>       
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="saleBatch_returnOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 1">
+              <salebatch-return-detial v-on:delete="delete" :list="request.detailList" :detail="item"></salebatch-return-detial>       
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="saleBatch_returnOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 2">
+              <salebatch-return-detial v-on:delete="delete" :list="request.detailList" :detail="item"></salebatch-return-detial>       
+            </div>
+          </div>
+        </div>
+        <div v-if="request.detailList.length==0">
+          <div class="content-block inset">
+            <div class="content-block-inner">
+              <div class="text-center">
+                <i class="fa fa-cart-plus fa-5x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block-title">经手人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.sponsorId" max="1"></select-user>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

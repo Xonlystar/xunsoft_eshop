@@ -1,0 +1,67 @@
+<div class="pages">
+    <div data-page="account_loginPhone" class="page login">
+        <div class="searchbar-overlay"></div>
+        <div class="page-content">
+            <div>
+                <img src="../img/login_top.png" style="max-width:100%;width: 100%;">
+            </div>
+            <ul class="list-block inset">
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon iconfont icon-telephone"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input v-model="request.data.phoneNum" placeholder="手机号码" type="text" style="text-align: left;">
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="item-content">
+                    <div class="item-media"><i class="icon icon iconfont icon-lock"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input v-model="request.data.phoneCode" placeholder="短信验证码" type="password" style="text-align:left;">
+                        </div>
+                    </div>
+                </li> -->
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon iconfont icon-lock"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input v-model="request.data.userPassword" placeholder="密码" type="password" style="text-align:left;">
+                        </div>
+                    </div>
+                </li>
+                <li class="login-type" style="margin-top:10px;">
+                    <span class="float-left"><a href="#" class="text-blue back">账户登入</a></span>
+                    <!-- <span class="float-right text-lightBlue">发送验证码</span> -->
+                </li>
+                <li class="remember checkbox">
+                    <!-- <span class="float-right text-red">快速注册</span> -->
+                    <label class="label-checkbox item-content">
+                                <input type="checkbox" name="remember" v-model="request.data.remember">
+                                <div class="item-media">
+                                <i class="icon icon-form-checkbox"></i>
+                                </div>
+                                <div class="item-inner">
+                                <div class="item-title">记住密码</div>
+                                </div>
+                            </label>
+                </li>
+                <li style="margin-bottom:0">
+                    <a class="item-link list-button login-btn" v-on:click="login">登   录</a>
+                </li>
+                <li class="checkbox">
+                    <label class="label-checkbox item-content">
+                                <input type="checkbox" name="agreeIssue" v-model="request.data.agreeIssue">
+                                <div class="item-media">
+                                <i class="icon icon-form-checkbox"></i>
+                                </div>
+                                <div class="item-inner">
+                                <div class="item-title" style="color:#5d5959">同意<b style="color:black;">讯商软件</b>会员服务条款</div>   
+                                </div>
+                            </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,45 @@
+<div class="pages">
+    <div data-page="report_fundReport_index" class="page page_report">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">资金报表</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <select-date :data.sync="request" v-on:fresh="load"></select-date>
+            <div class="report-content">
+                <div class="content-header">
+                    <div class="row">
+                        <div class="col-20 title">{{response.name}}收款</div>
+                        <div class="col-20 title">{{response.name}}支出</div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-20"><span style="color:red;">{{response.receiptmoney|currency ""}}</span></div>
+                        <div class="col-20"><span style="color:green;">{{response.paymoney|currency ""}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div id="cloud_fundReport" style="height:250px;"></div>
+                </div>
+            </div>
+            <div class="report-content">
+                <div class="fundReportList">
+                    <div class="list-item" v-for="item in response.moneyData" style="border-bottom: 1px solid #999;padding-bottom: 8px; margin-top: 7px;">
+                        <i></i>
+                        <span>{{item.name}}</span>
+                        <span class="float-right">{{item.value|currency ""}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

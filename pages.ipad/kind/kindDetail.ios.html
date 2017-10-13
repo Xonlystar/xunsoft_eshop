@@ -1,0 +1,146 @@
+
+ <div class="pages">
+  <div data-page="kind_kindDetail" class="page with-subnavbar">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+       <div class="center sliding">货品明细</div>
+       <div class="right">
+            <a href="#" class="link" v-on:click="showPop"> 
+               <i class="fa fa-photo" id="userLogo"></i>
+            </a>
+       </div>
+        <!-- 二级菜单 -->
+        <div class="subnavbar">
+          <div class="buttons-row">
+            <a href="#kindInfo" class="button tab-link active">基本信息</a>
+            <a href="#kindColorSize" class="button tab-link">颜色尺码</a>
+            <a href="#kindPrice" class="button tab-link">价格信息</a>
+            <a href="#kindImage" class="button tab-link">货品相册</a>
+            <a href="#kindProperty" class="button tab-link">扩展属性</a>
+          </div>
+        </div>
+      </div>
+    </div>  
+ 
+    <div class="page-content" >
+      <div class="tabs">
+       <!--货品基本信息-->
+         <div id="kindInfo" class="tab active">
+            <div class="list-block inset">
+              <ul>
+                <li>
+                    <div class="item-content">
+                       <div class="item-inner">
+                          <div class="item-title">货品分类</div>   
+                          <div class="item-after">{{response.data.brandName}}</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                   <div class="item-inner">
+                     <div class="item-title">货品名称</div>   
+                     <div class="item-after">{{response.data.kindName}}</div>
+                   </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                   <div class="item-inner">
+                       <div class="item-title">货号</div>   
+                       <div class="item-after">{{response.data.kindNo}}</div>
+                    </div>
+                  </div>
+                 </li>
+               <li>
+                  <div class="item-content">
+                   <div class="item-inner">
+                        <div class="item-title">单位</div>   
+                        <div class="item-after">{{response.data.unitName}}</div>
+                    </div>
+                  </div>
+               </li>
+               <li>
+                  <div class="item-content">
+                   <div class="item-inner">
+                         <div class="item-title">说明</div>   
+                         <div class="item-after">{{response.data.description}}</div>
+                    </div>
+                   </div>
+               </li>          
+              </ul>
+            </div>
+         </div>
+
+          <!--颜色尺码-->
+          <div id="kindColorSize" class="tab">
+            <div class="list-block inset"> 
+               <div v-for="(key, val) in response.data.entityList" class="list-group">    
+                 <ul>
+                   <li class="list-group-title">颜色:{{key}}</li>
+                   <li v-for="item in val" class="item-content">
+                     <div class="item-inner">
+                          <div class="item-title">尺码:{{item.sizeText}}</div>  
+                          <div class="item-after">条形码:{{item.barNo}}</div> 
+                      </div>
+                   </li>
+                </ul>
+              </div>  
+            </div>
+          </div>
+
+          <!--价格信息-->
+          <div id="kindPrice" class="tab">
+             <div class="list-block inset">
+               <ul>
+                  <li v-for="item in response.data.priceList">
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">{{item.itemKey | kindPirceKey}}</div> 
+                        <div class="item-after">{{item.value | currency}}</div>
+                      </div>
+                    </div>
+                   </li>  
+                </ul>
+             </div>  
+          </div>
+
+         <!--图片展示-->
+         <div id="kindImage" class="tab">
+            <!--图片浏览-->
+            <div class="swiper-container">
+               <div class="swiper-wrapper">
+                 
+               </div>
+               <div class="swiper-pagination">
+               </div>
+            </div>
+         </div>
+
+         <!--扩展属性-->
+         <div id="kindProperty" class="tab">
+           <div class="list-block inset">
+              <ul>            
+                <li  v-for="item in response.data.propertyList">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">{{item.propertyName}}</div> 
+                      <div class="item-after">{{item.propertyValueText}}</div>
+                    </div>
+                  </div>
+                 </li>               
+              </ul>
+           </div>
+         </div>
+      </div>
+    </div>
+
+  </div>
+ </div>

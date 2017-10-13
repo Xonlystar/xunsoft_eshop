@@ -1,0 +1,81 @@
+<div data-page="account_login" class="page no-navbar no-toolbar">
+	<div class="page-content login-screen-content">
+		<div class="account_login_container">
+			<!-- 上部logo -->
+			<div class="row title">
+				<div class="col-20 title_left"><img src="../img/login-logo.png" class="img-responsive"></div>
+				<div class="col-20 col-offset-60 text-right">
+					<a href="#">E售易首页</a>
+					<span>|</span>
+					<a href="#">帮助</a>
+				</div>
+			</div>
+			<!-- 中部主体内容 -->
+			<div class="row content no-gutter">
+				<div class="col-65"><img src="../img/carous.jpg" class="img-responsive"></div>
+				<div class="col-35 list-block">
+					<ul class="content-block" style="margin: 0;">
+						<li>
+							<div class="item-content">
+								<div class="item-title label"><img src="../img/user.jpg" class="img-responsive"></div>
+								<div class="item-input">
+					            	<input type="text" placeholder="公司" v-model="request.data.companyName">
+					          	</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+							<div class="item-title label"><img src="../img/user.jpg" class="img-responsive"></div>
+								<div class="item-input">
+					            	<input type="text" placeholder="用户" v-model="request.data.userName">
+					          	</div>
+							</div>
+						</li>
+						<li>
+					        <div class="item-content">
+							<div class="item-title label"><img src="../img/pwd.jpg" class="img-responsive"></div>
+								<div class="item-input">
+					            	<input type="password" placeholder="密码" v-model="request.data.userPassword">
+					          	</div>
+							</div>
+					    </li>
+					</ul>
+					<div class="content-block" style="margin-top: 0">
+					  <a href="#" class="button button-fill button-big" v-on:click="login">登录</a>
+					</div>
+					<div class="content-block">
+						<div class="row">
+							<div class="col-40 text-left"><a href="#">忘记密码?</a></div>
+							<div class="col-60 text-right"><a href="#" class="text-red">去注册</a></div>
+						</div>
+					</div>
+					<div class="content-block">
+					 <span>客服热线:400-685-3885</span>
+					</div>
+				</div>
+			</div>
+			<!-- 下部页脚 -->
+			<div class="footer">
+				<i class="left"></i>
+				<div class="text-center foot-t">
+					<span class="footer_title">管理之道&nbsp;&nbsp;唯有讯商</span>
+				</div>
+				<ul class="row">
+					<li class="col-12"><a href="">分销</a></li>
+					<li class="col-12"><a href="">生产</a></li>
+					<li class="col-12"><a href="">WMS</a></li>
+					<li class="col-12"><a href="">云电商</a></li>
+					<li class="col-12"><a href="">云订货</a></li>
+					<li class="col-12"><a href="">电子工票</a></li>
+					<li class="col-12"><a href="">财务</a></li>
+					<li class="col-12"><a href="">CRM</a></li>
+				</ul>
+				<div class="text-center foot-b">
+					<span>讯商E售易版权所有</span>
+				</div>
+				<i class="right"></i>
+			</div>
+		</div>
+	</div>
+	
+</div>

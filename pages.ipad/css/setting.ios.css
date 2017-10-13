@@ -1,0 +1,33 @@
+
+.setting_default_weather{
+	font-size: 23px;
+}
+
+.setting_default_item{
+	padding: 15px;
+	background-color: rgb(255,255,255);
+	word-break: break-all;
+	margin-bottom: 15px;
+}
+.setting_default_item_title{
+	font-size: 17px;
+	color:#2A85C3;
+	padding-top: 10px;
+}
+
+.swiper-container {
+  height: 100%;
+}
+.swiper-slide {
+  background:#fff;
+
+}
+.swiper-slide span {
+  text-align:center;
+
+}
+
+div#center {
+    width: 600px;
+    white-space:inherit;
+}

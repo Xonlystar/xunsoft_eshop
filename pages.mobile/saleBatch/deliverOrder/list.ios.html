@@ -1,0 +1,86 @@
+<div class="pages">
+    <div data-page="saleBatch_deliverOrder_list" class="page">
+
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init" data-custom-search="true">
+            <div class="searchbar-input">
+                <input v-model="request.query.deliverOrderNo" type="search" placeholder="出货单号">
+                <a href="#" class="searchbar-clear">
+                </a>
+            </div>
+            <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+        </form>
+
+        <!-- 标题title -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="link" v-on:click="back">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">出货单({{response.total}})</div>
+                <div class="right">
+                    <a href="#" class="link" v-on:click="query()">
+                        <i class="icon iconfont icon-filter"></i>
+                    </a>
+                    <a href="saleBatch/deliverOrder/add.ios.html" class="link">
+                        <i class="icon iconfont icon-add"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content pull-to-refresh-content">
+
+            <!-- 刷新组件 -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+            <div class="list-block media-list">
+                <div v-for="row in response.data">
+                    <div class="content-block-title" v-if="row.value&&row.value.length>0">{{row.time | date}}</div>
+                    <ul>
+                        <li v-for="item in row.value">
+                            <a href="saleBatch/deliverOrder/detail.ios.html?orderId={{item.deliverOrderId}}" class="item-link item-content" v-on:tapHold="showMenu(item)">
+                                <div class="item-inner" style="position: relative;">
+                                    <order-status :flag="item.flag"></order-status>
+                                    <div v-if="item.flag=='L'" class="item-subtitle" style="margin-bottom: 1em;color:#00E58C;">
+                                        {{item.customerName}}
+                                    </div>
+                                    <div v-if="item.flag=='T'" class="item-subtitle" style="margin-bottom: 1em;color:#00B770;">
+                                        {{item.customerName}}
+                                    </div>
+                                    <div v-if="item.flag=='S'" class="item-subtitle" style="margin-bottom: 1em; color:#358AE5;">
+                                        {{item.customerName}}
+                                    </div>
+                                    <div class="item-title-row" style="background-image: none;">
+                                        <div class="item-title">{{item.deliverOrderNo}}</div>
+                                        <div class="item-after" style="text-align:right;"><span style="margin-right: 20px;color:black;">{{item.detailSummary.deliverMoney | currency}}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+            </div>
+        </div>
+
+        <!--  底部合计 开始 -->
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div href="#" class="link">
+                    合计: {{_totalPrice | currency}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

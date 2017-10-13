@@ -1,0 +1,67 @@
+<div class="pages">
+	<div data-page="saleBatch_default" class="page no-swipeback">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="home.ios.html" class="link">
+						首页
+					</a>
+				</div>
+				<div class="center sliding">销售</div>
+				<div class="right">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+			<!--数据看板-->
+			<div class="swiper-container swiper-slow">
+			    <div class="swiper-pagination">111</div>
+			    <div class="swiper-wrapper" style="width: 100%; height: 200px ;">
+			      <div class="swiper-slide" style="background-color: #ACD6FF;"><span style="color: #fff;">本日销售数量:50</span></div>
+			      <div class="swiper-slide" style="background-color: #ACD6FF;"><span style="color: #fff;">本月销售数量:60</span></div>
+			      <div class="swiper-slide"  style="background-color: #ACD6FF;"><span style="color: #fff;">本年销售数量:70</span></div>
+			    </div>
+			</div>
+			<!--菜单区域-->
+			<div class="content-block">
+				<div class="row no-gutter">
+					<div class="col-33">
+						<div v-on:click="select('saleBatch/saleOrder/list.ios.html')" class="saleBatch_default_menu">
+							<div class="text-center">
+								<i class="fa fa-shopping-cart fa-3x"></i>
+							</div>
+							<p class="text-center">销售订单</p>
+						</div>
+					</div>
+					<div class="col-33">
+						<div v-on:click="select('saleBatch/deliverOrder/list.ios.html')" class="saleBatch_default_menu">
+							<div class="text-center">
+								<i class="fa fa-truck fa-3x"></i>
+							</div>
+							<p class="text-center">销售出货</p>
+						</div>
+					</div>
+					<div class="col-33">
+						<div v-on:click="select('saleBatch/receiptOrder/list.ios.html')" class="saleBatch_default_menu">
+							<div class="text-center">
+								<i class="fa fa-jpy fa-3x"></i>
+							</div>
+							<p class="text-center">销售收款</p>
+						</div>
+					</div>
+					<div class="col-33">
+						<div v-on:click="select('saleBatch/report/index.ios.html')" class="saleBatch_default_menu">
+							<div class="text-center">
+								<i class="fa fa-bar-chart fa-3x"></i>
+							</div>
+							<p class="text-center">统计分析</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

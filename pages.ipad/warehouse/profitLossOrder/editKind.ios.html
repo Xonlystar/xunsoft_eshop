@@ -1,0 +1,92 @@
+<div class="pages">
+  <div data-page="warehouse_profitLossOrder_editKind" class="page">
+    <!--导航栏-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+             <i class="icon icon-back"></i>
+               返回
+            </a>
+        </div>
+        <div class="center sliding">编辑货品</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+               确认
+            </a>
+        </div>
+      </div>
+    </div>
+    <!--内容区-->
+    <div class="page-content">
+
+       <div class="content-block-title">货品颜色 </div>   
+       <div  class="content-block inset">
+           <div class="content-block-inner"> 
+             <select-color :source="response.kindDetail.colorList"
+                        :data.sync="request.colorId" max="1"
+                        :kind-id="response.kindDetail.kindId"></select-color>
+           </div>
+       </div>
+       <div class="content-block-title">货品尺码 </div>
+       <div class="content-block inset">
+          <div class="content-block-inner">
+           <select-size :source="response.kindDetail.sizeList"
+                       :data.sync="request.sizeId" max="1"
+                       :kind-id="response.kindDetail.kindId"
+                       :size-group-id="response.kindDetail.sizeGroupId"></select-size>
+          </div>
+       </div>
+       <div class="content-block-title">益损信息</div>
+       <div  class="list-block inset">
+          <ul>
+             <li>
+               <div class="item-content">
+                   <div class="item-media">
+                        <i class="fa fa-shopping-basket"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">数量</div>
+                        <div class="item-input">
+                          <input type="number"  min="1" max="99999" v-model="request.profitLossAmount"  name="name" placeholder="数量">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+               <div class="item-content">
+                   <div class="item-media">
+                         <i class="fa fa-sticky-note"></i>
+                   </div>
+                   <div class="item-inner">
+                      <div class="item-title label">备注</div>
+                        <div class="item-input">
+                          <input type="text" v-model="request.description"  name="name" placeholder="备注">
+                      </div>
+                   </div>
+                </div>
+             </li>
+          </ul> 
+          <div class="list-block-label">
+            <p class="text-right">
+              库存:<span>{{request.inventory}}</span>
+              &nbsp;&nbsp;
+              成本价:<span>{{request.retailPrice | currency}}</span>
+              &nbsp;&nbsp;
+              金额:<span>{{request.profitLossMoney | currency}}</span>
+            </p>
+          </div>        
+          <div class="content-block-title">货品信息</div>
+          <div  class="list-block media-list">
+            <ul>  
+               <li>
+                  <div class="item-content">
+                    <kind-info :kind="response.kindDetail"></kind-info>
+                  </div>
+               </li>      
+            </ul>
+          </div> 
+       </div>
+    </div>
+  </div>
+</div>

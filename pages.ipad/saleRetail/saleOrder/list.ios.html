@@ -1,0 +1,88 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_list" class="page">
+
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.query.saleOrderNo" type="search" placeholder="零售单号">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+            <i class="icon icon-back"></i>
+              返回
+          </a>
+        </div>
+        <div class="center sliding">零售单列表({{response.total}})</div>
+        <div class="right">
+          <a href="saleRetail/saleOrder/add.ios.html" class="link">
+            开单
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+      
+      <div>
+        <div class="list-block media-list inset">
+          <ul>
+            <li class="swipeout" v-for="item in response.data">
+              <div class="swipeout-content"> 
+              <a class="item-content item-link" href="saleRetail/saleOrder/detail.ios.html?orderId={{item.saleOrderId}}">
+                <div class="item-media">
+                  <order-flag :flag="item.flag"></order-flag>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">{{item.saleOrderNo}}</div>
+                    <div class="item-after">
+                      <span class="badge">{{item.detailSummary.performanceMoney | currency}}</span>
+                    </div>
+                  </div>
+                  <div class="item-subtitle">
+                    {{item.saleDate | date}}
+                  </div>
+                  <div class="item-text">
+                    <div v-if="item.memberCardNo">
+                      会员卡:<span>{{item.memberCard_MemberName}}</span>/<span>{{item.memberCardNo}}</span>
+                    </div>
+                    <div>
+                      制单日期:<span>{{item.creatorName}}</span> /<span>{{item.createTime | dateTime}}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>                            
+              </div>
+              <div class="swipeout-actions-left">
+                      <a v-on:click="updateState('1',item)" v-if="item.flag=='L'"  href="#" class="bg-green swipeout-close">提交</a>
+                      <a v-on:click="updateState('2',item)" v-if="item.flag=='T'" href="#" class="bg-red swipeout-close">取消提交</a>
+                      <a v-on:click="updateState('3',item)" v-if="item.flag=='T'" href="#" class="swipeout-close">审核</a>
+                      <a v-on:click="updateState('4',item)" v-if="item.flag=='S'" href="#" class="bg-red swipeout-close">取消审核</a>
+                      <a href="saleBatch/common/print.ios.html?orderType=saleRetailOrder&orderId={{item.saleOrderId}}" class="bg-lightblue">打印</a>
+                      <a class="swipeout-close" href="#">取消</a>
+                    </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+            <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<div class="pages">
+
+  <div data-page="saleRetail_saleOrder_selectMemberCard" class="page">
+   
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.query.member_MemberName" type="search" placeholder="会员名称">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+                <i class="fa fa-angle-left fa-lg"></i>
+            </a>
+        </div>
+        <div class="center sliding">会员选择({{response.total}})</div>
+        <div class="right">
+          <a v-on:click="query" href="#" class="link"> 
+            筛选
+          </a>
+          <a v-on:click="add" href="#" class="link"> 
+            录入
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="page-content pull-to-refresh-content">
+        
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div>
+        <div class="content-block">          
+          <div class="row">
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 0" class="saleRetail_saleOrder_selectMemberCard_item">
+                  <div v-on:click="select(item)">
+                    <div>
+                      <div class="text-center">                      
+                         <img class="img-responsive" :src="item.userLogo">
+                      </div>
+                    </div>
+                    <div>
+                      <p>{{item.member_MemberName}}</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-60">
+                        {{item.memberCardNo}}
+                      </div>
+                      <div class="col-40">
+                        <div class="text-right">
+                         <span class="badge">{{item.cost_Score}}</span> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 1" class="saleRetail_saleOrder_selectMemberCard_item">
+                  <div v-on:click="select(item)">
+                    <div>
+                      <div>                      
+                         <img class="img-responsive" :src="item.userLogo">
+                      </div>
+                    </div>
+                    <div>
+                      <p>{{item.member_MemberName}}</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-60">
+                        {{item.memberCardNo}}
+                      </div>
+                      <div class="col-40">
+                        <div class="text-right">
+                         <span class="badge">{{item.cost_Score}}</span> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 2" class="saleRetail_saleOrder_selectMemberCard_item">
+                  <div v-on:click="select(item)">
+                    <div>
+                      <div>                      
+                         <img class="img-responsive" :src="item.userLogo">
+                      </div>
+                    </div>
+                    <div>
+                      <p>{{item.member_MemberName}}</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-60">
+                        {{item.memberCardNo}}
+                      </div>
+                      <div class="col-40">
+                        <div class="text-right">
+                         <span class="badge">{{item.cost_Score}}</span> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <div v-for="item in response.data|arraySkip 4 3" class="saleRetail_saleOrder_selectMemberCard_item">
+                 <div v-on:click="select(item)">
+                    <div>
+                      <div>                      
+                         <img class="img-responsive" :src="item.userLogo">
+                      </div>
+                    </div>
+                    <div>
+                      <p>{{item.member_MemberName}}</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-60">
+                        {{item.memberCardNo}}
+                      </div>
+                      <div class="col-40">
+                        <div class="text-right">
+                         <span class="badge">{{item.cost_Score}}</span> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div>
+           <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

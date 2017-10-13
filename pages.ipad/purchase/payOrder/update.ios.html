@@ -1,0 +1,163 @@
+
+<div class="pages">
+  <div data-page="purchase_payOrder_update" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" v-on:click="back" class="back link"> 
+               退出
+            </a>
+        </div>
+        <div class="center sliding">付款单编辑</div>
+        <div class="right">
+            <a href="#" v-on:click="save" class="link"> 
+               保存修改
+            </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content">
+      <div class="content-block-title">采购供应商</div>
+      <div class="content-block inset">
+          <div class="content-block-inner">
+            <select-supplier :source="response.suppliers" :data.sync="request.supplierId" max="1" edit-status=false></select-supplier>
+          </div>
+      </div>
+
+      <div class="content-block-title">付款单信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  付款日期
+                </div>
+                <div class="item-input">
+                  <input id="payDate" v-model="request.payDate | date" type="text" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea placeholder="备注" v-model="request.description" class="resizable"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="content-block-title">支出类型</div>
+        <div class="content-block inset">
+          <div class="content-block-inner">
+            <select-expend :source="response.expendType"
+                           :data.sync="request.costTypeId"
+                           max="1"></select-expend>
+          </div>
+        </div>
+      </div>
+
+      <!--菜单栏-->
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <div class="row no-gutter">
+            <div v-on:click="selectSources" data-order="asc" class="col-auto">
+              <div class="text-center">
+                <i class="fa fa-bars fa-3x"></i>
+              </div>
+              <div class="text-center">选择单据</div>
+            </div>
+            <div v-on:click="selectAccount" data-order="asc" class="col-auto">
+              <div class="text-center">
+                <i class="fa fa-address-book-o fa-3x"></i>
+              </div>
+              <div class="text-center">付款账户</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <div class="content-block-title text-right">
+            付款单据(总额:<span>{{totalPayMoney | currency}}</span>)
+          </div>
+          <div class="list-block media-list inset">
+            <ul>
+              <li v-for="item in request.sourceDetailList">
+                <a v-on:click="updateSources(item)" class="item-content item-link" href="#">
+                  <div class="item-media">
+                    <img :src="item.userLogo">
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">
+                        {{item.sourceTypeName}}
+                      </div>
+                      <div class="item-after">
+                        收:{{item.payMoney | currency}}
+                      </div>
+                    </div>
+                    <div class="item-subtitle">
+                      单据号码:<span>{{item.sourceNo}}</span>
+                    </div>
+                    <div class="item-text">
+                      未收金额:<span>{{item.unpaidMoney | currency}}</span> |
+                      已收金额:<span>{{item.paidMoney | currency}}</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="content-block-title text-right">
+            付款账户(总额:<span>{{totalAccountMoney | currency}}</span>)
+          </div>
+          <div class="list-block inset">
+            <ul>
+              <li v-for="item in request.detailList">
+                <a v-on:click="updateAccount(item)" href="#" class="item-content item-link">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      {{item.accountName}}
+                    </div>
+                    <div class="item-after">
+                      {{item.accountingMoney | currency}}
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block-title">经手人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.sponsorId" max="1">
+          </select-user>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

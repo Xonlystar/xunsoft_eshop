@@ -1,0 +1,166 @@
+<div class="pages">
+	<div data-page="saleBatch_report_index" class="page">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link">
+						<i class="icon icon-back"></i> 返回
+					</a>
+				</div>
+				<div class="center sliding">
+					数据看板
+				</div>
+				<div class="right">
+
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+
+			<div class="row">
+				<div class="col-20">
+
+				</div>
+				<div class="col-60">
+					<div class="content-block">
+						<div class="buttons-row">
+							<a href="#0" class="tab-link button" >本周</a>
+							<a href="#1" class="tab-link active button">本月</a>
+							<a href="#2" class="tab-link button">本季</a>
+							<self-define-date :data="request.query" v-on:update="load(3)"></self-define-date>
+						</div>
+					</div>
+				</div>
+				<div class="col-20">
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							销售汇总
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleBatch_report" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							销售汇总（按供应商）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="getSaleBatchBySupplier" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							退货汇总（按货品）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleReturnOrderByKind" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							退货汇总（按供应商）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleReturnOrderBySupplier" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							收货汇总（按支付类型）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleReceiptByCostType" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							收货汇总（按供应商）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleReceiptBySupplier" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							零售汇总（按会员卡）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleByMemberCardId" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-auto">
+					<div class="content-block inset">
+						<div class="content-block-inner">
+							零售汇总（按货品）
+							<div class="content-block inset">
+								<div class="row">
+									<div class="col-100">
+										<div id="saleRetailhByKind" style="height:280px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

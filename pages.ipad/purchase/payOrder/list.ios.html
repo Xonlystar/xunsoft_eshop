@@ -1,0 +1,92 @@
+
+<div class="pages">
+  <div data-page="purchase_payOrder_list" class="page">
+
+    <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.query.payOrderNo" type="search" placeholder="付款单号">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <!--导航栏-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+        <div class="center sliding">付款单({{response.total}})</div>
+        <div class="right">
+            <a v-on:click="query" href="#" class="link">
+               筛选
+            </a>
+            <a href="purchase/payOrder/add.ios.html" class="link"> 
+               开单
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <!--内容区-->
+    <div class="page-content pull-to-refresh-content">
+
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <div>
+            <div class="list-block media-list inset">
+              <ul>
+                <li class="swipeout" v-for="item in response.data">
+                  <div class="swipeout-content">
+                    <a href="purchase/payOrder/detail.ios.html?id={{item.payOrderId}}" 
+                        class="item-content item-link">
+                        <div class="item-media">
+                          <order-flag :flag="item.flag"></order-flag>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                              <div class="item-title">
+                                {{item.payOrderNo}}
+                              </div>
+                              <div class="item-after">{{item.detailSummary.payMoney | currency}}</div>
+                          </div>
+                          <div class="item-subtitle">
+                            <div>供应商:{{item.supplierName}}</div>
+                          </div>
+                          <div class="item-text">
+                            <div>支出类型:<span>{{item.costTypeName}}</span></div>
+                            <div>付款日期:<span>{{item.payDate | date}}</span></div>
+                          </div>
+                        </div>
+                    </a>
+                  </div>
+                  <div class="swipeout-actions-left">
+                    <a v-on:click="updateState('1',item)" v-if="item.flag=='L'" href="#" class="swipeout-close bg-green">提交</a>
+                    <a v-on:click="updateState('2',item)" v-if="item.flag=='T'" href="#" class="bg-red swipeout-close">取消提交</a>
+                    <a v-on:click="updateState('3',item)" v-if="item.flag=='T'" href="#" class="bg-green swipeout-close">审核</a>
+                    <a v-on:click="updateState('4',item)" v-if="item.flag=='S'" href="#" class="bg-red swipeout-close">取消审核</a>
+                    <a v-on:click="update(item)" v-if="item.flag=='L'" href="#" class="swipeout-close bg-green">编辑</a>
+                    <a v-on:click="delete(item)" v-if="item.flag=='L'" href="#" class="bg-red">删除</a>
+                    <a href="purchase/common/print.ios.html?orderType=pay&orderId={{item.payOrderId}}">打印</a>
+                    <a class="swipeout-close" href="#">取消</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div>
+                <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

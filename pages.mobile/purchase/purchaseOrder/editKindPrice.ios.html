@@ -1,0 +1,150 @@
+<div class="pages">
+  <div data-page="purchase_purchaseOrder_editKindPrice" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+                <i class="icon iconfont icon-fanhui"></i>
+            </a>
+        </div>
+        <div class="center sliding">修改信息</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+               <i class="icon iconfont icon-save1"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content">
+      
+      <div class="list-block ">
+            <ul>
+              <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title label2">
+                    <span >{{kind.kind.kindName}} </span>
+                    </div>
+                    <div >
+                      
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+       </div>
+
+
+      <div class="content-block-title">
+        采购信息<span style="float: right;">金额:{{request.purchaseMoney|currency}}</span> &nbsp;&nbsp;
+                <span style="float: right;margin-right: 10px; ">吊牌价:{{request.salePrice|currency}}</span>
+      </div>
+      <div class="list-block ">
+        <ul>
+
+         <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  单价
+                </div>
+                <div class="item-input">
+                  <input type="number" v-on:keyup="calculate" v-model="request.purchasePrice">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  数量
+                </div>
+                <div class="item-input">
+                  <input type="number"  v-on:keyup="calculate" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" v-model="request.purchaseAmount">
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  折扣率%
+                </div>
+                <div class="item-input">
+                  <input type="number" v-on:keyup="calculate" v-model="request.discountRate">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-block-title">
+        税务信息 
+            <span style="float: right; ">税额:{{request.taxMoney | currency}}</span>
+            &nbsp;&nbsp;
+            <span style="float: right;margin-right: 10px;">金额(去税):{{(request.purchaseMoney-request.taxMoney) | currency}}</span>
+          
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  税率%
+                </div>
+                <div class="item-input">
+                  <input v-model="request.taxRate" type="number"  v-on:keyup="calculate">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-block-title">
+        其他
+      </div>
+      <div class="list-block ">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  货品交期
+                </div>
+                <div class="item-input">
+                  <input id="deliverDate" placeholder="交期" type="text" v-model="request.deliverDate">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">                
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="content-block inline-delete">
+          <delete-kind :data.sync="detailList" :kind="kind" v-on:delete="delete(kind)" style="width: 300px;"></delete-kind>
+      </div>
+
+    </div>
+  </div>
+</div>

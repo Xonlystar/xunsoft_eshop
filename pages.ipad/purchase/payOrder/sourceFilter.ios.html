@@ -1,0 +1,70 @@
+<div class="pages">
+  <div data-page="purchase_payOrder_sourceFilter" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+               返回
+            </a>
+        </div>
+        <div class="center sliding">单据筛选</div>
+        <div class="right">
+          <a v-on:click="reset" href="#" class="link">
+              重置
+          </a>
+          <a v-on:click="save" href="#" class="link"> 
+              确定
+          </a>
+        </div>
+      </div>
+    </div>  
+    
+    <div class="page-content">    
+
+      <div class="content-block-title">日期范围</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">起始日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeFrom" id="startDate" type="text" placeholder="起始日期">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">截止日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeTo" id="endDate" type="text" placeholder="截止日期">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--单据筛选----暂未确定-->
+    <!--  <div class="content-block-title">单据类型</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-source-type :source="response.sourceTypes"
+                              :data.sync="request.sourceTypeId"
+                              max="1">
+          </select-source-type>
+        </div>
+      </div>-->
+
+    </div>
+  </div>
+</div>

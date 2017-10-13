@@ -1,0 +1,61 @@
+<div class="pages">
+  <div data-page="saleBatch_receiptOrder_selectOrder" class="page">
+
+  	<div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon iconfont icon-fanhui"></i>
+            </a>
+        </div>
+        <div class="center sliding">待收款单据列表({{response.total}})</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+              <i class="icon iconfont icon-save1"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content pull-to-refresh-content">
+
+      <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div>
+        <div>
+          <div class="list-block media-list">
+            <ul>
+              <li v-for="item in response.data">
+                <label class="label-checkbox item-content">
+                    <input v-if="item.isCheck" type="checkbox" v-model="item.isCheck" checked="checked">
+                    <input v-else type="checkbox" v-model="item.isCheck">
+                    <div class="item-media">
+                      <i class="icon icon-form-checkbox"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">{{item.sourceNo}}</div>
+                        <div class="item-after">{{item.sourceTypeName}}</div>
+                      </div>
+                      <div class="item-subtitle">
+                          单据日期:<span>{{item.sourceDate | date}}</span> |
+                      未收金额:<span>{{item.unreceivedMoney | currencys}}</span>
+                      </div>
+                    </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <load-more-normal :total="response.total" :data="response.data" v-on:load="load"></load-more-normal>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>

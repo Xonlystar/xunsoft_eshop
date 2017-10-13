@@ -1,0 +1,140 @@
+<div class="pages">
+    <div data-page="customer_detail" class="page">
+
+        <!-- 标题title -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">客户详情</div>
+                <div class="right">
+                    <a href="#" v-on:click="edit" class="link">
+                        <i class="icon iconfont icon-edit"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list-block" style="margin:0px 0;margin-bottom: 15px">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">客户名称</div>
+                                <div class="item-after">{{response.data.companyName}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">通讯地址</div>
+                                <div class="item-after">{{response.data.address}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block-title">
+                基本信息
+            </div>
+            <div class="list-block" style="margin:0px 0;margin-bottom: 15px">
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">注册类型</div>
+                                    <div class="item-after">{{response.data.companyRegisterTypeName}}</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">所在城市</div>
+                                    <div class="item-after">{{response.data.cityName}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">换货比率</div>
+                                    <div class="item-after">{{response.data.businessData.swapRate}}</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">换货期限</div>
+                                    <div class="item-after">{{response.data.businessData.swapLimitDays}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="content-block-title">
+                联系信息
+            </div>
+            <div class="list-block" style="margin:0px 0;">
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">联系对象</div>
+                                    <div class="item-after">{{response.data.contactList[0].objectName}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">联系电话</div>
+                                    <div class="item-after">{{response.data.contactList[0].mobile}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">手机号</div>
+                                    <div class="item-after">{{response.data.contactList[0].telephone}}</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">电子邮箱</div>
+                                    <div class="item-after">{{response.data.contactList[0].email}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="list-block" style="margin:0px 0;margin-top: 5px">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">备注</div>
+                                <div class="item-after">{{response.data.description}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

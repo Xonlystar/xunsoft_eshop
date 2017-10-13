@@ -1,0 +1,265 @@
+<div class="pages">
+  <div data-page="saleBatch_saleOrder_detail" class="page">
+  
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+        <div class="center sliding">销售订单详情</div>
+        <div class="right">
+            <a href="saleBatch/common/print.ios.html?orderType=saleOrder&orderId={{response.data.saleOrderId}}" class="link"> 
+              打印
+            </a>
+            <a href="saleBatch/saleOrder/add.ios.html?orderId={{response.data.saleOrderId}}" class="link"> 
+              复制
+            </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">销售订单信息</div>
+        <div class="card-content">
+            <div class="card-content-inner">
+              <div class="list-block">
+                <ul>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-key"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        销售订单号
+                      </div>
+                      <div class="item-after">
+                        {{response.data.saleOrderNo}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-qq"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        销售客户
+                      </div>
+                      <div class="item-after">
+                        {{response.data.customerName}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-jpy"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        订金金额
+                      </div>
+                      <div class="item-after">
+                        {{response.data.advanceMoney|currency}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        订单日期
+                      </div>
+                      <div class="item-after">
+                        {{response.data.placeDate | date}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        订单交期
+                      </div>
+                      <div class="item-after">
+                        {{response.data.deliverDate | date}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        销售数量
+                      </div>
+                      <div class="item-after">
+                        {{response.data.detailSummary.saleAmount}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-jpy"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        销售金额
+                      </div>
+                      <div class="item-after">
+                        {{response.data.detailSummary.saleMoney | currency}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-user-circle"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        制单人
+                      </div>
+                      <div class="item-after">
+                        {{response.data.creatorName}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        制单日期
+                      </div>
+                      <div class="item-after">
+                        {{response.data.createTime | dateTime}}
+                      </div>
+                    </div>
+                  </li>
+                  <li v-if="response.data.submitTime" class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        提交日期
+                      </div>
+                      <div class="item-after">
+                        {{response.data.submitTime | dateTime}}
+                      </div>
+                    </div>
+                  </li>
+                  <li v-if="response.data.auditorName" class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-user-circle"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        审核人
+                      </div>
+                      <div class="item-after">
+                        {{response.data.auditorName}}
+                      </div>
+                    </div>
+                  </li>
+                  <li v-if="response.data.auditTime" class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        审核日期
+                      </div>
+                      <div class="item-after">
+                        {{response.data.auditTime | dateTime}}
+                      </div>
+                    </div>
+                  </li>
+                  <li v-if="response.data.description" class="item-content">
+                    <div class="item-media">
+                      <i class="fa fa-sticky-note"></i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title">
+                        备注
+                      </div>
+                      <div class="item-after">
+                        {{response.data.description}}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">销售货品信息</div>
+        <div class="card-content">
+          <div class="card-content-inner">
+            <div class="list-block media-list">
+              <ul>
+                <li v-for="item in response.data.detailList">
+                  <a href="kind/kindDetail.ios.html?kindId={{item.kindId}}" class="item-link item-content">
+                    <div class="item-media">
+                      <kind-img :kind-id="item.kindId"></kind-img>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">
+                          {{item.kindName}}
+                        </div>
+                        <div class="item-after">
+                          {{item.saleMoney|currency}}
+                        </div>
+                      </div>
+                      <div class="item-subtitle">
+                        {{item.brandName}}
+                      </div>
+                      <div class="item-text">
+                        <div>
+                          批发价:<span>{{item.wholesalePrice|currency}}</span> |
+                          数量:<span>{{item.saleAmount}}</span> |
+                          折扣:<span>{{item.discountRate | discountRate}}</span>
+                        </div>
+                        <div>
+                          货号:<span>{{item.kindNo}}</span>  |
+                          颜色:<span>{{item.colorName}}</span>  |
+                          尺码:<span>{{item.sizeText}}</span>  |
+                          单位:<span>{{item.unitName}}</span>
+                        </div>
+                        <div v-if="item.deliverDate">
+                          货品交期:<span>{{item.deliverDate | date}}</span>
+                        </div>
+                        <div v-if="item.description">
+                          备注:<span>{{item.description}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

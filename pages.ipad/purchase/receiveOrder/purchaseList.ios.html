@@ -1,0 +1,91 @@
+<div class="pages">
+   <div class="page" data-page="purchase_receiveOrder_purchaselist">
+         <!--搜索栏-->
+    <form class="searchbar searchbar-init" data-custom-search="true">
+        <div class="searchbar-input">
+            <input v-model="request.orderNo" type="search" placeholder="采购订单号">
+            <a href="#" class="searchbar-clear">
+            </a>
+        </div>
+        <a v-on:click="loadOrderList" href="#" class="searchbar-cancel">检索</a>
+    </form>
+
+    <div class="searchbar-overlay"></div>
+
+    <!--导航栏-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+             <i class="icon icon-back"></i>
+                返回
+            </a>
+        </div>
+        <div class="center sliding">选择采购订单</div>
+        <div class="right">
+            
+            <a v-on:click="save" href="#"> 
+               确定
+            </a>
+        </div>
+      </div>
+    </div>
+    
+    <!--内容区-->
+    <div class="page-content">
+
+        <div class="content-block-title">采购订单单号</div>
+        <div class="content-block">
+          <div v-on:click="slectOrder(item)"  v-bind:class="[item.isActive ? 'bg-green' : '','chip']" 
+               v-for="item in response.data">
+            <div class="chip-media">
+              <img :src="item.userLogo">
+            </div>
+            <div class="chip-label">{{item.orderNo}}/{{item.purchaseAmount}}</div>
+          </div>
+        </div>
+
+        <div class="content-block-title">采购订单货品列表</div>
+        <div class="list-block media-list inset">
+          <ul>
+            <li v-for="item in response.kinds">
+              <label class="label-checkbox item-content">
+                <input type="checkbox" v-model="item.isChecked">
+                <div class="item-media">
+                  <span>
+                    <i class="icon icon-form-checkbox"></i>
+                    &nbsp;&nbsp;
+                  </span>
+                  <span><kind-img :kind-id="item.kind.kindId"></kind-img></span>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">{{item.kind.kindName}}/{{item.kind.brandName}}</div>
+                    <div class="item-after">
+                      总数:{{item.originQty}}/已传:{{item.transferQty1}}
+                    </div>                  
+                  </div>
+                  <div class="item-subtitle">
+                    ({{item.receivePrice|currency}} 
+                    <i class="fa fa-close"></i> 
+                    {{item.receiveAmount|currency}}{{item.kind.unitName}})
+                    <i class="fa fa-close"></i>
+                    {{item.discountRate | discountRate}}
+                    <i class="fa fa-minus"></i>
+                    {{item.taxMoney|currency}}
+                    <i class="fa fa-angle-double-right"></i>
+                    {{(item.receiveMoney-item.taxMoney)|currency}}
+                  </div>
+                  <div class="item-text">
+                    {{item.kind.kindNo}} | {{item.kind.colorName}} | {{item.kind.sizeText}}
+                  </div>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+                 
+     </div>
+   </div>
+</div>
+   

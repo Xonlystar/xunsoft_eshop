@@ -1,0 +1,93 @@
+<div class="pages">
+    <div data-page="purchase_purchaseOrder_list" class="page">
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init " data-custom-search="true">
+            <div class="searchbar-input ">
+                <input v-model="request.query.purchaseOrderNo" type="search" placeholder="搜索订单号">
+                <a href="#" class="searchbar-clear">
+                </a>
+            </div>
+            <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+        </form>
+        <div class="searchbar-overlay"></div>
+
+        <!--  导航栏 -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="link" v-on:click="back">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">采购订单({{response.total}})</div>
+                <div class="right">
+                    <a v-on:click="query" href="#" class="link">
+                        <i class="icon iconfont icon-filter"></i>
+                    </a>
+                    <a href="purchase/purchaseOrder/add.ios.html" class="link">
+                        <i class="icon iconfont icon-add"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--内容区-->
+        <div class="page-content pull-to-refresh-content">
+
+            <!-- 刷新 -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+            <div class="list-block media-list ">
+                <div v-for="row in response.data">
+                    <div class="content-block-title" v-if="row.value&&row.value.length>0">{{row.time | date}}</div>
+                    <ul>
+                        <li v-for="item in row.value">
+                            <a href="purchase/purchaseOrder/detail.ios.html?orderId={{item.purchaseOrderId}}" class="item-link item-content" v-on:tapHold="showMenu(item)">
+                                <div class="item-inner" style="position: relative;">
+                                    <order-status :flag="item.flag"></order-status>
+                                    <div v-if="item.flag=='L'" class="item-subtitle" style="margin-bottom: 1em;color:#00E58C;">
+                                        {{item.supplierName}}
+                                    </div>
+                                    <div v-if="item.flag=='T'" class="item-subtitle" style="margin-bottom: 1em;color:#00B770;">
+                                        {{item.supplierName}}
+                                    </div>
+                                    <div v-if="item.flag=='S'" class="item-subtitle" style="margin-bottom: 1em; color:#358AE5;">
+                                        {{item.supplierName}}
+                                    </div>
+                                    <div class="item-title-row" style="background-image: none;">
+                                        <div class="item-title">{{item.purchaseOrderNo}}</div>
+                                        <div class="item-after" style="text-align:right;"><span style="margin-right: 20px;color:black;">{{item.detailSummary.sumMoney | currency}}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <load-more :total="response.total" :data="response.data" v-on:load="load"></load-more>
+            </div>
+
+        </div>
+
+
+        <!--  底部合计 开始 -->
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div href="#" class="link">
+                    合计: {{_totalPrice | currency}}
+                </div>
+            </div>
+        </div>
+        <!-- 底部合计 结束 -->
+
+
+
+
+    </div>
+</div>

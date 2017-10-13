@@ -1,0 +1,173 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_editKindPrice" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+                 <i class="icon iconfont icon-fanhui"></i>
+            </a>
+        </div>
+        <div class="center sliding">编辑货品</div>
+        <div class="right">
+              <a v-on:click="saveKind" href="#" class="link"> 
+                <i class="icon iconfont icon-save1"></i>
+              </a>
+        </div>
+      </div>
+    </div>
+
+      <div class="page-content">
+
+      <div class="list-block ">
+            <ul>
+              <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title label">
+                    <span >{{kind.kind.kindName}} </span>
+                    </div>
+                    <div >
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+       </div>
+       
+      <div class="content-block-title">销售信息 <span style="float: right;margin-right: 10px; ">吊牌价:{{request.salePrice|currency}}</span></div>
+      <div class="list-block">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  单价
+                </div>
+                <div class="item-input">
+                  <input v-on:keyup="calculate" type="number" v-model="request.retailPrice">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  数量
+                </div>
+                <div class="item-input">
+                  <input v-on:keyup="calculate" type="number" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" v-model="request.saleAmount">
+                </div>
+              </div>
+            </div>
+          </li> 
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">
+                  折扣率%
+                </div>
+                <div class="item-input">
+                  <input type="number" v-model="request.discountRate" v-on:keyup="calculate" readonly>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="list-block-label">
+          <div>
+            <p> <span style="float: right;">应收金额:{{request.saleMoney | currency}}</span> <span style="float: right;margin-right: 10px; ">实收金额:{{request.actualMoney | currency}}</span> </p>
+            <!-- <p>
+              
+              &nbsp;
+              折扣率:<span>{{request.discountRate | discountRate}}</span>
+              &nbsp;
+              库存:<span>{{request.inventory}}</span>
+            </p> -->
+            <!-- <p>
+              赠送数量:<span>{{request.gratisAmount}}</span>
+              &nbsp;
+              赠品数量:<span>{{request.giftsNum}}</span>
+              &nbsp;
+              折扣金额:<span>{{request.performanceMoney | currency}}</span>
+            </p>
+            <p>
+              返现金额:<span>{{request.cashMoney | currency}}</span>
+              &nbsp;
+              现金券额:<span>{{request.cashTicket | currency}}</span>
+              &nbsp;
+            </p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block-title"  v-if="request.activityList.length>0">
+        已选促销活动
+      </div>
+      <div class="list-block">
+        <div v-for="item in request.activityList" class="list-group">
+          <ul>
+            <li class="list-group-title">{{item.activityName}} | {{item.validDateFrom | date}}至{{item.validDateTo | date}} | <span v-if="item.summary">{{item.summary}}</span></li>
+            <li v-for="item in item.detailList">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    {{item.ruleClassName}}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-block-title" v-if="response.activity.length>0">
+        可选促销活动
+      </div>
+      <div class="list-block">
+        <div v-for="item in response.activity" class="list-group">
+          <ul>
+            <li class="list-group-title">{{item.activityName}} | {{item.validDateFrom | date}}至{{item.validDateTo | date}} | <span v-if="item.summary">{{item.summary}}</span></li>
+
+            <li v-for="rule in item.detailList">
+              <label class="label-radio item-content" v-on:click="selectActivity(item,rule)">
+                <input type="radio" name="{{item.activityId}}">
+                <div class="item-inner">
+                  <div class="item-title">
+                    {{rule.ruleClassName}}
+                  </div>
+                </div>
+              </label>
+            </li>
+            
+          </ul>
+        </div>
+      </div> 
+
+      <div class="content-block-title">
+        其他
+      </div>
+
+      <div class="list-block">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">                
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-block inline-delete" v-on:click="delete(detailList,kind)">
+         <a  href="#"  style="text-decoration:none;color:#fff;line-height:30px;">删除</a> 
+      </div>
+    </div>
+  </div>
+</div>

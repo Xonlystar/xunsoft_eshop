@@ -1,0 +1,119 @@
+<div class="pages">
+  <div data-page="warehouse_common_filter" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+               <i class="icon icon-back"></i>
+               返回
+            </a>
+        </div>
+        <div class="center sliding">筛选</div>
+        <div class="right">
+          <a v-on:click="clear" href="#" class="link">
+              清空
+          </a>
+          <a v-on:click="save" href="#" class="link"> 
+              确定
+          </a>
+        </div>
+      </div>
+    </div>  
+    
+    <div class="page-content">    
+
+      <div class="content-block-title">日期范围</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">起始日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeFrom" id="startDate" type="text" placeholder="起始日期">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">截止日期</div>
+                <div class="item-input">
+                  <input v-model="request.createTimeTo" id="endDate" type="text" placeholder="截止日期">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li v-if="response.type!=''">
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-arrows-v"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">盘点级别</div>
+                <div class="item-input">
+                  <select v-model="request.checkStockLevelId"  >
+                   <option value="0">全部</option>
+                   <option value="1">SKU</option>
+                   <option value="2">货号盘点</option>         
+                  </select>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div> 
+
+      <div class="content-block-title">单据状态</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-order-state :source="response.orderState"
+                              :data.sync="request.status" 
+                              max="1">
+          </select-order-state>
+        </div>
+      </div>
+
+
+      <div class="content-block-title">制单人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.creatorId" 
+                       max="1">
+          </select-user>
+        </div>
+      </div>
+
+      <div class="content-block-title">经手人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.sponsorId" 
+                       max="1">
+          </select-user>
+        </div>
+      </div>
+
+      <div class="content-block-title">审核人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.auditorId" 
+                       max="1">
+          </select-user>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

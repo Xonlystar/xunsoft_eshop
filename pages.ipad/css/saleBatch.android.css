@@ -1,0 +1,41 @@
+
+.saleBatch_default_dashborad{
+	color:#fff;
+	padding: 15px;
+	margin-bottom: 15px;
+	font-size:17px;
+}
+
+.warehouse_default_menu{
+	background-color:  rgb(255,255,255);
+	padding: 15px;
+}
+
+
+.saleBatch_saleOrder_add_kindItem{
+	padding-bottom: 14px;
+	margin-bottom: 15px;
+	background-color: rgb(255,255,255);
+	word-break: break-all;
+}
+
+.saleBatch_saleOrder_add_kindItem .title{
+	font-size: 17px;
+	color:#2A85C3;
+	padding-top: 10px;
+}
+
+
+.saleBatch_deliverOrder_add_kindItem{
+	padding-bottom: 14px;
+	margin-bottom: 15px;
+	background-color: rgb(255,255,255);
+	word-break: break-all;
+}
+
+.saleBatch_deliverOrder_add_kindItem .title{
+	font-size: 17px;
+	color:#2A85C3;
+	padding-top: 10px;
+}
+

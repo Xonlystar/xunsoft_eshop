@@ -1,0 +1,350 @@
+<html>
+ <head></head>
+ <body>
+  <div class="pages"> 
+   <div data-page="account_user" class="page"> 
+    <div class="navbar"> 
+     <div class="navbar-inner"> 
+    <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+      <div class="center sliding">
+        我的信息 
+      </div> 
+      <div class="right"> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="page-content"> 
+     <div class="content-block "> 
+      <div class="text-center"> 
+       <a href="#" v-on:click="showPop"> <img class="img-circle" id="userLogo" :src="response.data.userLogo" /> </a> 
+      </div> 
+     </div> 
+     <div class="card" style="margin:0px;"> 
+      <div class="card-header">
+       用户信息
+      </div> 
+      <div class="card-content"> 
+       <div class="card-content-inner"> 
+        <div class="list-block"> 
+         <ul> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-key"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              用户账号
+             </div> 
+             <div class="item-after">
+              {{response.data.loginName}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <!--
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                      <div class="item-inner">
+                                            <div class="item-title">对应员工</div>
+                                            <div class="item-after">{{response.data.employeeName}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+<!--                                 <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">所属店铺</div>
+                                            <div class="item-after">{{response.data.shopName}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-calendar"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              所属机构
+             </div> 
+             <div class="item-after">
+              {{response.data.organName}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <!--  <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-expand"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">状态</div>
+                                            <div class="item-after" v-if="response.data.isEnable==1">启用</div>
+                                            <div class="item-after" v-if="response.data.isEnable==0">禁用</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="card" style="margin:0px;"> 
+      <div class="card-header">
+       员工信息
+      </div> 
+      <div class="card-content"> 
+       <div class="card-content-inner"> 
+        <div class="list-block"> 
+         <ul> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-key"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              姓名
+             </div> 
+             <div class="item-after">
+              {{response.data.employeeName}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <!--          <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">性别</div>
+                                            <div class="item-after" v-if="response.data.employeeData.sex=='1'">男</div>
+                                            <div class="item-after" v-if="response.data.employeeData.sex=='0'">女</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <!--   <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">年龄</div>
+                                            <div class="item-after">{{response.data.employeeData.age}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-car"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              店铺
+             </div> 
+             <div class="item-after">
+              {{response.data.shopName}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <!--  <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-adn"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">所在机构</div>
+                                            <div class="item-after">{{response.data.organName}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <!-- <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-key"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">工号</div>
+                                            <div class="item-after">{{response.data.employeeData.employeeNo}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-coffee"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">岗位</div>
+                                            <div class="item-after">{{response.data.employeeData.jobName}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <!-- <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">入职日期</div>
+                                            <div class="item-after">{{response.data.employeeData.createTime | date}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">离职日期</div>
+                                            <div class="item-after" v-if="response.data.employeeData.leaveDate">{{response.data.employeeData.leaveDate | date}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <!--   <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-code"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">联系信息</div>
+                                            <div class="item-after">{{response.data.organName}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+          <!--  <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-address-book"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">现住地址</div>
+                                            <div class="item-after">{{response.data.employeeData.liveAddress}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="card" style="margin:0px;"> 
+      <div class="card-header">
+       联系信息
+      </div> 
+      <div class="card-content"> 
+       <div class="card-content-inner"> 
+        <div class="list-block"> 
+         <ul> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-key"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              邮箱
+             </div> 
+             <div class="item-after">
+              {{response.data.employeeData.contactData.email}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <li> 
+           <div class="item-content"> 
+            <div class="item-media"> 
+             <i class="fa fa-user"></i> 
+            </div> 
+            <div class="item-inner"> 
+             <div class="item-title">
+              手机
+             </div> 
+             <div class="item-after">
+              {{response.data.employeeData.contactData.mobile}}
+             </div> 
+            </div> 
+           </div> </li> 
+          <!-- <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-qq"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">qq</div>
+                                            <div class="item-after">{{response.data.employeeData.contactData.qq}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">座机</div>
+                                            <div class="item-after">{{response.data.employeeData.contactData.telephone}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-weixin"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">微信</div>
+                                            <div class="item-after">{{response.data.employeeData.contactData.wechatNo}}</div>
+                                        </div>
+                                    </div>
+                                </li> --> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <!--    <div class="card" style="margin:0px;">
+                <div class="card-header">角色信息</div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">角色编号</div>
+                                            <div class="item-after">角色名称</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li v-for="item in response.data.roleList">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title">{{item.roleCode}}</div>
+                                            <div class="item-after">{{item.roleName}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> --> 
+    </div> 
+   </div> 
+  </div> 
+ </body>
+</html>

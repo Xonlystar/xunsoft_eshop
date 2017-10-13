@@ -1,0 +1,40 @@
+<html>
+ <head></head>
+ <body>
+  <div class="pages"> 
+   <div data-page="setting_option" class="page"> 
+    <div class="navbar"> 
+     <div class="navbar-inner"> 
+       <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+      <div class="center sliding">
+       软件设置
+      </div> 
+      <div class="right"> 
+       <a v-on:click="save" href="#" class="link"> 
+              <i class="icon iconfont icon-save1"></i>
+            </a>
+      </div> 
+     </div> 
+    </div> 
+    <div class="page-content"> 
+     <div class="content-block-title">
+      请选择蓝牙打印机 
+      <span class="preloader preloader-green"></span>
+     </div> 
+     <div class="list-block inset"> 
+      <ul> 
+       <li v-for="item in response.bluetooths"> <label class="label-radio item-content"> <input v-model="request.bluetoothId" type="radio" name="bluetooth" value="{{item.id}}" /> 
+         <div class="item-inner"> 
+          <div class="item-title">
+           {{item.name}}
+          </div> 
+         </div> </label> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+  </div>
+ </body>
+</html>

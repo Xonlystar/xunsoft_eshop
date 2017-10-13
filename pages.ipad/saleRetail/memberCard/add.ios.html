@@ -1,0 +1,236 @@
+<div class="pages">
+	<div data-page="saleRetail_memberCard_add" class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" v-on:click="back" class="link">
+						返回
+					</a>
+				</div>
+				<div class="center sliding">会员卡录入</div>
+				<div class="right">
+					<a href="#" v-on:click="save" class="link">
+						确认
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+
+			<div class="content-block-title">会员卡图像</div>
+			<div class="list-block text-center">
+				<a href="#" v-on:click="showPop">
+					<i class="fa fa-plus-square fa-3x" id="userLogo"></i>
+				</a>
+			</div>
+
+			<div class="content-block-title">卡类型</div>
+			<div class="content-block inset">
+				<div class="content-block-inner">
+					<select-membercardtype :source="response.memberCardType" :data.sync="request.memberCardTypeId" max="1"></select-membercardtype>
+				</div>
+			</div>
+
+			<div class="content-block-title">基本信息</div>
+			<div class="list-block inset">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-book"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									卡号
+								</div>
+								<div class="item-input">
+									<input id="placeDate" placeholder="卡号" v-model="request.memberCardNo" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-delicious"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									默认折扣率
+								</div>
+								<div class="item-input">
+									<input v-model="request.discountRate" placeholder="默认折扣率" type="text" value="{{getDiscount}}" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									建卡日期
+								</div>
+								<div class="item-input">
+									<input id="openDate" v-model="request.openDate | date" placeholder="建卡日期" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-sticky-note"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									备注
+								</div>
+								<div class="item-input">
+									<textarea placeholder="备注" v-model="request.description" class="resizable"></textarea>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">持卡人信息</div>
+			<div class="list-block inset">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-user"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									姓名
+								</div>
+								<div class="item-input">
+									<input placeholder="姓名" v-model="request.member_MemberName" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									出生日期
+								</div>
+								<div class="item-input">
+									<input id='member_Birthday' v-model="request.member_Birthday | date" placeholder="出生日期" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									结婚日期
+								</div>
+								<div class="item-input">
+									<input id='marriageDate' v-model="request.member_MarriageDate | date" placeholder="结婚日期" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									手机号
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_MobilePhone" placeholder="手机号" type="number" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-envelope"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									电子邮箱
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_Email" placeholder="电子邮箱" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-qq"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									QQ号
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_QQ" placeholder="QQ号" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="fa fa-wechat"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">
+									微信号
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_WechatNo" placeholder="微信号" type="text" />
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">性别</div>
+			<div class="content-block inset">
+				<div class="content-block-inner">
+					<select-sex :data.sync="request.member_Sex" max="1"></select-sex>
+				</div>
+			</div>
+
+			<div class="content-block-title">建卡人</div>
+			<div class="content-block inset">
+				<div class="content-block-inner">
+					<select-user :source="response.users" :data.sync="request.sponsorId" max="1"></select-user>
+				</div>
+			</div>
+
+			<!--  <div class="content-block-title">储值卡信息</div>
+            <div class="content-block inset">
+       <div class="content-block-inner">
+         <select-user :source="response.users"
+                      :data.sync="request.storeValueCardId" max="1"></select-user>
+       </div>
+            </div> -->
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,171 @@
+<div class="pages">
+    <div data-page="kind_add" class="page">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">录入商品</div>
+                <div class="right">
+                    <a v-on:click="save" href="#" class="link">
+                        <i class="icon iconfont icon-save1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div>
+                <div class="content-block-title">商品信息</div>
+                <div class="list-block ">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">货号</div>
+                                    <div class="item-input">
+                                        <input v-model="request.kindNo" type="text" placeholder="货号" maxlength="36">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">名称</div>
+                                    <div class="item-input">
+                                        <input v-model="request.kindName" type="text" placeholder="名称" maxlength="25">
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="content-block-title">价格信息</div>
+                <div class="list-block ">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">采购价</div>
+                                    <div class="item-input">
+                                        <input v-model="request.purchasePrice" type="text" placeholder="采购价" maxlength="36">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">成本价</div>
+                                    <div class="item-input">
+                                        <input v-model="request.purchaseCost" type="text" placeholder="成本价" maxlength="25">
+                                    </div>
+                                </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">吊牌价</div>
+                                    <div class="item-input">
+                                        <input v-model="request.salePrice" type="text" placeholder="吊牌价" maxlength="36">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">会员价</div>
+                                    <div class="item-input">
+                                        <input v-model="request.saleMember" type="text" placeholder="会员价" maxlength="25">
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                    </div>
+
+                    <div class="list-block ">
+                        <ul>
+
+                            <li>
+                                <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                                    <select v-model="request.brandId">
+									<option v-for="item in response.brands"  value="{{item.brandId}}">   {{item.brandName}}</option>
+								</select>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">品牌</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link smart-select" data-navbar-theme="white" v-on:click="selectBefore">
+                                    <select v-model="request.kindClassId">
+									<option v-for="item in response.kindClasses"  value="{{item.kindClassId}}">   {{item.kindClassName}}</option>
+								</select>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">分类</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                                    <select v-model="request.sizeGroupId">
+									<option v-for="item in response.sizeGroups"  value="{{item.sizeGroupId}}">   {{item.sizeGroupName}}</option>
+								</select>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">尺码组</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="item-link smart-select" data-navbar-theme="white" v-on:click="selectBefores">
+                                    <select name=" car " multiple v-model="request.sizeId ">
+									<option v-for="item in response.sizes "  value="{{item.sizeId}} ">   {{item.sizeText}}</option>
+								</select>
+                                    <div class="item-content ">
+                                        <div class="item-inner ">
+                                            <div class="item-title ">尺码</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="# " class="item-link smart-select " data-navbar-theme="white ">
+                                    <select v-model="request.unitId ">
+									<option v-for="item in response.units "  value="{{item.unitId}} ">   {{item.unitName}}</option>
+								</select>
+                                    <div class="item-content ">
+                                        <div class="item-inner ">
+                                            <div class="item-title ">单位</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="# " class="item-link smart-select " data-navbar-theme="white ">
+                                    <select name="car " multiple v-model="request.colorId ">
+									<option v-for="item in response.colors "  value="{{item.colorId}} ">   {{item.colorName}}</option>
+								</select>
+                                    <div class="item-content ">
+                                        <div class="item-inner ">
+                                            <div class="item-title ">颜色</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+
+                </div>
+            </div>

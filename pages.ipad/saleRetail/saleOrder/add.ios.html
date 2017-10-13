@@ -1,0 +1,305 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_add" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a v-on:click="back" href="#" class="link">
+            <i class="icon icon-back"></i>
+            退出
+          </a>
+        </div>
+        <div class="center sliding">POS开单</div>
+        <div class="right">
+          <a v-on:click="save" href="#" class="link">
+            结算
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="page-content">
+      <div class="content-block-title">销售信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <a href="#" v-on:click="selectMember" class="item-content item-link">
+              <div class="item-media">
+                <i class="fa fa-user-circle fa-1x"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title">
+                  会员
+                </div>
+                <div class="after">
+                  {{request.memberCardNo}}/{{request.memberCard_MemberName}}
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea placeholder="备注" v-model="request.description" class="resizable" maxlength="200"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--菜单-->
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <div class="row no-gutter">
+            <div class="col-auto">
+              <select-order-kind :data.sync="request" edit="saleRetail/saleOrder/editKind.ios.html"></select-order-kind>
+            </div>
+            <div v-on:click="scanKind" class="col-auto">
+              <select-barcode :data.sync="request.detailList" order="24" edit="saleRetail/saleOrder/editKindPrice.ios.html"></select-barcode>
+            </div>
+            <div class="col-auto">
+              <sort-money :data.sync="request.detailList" prop="saleMoney"></sort-money>
+            </div>
+            <div class="col-auto">
+              <sort-amount :data.sync="request.detailList" prop="saleAmount"></sort-amount>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block-title">
+      货品信息(总数:<span>{{request.detailList | arraySum 'saleAmount'}}</span>,总额:<span>{{request.detailList | arraySum 'actualMoney' | currency}}</span>)
+    </div>
+    <div class="content-block">
+      <div class="row">
+        <div class="col-auto">
+          <div class="saleRetail_saleOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 0">
+            <div>
+              <div>
+                <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+              </div>
+              <div>
+                <div class="title">{{item.kind.kindName}}</div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    品牌:<span>{{item.kind.brandName}} </span>
+                  </div>
+                  <div class="col-50">
+                    货号:<span>{{item.kind.kindNo}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    颜色:<span>{{item.kind.colorName}} </span>
+                  </div>
+                  <div class="col-50">
+                    尺码:<span>{{item.kind.sizeText}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    售价:{{item.retailPrice|currency}}
+                  </div>
+                  <div class="col-50">
+                    购量:{{item.saleAmount}}{{item.kind.unitName}}
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    折扣:{{item.discountRate | discountRate}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      金额:{{item.saleMoney|currency}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    总赠品:{{item.gratisAmount+item.giftsNum}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      优惠:{{item.performanceMoney | currency}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-50">
+                <div>
+                  <div v-on:click="updateKind(item)" class="text-center">
+                    <i class="fa fa-edit fa-2x"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-50">
+                <delete-kind :data.sync="request.detailList" :kind="item"></delete-kind>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="saleRetail_saleOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 1">
+            <div>
+              <div>
+                <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+              </div>
+              <div>
+                <div class="title">{{item.kind.kindName}}</div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    品牌:<span>{{item.kind.brandName}} </span>
+                  </div>
+                  <div class="col-50">
+                    货号:<span>{{item.kind.kindNo}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    颜色:<span>{{item.kind.colorName}} </span>
+                  </div>
+                  <div class="col-50">
+                    尺码:<span>{{item.kind.sizeText}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    售价:{{item.retailPrice|currency}}
+                  </div>
+                  <div class="col-50">
+                    购量:{{item.saleAmount}}{{item.kind.unitName}}
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    折扣:{{item.discountRate | discountRate}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      金额:{{item.saleMoney|currency}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    总赠品:{{item.gratisAmount+item.giftsNum}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      优惠:{{item.performanceMoney | currency}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-50">
+                <div>
+                  <div v-on:click="updateKind(item)" class="text-center">
+                    <i class="fa fa-edit fa-2x"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-50">
+                <delete-kind :data.sync="request.detailList" :kind="item"></delete-kind>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="saleRetail_saleOrder_add_kindItem" v-for="item in request.detailList | arraySkip 3 2">
+            <div>
+              <div>
+                <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img>
+              </div>
+              <div>
+                <div class="title">{{item.kind.kindName}}</div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    品牌:<span>{{item.kind.brandName}} </span>
+                  </div>
+                  <div class="col-50">
+                    货号:<span>{{item.kind.kindNo}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    颜色:<span>{{item.kind.colorName}} </span>
+                  </div>
+                  <div class="col-50">
+                    尺码:<span>{{item.kind.sizeText}} </span>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    售价:{{item.retailPrice|currency}}
+                  </div>
+                  <div class="col-50">
+                    购量:{{item.saleAmount}}{{item.kind.unitName}}
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    折扣:{{item.discountRate | discountRate}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      金额:{{item.saleMoney|currency}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row no-gutter">
+                  <div class="col-50">
+                    总赠品:{{item.gratisAmount+item.giftsNum}}
+                  </div>
+                  <div class="col-50">
+                    <div>
+                      优惠:{{item.performanceMoney | currency}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-50">
+                <div>
+                  <div v-on:click="updateKind(item)" class="text-center">
+                    <i class="fa fa-edit fa-2x"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-50">
+                <delete-kind :data.sync="request.detailList" :kind="item"></delete-kind>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="request.detailList.length==0">
+        <div class="content-block">
+          <div class="content-block-inner">
+            <div class="text-center">
+              <i class="fa fa-cart-plus fa-5x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block-title">操作员</div>
+    <div class="content-block inset">
+      <div class="content-block-inner">
+        <select-user :source="response.users"
+        :data.sync="request.sponsorId" max="1"></select-user>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

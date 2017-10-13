@@ -1,0 +1,155 @@
+<div class="pages">
+  <div data-page="warehouse_checkStockOrder_add" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+         <div class="left"> 
+       <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i> </a> 
+      </div> 
+        <div class="center sliding">盘点单录入</div>
+         <div class="right"> 
+       <a v-on:click="save" href="#" class="link"> <i class="icon iconfont icon-save1"></i> </a> 
+      </div> 
+      </div>
+    </div>
+    <!-- 内容区开始 --> 
+ <div class="page-content"> 
+     <div class="list-block accordion-list" style="margin: 5px 0;"> 
+      <ul> 
+         <li>
+            <a href="#" class="item-link smart-select" data-navbar-theme="white">
+                <select v-model="request.warehouseId" id="warehouseId">
+                    <option v-for="item in response.transfers" value="{{item.shopId}}">{{item.shopName}}</option>
+                </select>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">盘点仓库</div>
+                    </div>
+                </div>
+            </a>
+        </li>
+       <li> 
+         <a href="#" class="item-link smart-select" data-navbar-theme="white" > 
+            <select v-model="request.checkStockLevelId" id="checkStockLevelId" >
+             <option v-for="item in response.checkLevels" value="{{item.levelId}}">{{item.levelName}}</option>
+            </select>
+         <div class="item-content"> 
+          <div class="item-inner"> 
+           <div class="item-title">盘点级别</div> 
+          </div> 
+         </div> </a> </li> 
+      </ul> 
+     </div> 
+  <div class="content-block-title">
+盘点信息
+     </div> 
+     <div class="list-block "> 
+      <ul> 
+       <li> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title label">
+           盘点日期
+          </div> 
+          <div class="item-input"> 
+            <input v-model="request.checkStockDate | date" closeOnSelect="true" id="checkStockDate" type="text" />
+          </div> 
+         </div> 
+        </div> </li> 
+  </ul> 
+     </div> 
+      <div class="list-block" style="text-align: right;min-height: 44px;"> 
+      <ul> 
+       <li> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title">
+           选择商品
+          </div> 
+          <div href="#" class="link" v-on:click="scanKind" style="margin-right: 200px;"> 
+             <select-barcode :data.sync="request.detailList" order="21" edit="warehouse/checkStockOrder/editKindPrice.ios.html"></select-barcode>
+          </div> 
+        <select-order-kind :data.sync="request" type="checkStockOrder" edit="warehouse/checkStockOrder/editKind.ios.html" v-on:select="selectKind"></select-order-kind>
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+    <div class="content-block-title"> 
+          货品信息(总数:{{request.detailList | arraySum 'checkAmount'}})
+          </div>
+     <div class="list-block media-list"> 
+      <ul> 
+       <li v-for="item in request.detailList" class="swipeout"> 
+        <div class="swipeout-content"> 
+         <a href="#" class="item-content" v-on:click="editKind(item)"> 
+          <div class="item-media"> 
+           <div> 
+            <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img> 
+           </div> 
+          </div> 
+          <div class="item-inner"> 
+           <div class="item-title-row"> 
+            <div class="item-title">
+             {{item.kind.kindName}}({{item.kind.kindNo}})
+            </div> 
+            <div class="item-after"> 
+              &gt;
+            </div> 
+           </div> 
+           <div class="item-text" style="font-size: 13px;"> 
+            <div> 
+             <span style="display: inline-block;width: 100px;">数量:{{item.checkAmount}}</span> 
+            </div> 
+            <div> 
+             <span style="display: inline-block;width: 100px;">账面数量:{{item.accountAmount}}</span> 
+             <span style="margin-left: 20px;">盈亏数量:{{item.profitLossAmount}}</span> 
+            </div> 
+           </div> 
+          </div> 
+         </a> 
+        </div> 
+       </li> 
+      </ul> 
+      <div v-if="request.detailList.length==0"> 
+       <div class="content-block"> 
+        <div class="content-block-inner"> 
+         <div class="text-center"> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="list-block " > 
+      <ul> 
+       <li> 
+        <div class="item-content"> 
+         <div class="item-inner"> 
+          <div class="item-title label">
+            备注 
+          </div> 
+          <div class="item-input"> 
+           <textarea class="resizable" placeholder="备注" maxlength="100" v-model="request.description"></textarea> 
+          </div> 
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+     <div class="list-block" > 
+      <ul> 
+       <li> 
+       <a href="#" class="item-link smart-select" data-navbar-theme="white" > 
+             <select v-model="request.sponsorId" id="sponsorId">
+                <option v-for="item in response.users" value="{{item.userId}}"> {{item.employeeName}}</option>
+            </select> 
+         <div class="item-content"> 
+          <div class="item-inner"> 
+           <div class="item-title">
+            经手人
+           </div> 
+          </div> 
+         </div>
+          </a> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+  </div>

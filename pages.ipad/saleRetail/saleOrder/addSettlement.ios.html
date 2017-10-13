@@ -1,0 +1,237 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_settlement" class="page">
+    
+     <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              返回
+            </a>
+        </div>
+        <div class="center sliding">POS开单结算</div>
+        <div class="right">
+            <a href="#" v-on:click="save" class="link"> 
+              确认
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="content-block inset">
+        <div class="row">
+          <div class="col-auto saleRetail_saleOrder_addSettlement_label">
+           应收金额:{{response.data.summary_actualMoney | currency}}
+          </div>
+          <div class="col-auto saleRetail_saleOrder_addSettlement_label">
+           找回金额:{{request.payBackMoney | currency}}
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header">
+              零售结算
+          </div>
+          <div class="card-content">
+              <div class="card-content-inner">
+                <div class="list-block">
+                  <ul>
+                    <li v-for="item in response.checkOut">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">
+                            {{item.checkoutTypeName}}
+                          </div>
+                          <div class="item-input">
+                            <input type="number" v-on:keyup="calculate" v-model="item.money">
+                          </div>
+                        </div>
+                      </div>
+                    </li>                   
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="link">
+              实收金额:<span>{{request.reallyMoney | currency}}</span>
+            </a>
+          </div>
+      </div> 
+      
+      <div class="row">
+        <div class="col-auto">
+          <div class="card">      
+            <div class="card-header">现金卡充值抵({{request.cashCarBalanceMoney | currency}})</div>
+            <div class="card-content">
+              <div class="card-content-inner">
+               <div class="list-block">
+                 <ul>
+                   <li>
+                     <div class="item-content">
+                       <div class="item-media">
+                          <i v-on:click="addCashCarNumber" class="fa fa-cloud"></i>
+                       </div>
+                       <div class="item-inner">      
+                          <div class="item-title label">现金卡号</div>
+                          <div class="item-input">
+                            <input type="text"  v-model="request.cashCarNo" placeholder="请输入现金卡号">
+                          </div>
+                       </div>
+                      </div>
+                   </li>
+                   <li>
+                     <div class="item-content">
+                        <div class="item-media">
+                            <i class="fa fa-jpy"></i>
+                        </div>
+                        <div class="item-inner">      
+                            <div class="item-title">可用余额</div>
+                            <div class="item-after">
+                              {{request.cashCar_balance}}
+                            </div>
+                        </div>
+                      </div>
+                   </li>
+                   <li>
+                      <div class="item-content">
+                         <div class="item-media">
+                             <i class="fa fa-jpy"></i>
+                         </div>
+                         <div class="item-inner">
+                            <div class="item-title label">抵扣金额</div>
+                            <div class="item-input">
+                               <input type="text" id="txt_cashCarBalanceMoney" v-model="request.cashCarBalanceMoney" placeholder="请输入抵扣金额">
+                            </div>
+                         </div>
+                      </div>
+                   </li>
+                 </ul>
+               </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="col-auto">
+          <div class="card">   
+            <div class="card-header">储值卡充值抵({{request.storeValueCardBalanceMoney | currency}})</div>   
+            <div class="card-content">
+                <div class="card-content-inner">
+                     <div class="list-block">
+                       <ul>
+                         <li >
+                            <div class="item-content">
+                              <div class="item-media">
+                                <i  v-on:click="addStoreValueCardNumber" class="fa fa-jpy"></i> 
+                              </div>
+                              <div class="item-inner">
+                                <div class="item-title label">储值卡号</div>
+                                <div class="item-input">
+                                  <input type="text"  placeholder="请输入储值卡号" v-model="request.storeValueCardNo">
+                                </div>
+                              </div>
+                            </div>
+                         </li>
+                         <li>
+                           <div class="item-content">
+                             <div class="item-media">
+                                <i class="fa fa-jpy"></i>
+                             </div>
+                             <div class="item-inner">                              
+                                <div class="item-title">可用余额</div>
+                                <div class="item-after">
+                                  {{request.storeValueCard_balance}}
+                                </div>
+                             </div>
+                            </div>    
+                         </li>
+                         <li>
+                           <div class="item-content">
+                            <div class="item-media">
+                                 <i class="fa fa-jpy"></i>
+                             </div>
+                             <div class="item-inner">
+                                <div class="item-title label">抵扣金额</div>
+                                <div class="item-input">
+                                   <input type="text" id="txt_storeValueCardBalanceMoney" v-model="request.storeValueCardBalanceMoney" placeholder="请输入抵扣金额">
+                                </div>
+                            </div>
+                          </div>
+                         </li>
+                       </ul>
+                     </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-auto">
+          <div class="card">      
+            <div class="card-header">积分充抵({{request.integralBlance | currency}})</div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                     <div v-if="response.data.memberCardId>0" class="list-block">
+                       <ul>
+                         <li class="item-content">
+                          <div class="item-media">
+                            <i v-on:click="integralCash"  class="fa fa-jpy"></i> 
+                          </div>
+                          <div class="item-inner">
+                            <div class="item-title label">抵扣金额</div>
+                            <div class="item-input">
+                              <input type="text" v-model="request.txt_integralBlance" class="no-border" placeholder="请输入使用积分">
+                            </div>
+                          </div>
+                         </li>
+                       </ul>
+                       <div class="list-block-label text-right">可用积分:{{response.integral}}</div>  
+                     </div>
+                     <div v-if="response.data.memberCardId<=0">
+                        <p>没有设置会员！</p>
+                    </div>
+                </div>
+            </div>
+          </div> 
+        </div>
+        <div class="col-auto">
+          <div class="card"> 
+          <div class="card-content">
+            <div class="card-header">会员卡充值抵({{request.memberCarBalanceMoney | currency}})</div>
+            <div class="card-content-inner">
+             <div v-if="response.data.memberCardId>0" class="list-block">
+                <ul>
+                    <li>
+                      <div  class="item-content">                   
+                        <div class="item-media">
+                          <i class="fa fa-jpy"></i> 
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title label">抵扣金额</div>
+                          <div class="item-input">
+                           <input type="text" id="txt_memberCarBalanceMoney" v-model="request.memberCarBalanceMoney" placeholder="请输入抵扣金额">
+                          </div>
+                        </div>  
+                      </div>
+                    </li>
+                </ul>
+                <div class="list-block-label text-right">可用余额:{{request.memberCar_balance}}</div>   
+             </div>
+             <div v-if="response.data.memberCardId<=0">
+                  <p>没有设置会员！</p>
+              </div> 
+            </div>
+          </div>
+      </div>
+
+        </div>
+      </div>
+      
+             
+     </div>
+   
+  </div>
+</div>

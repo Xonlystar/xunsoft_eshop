@@ -1,0 +1,288 @@
+<div class="pages">
+    <div data-page="purchase_receiveOrder_detail" class="page">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">收货订单详情</div>
+                <div class="right">
+                    <a href="purchase/common/print.ios.html?orderType=receive&orderId={{response.data.receiveOrderId}}" class="link">
+                        <i class="fa fa-print"></i>
+                    </a>
+                    <a href="#" v-on:click="edit" class="link">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-content pull-to-refresh-content">
+
+
+            <div class="list-block" style="margin:0px 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">{{response.data.receiveOrderNo}}</div>
+                                <div class="item-after"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="list-block" style="margin:8px 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">供应商</div>
+                                <div class="item-after">{{response.data.supplierName}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">收货日期</div>
+                                <div class="item-after">{{response.data.receiveDate | date}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div class="card-header" style="min-height: 0px;padding:5px 10px;">商品信息</div>
+
+            <div class="card-content">
+                <!-- 货品信息开始 -->
+                <div class="list-block media-list" style="margin:0 0">
+                    <ul style="padding-left:0px;">
+                        <li v-for="item in response.data.detailList" class="swipeout">
+                            <div class="swipeout-content">
+                                <a v-on:click="detail($event,item)" class="item-content">
+                                    <div class="item-media">
+                                        <div>
+                                            <kind-img :kind-id="item.kindId" :color-id="item.colorId" :allow-scale=false></kind-img>
+                                        </div>
+                                    </div>
+                                    <div class="item-inner">
+
+                                        <div class="item-title-row">
+                                            <div class="item-title">{{item.kindName}}({{item.kindNo}})</div>
+                                            <div class="item-after"> > </div>
+                                        </div>
+
+                                        <div class="item-subtitle">
+                                        </div>
+                                        <div class="item-text" style="font-size: 13px">
+                                            <div>
+                                                <span style="display: inline-block;width: 100px;"> 数量:{{item.receiveAmount}}</span>
+                                                <span style="margin-left: 20px; ">收货价:{{item.receivePrice|currencys}}</span>
+                                            </div>
+                                            <div>
+                                                <span style="display: inline-block;">
+                                        总额:{{(item.receiveMoney-item.taxMoney)|currencys}}
+                                      </span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--  货品信息结束 -->
+
+            </div>
+
+
+
+            <div class="list-block" style="margin:8px 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">收货总数</div>
+                                <div class="item-after">{{response.data.detailSummary.receiveAmount}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">收货总额</div>
+                                <div class="item-after">{{response.data.detailSummary.receiveMoney | currencys}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">付款金额</div>
+                                <div class="item-after" v-if="response.data.advanceMoney>0">{{response.data.advanceMoney | currencys}} </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="list-block" style="margin:8px 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">总税额</div>
+                                <div class="item-after" v-if="response.data.detailSummary.taxMoney>0">{{response.data.detailSummary.taxMoney | currencys}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">去税总额</div>
+                                <div class="item-after">{{response.data.detailSummary.sumMoney | currencys}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--  其他信息 开始 -->
+                    <li class="accordion-item">
+                        <a href="#" class="item-content item-link">
+                            <div class="item-inner">
+                                <div class="item-title">
+                                    其他信息
+                                </div>
+                            </div>
+                        </a>
+                        <div class="accordion-item-content">
+                            <div class="item-content">
+                                <div class="item-title"> 结算账户</div>
+                                <div class="item-after">{{response.data.accountName}}</div>
+                            </div>
+
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">收货仓库</div>
+                                    <div class="item-after">{{response.data.receiveStorehouseName }}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="accordion-item-content">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"> 经手人</div>
+                                    <div class="item-after">{{response.data.sponsorName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item-content">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"> 过账人</div>
+                                    <div class="item-after">{{response.data.auditorName}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item-content">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"> 过账时间</div>
+                                    <div class="item-after">{{response.data.auditTime | dateTime}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <!-- 其他信息 结束 -->
+
+
+
+                </ul>
+            </div>
+
+
+
+
+            <div class="list-block" style="margin:8px 0">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">
+                                    备注
+                                </div>
+                                <div class="item-after">
+                                    {{response.data.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="list-block" style="margin:8px 0">
+                <ul>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">制单人</div>
+                                <div class="item-after">{{response.data.creatorName}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">制单时间</div>
+                                <div class="item-after">{{response.data.createTime | dateTime}}</div>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+
+            <!--  退货出库 -->
+           <!--  <div class="list-block" style="margin:8px 0" v-if="response.data.isReceive">
+                <ul>
+                    <li>
+                        <div class="item-content" v-on:click="toReturnOrder">
+                            <div style="margin:auto;">
+                                <a href="#" style="color: red;">退货出库</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- 退货出库 -->
+
+        </div>
+    </div>

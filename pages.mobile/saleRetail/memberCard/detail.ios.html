@@ -1,0 +1,315 @@
+<div class="pages">
+    <div data-page="saleRetail_memberCard_detail" class="page">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">会员卡详情</div>
+                <div class="right">
+                    <a href="#" v-on:click="edit" class="link">
+                        <i class="icon iconfont icon-edit"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content pull-to-refresh-content">
+
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+
+            <div class="content-block-title">基本信息</div>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                姓名
+                            </div>
+                            <div class="item-after">
+                                {{response.data.member_MemberName}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                手机号
+                            </div>
+                            <div class="item-after">
+                                {{response.data.member_MobilePhone}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                电子邮箱
+                            </div>
+                            <div class="item-after">
+                                {{response.data.member_Email}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                QQ号
+                            </div>
+                            <div class="item-after">
+                                {{response.data.member_QQ}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                微信号
+                            </div>
+                            <div class="item-after">
+                                {{response.data.member_WechatNo}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title">会员卡信息</div>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                卡类型
+                            </div>
+                            <div class="item-after">
+                                {{response.data.memberCardTypeName}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                卡号
+                            </div>
+                            <div class="item-after">
+                                {{response.data.memberCardNo}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                建卡人
+                            </div>
+                            <div class="item-after">
+                                {{response.data.updatorName}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                建卡日期
+                            </div>
+                            <div class="item-after">
+                                {{response.data.openDate | date}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title">其他信息</div>
+            <div class="list-block accordion-list" style="margin: 0px">
+                <ul>
+                    <li class="accordion-item">
+                        <a href="" class="item-link item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">持卡人信息</div>
+                                    <div class="item-after"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="accordion-item-content">
+                            <div class="list-block">
+                                <ul>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                性别
+                                            </div>
+                                            <div class="item-after" v-if="response.data.member_Sex=='1'">
+                                                男
+                                            </div>
+                                            <div class="item-after" v-if="response.data.member_Sex=='0'">
+                                                女
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                年龄
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.age}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                出生日期
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.member_Birthday | date}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                结婚日期
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.member_MarriageDate | date}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion-item">
+                        <a href="" class="item-link item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">卡信息</div>
+                                    <div class="item-after"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="accordion-item-content">
+                            <div class="list-block">
+                                <ul>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                默认折扣
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.discountRate}}折
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                最近消费日期
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.tradeSummary_RecentDate | date}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                最近消费金额
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.tradeSummary_RecentMoney | currency}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                储值卡余额
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.cost_CashMoney | currency}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                赠送额
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.cost_TicketMoney | currency}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                总余额
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.tradeSummary_TotalTicketMoney | currency}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                累计消费
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.tradeSummary_TotalConsumption | currency}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                剩余积分
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.cost_Score}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                状态
+                                            </div>
+                                            <div class="item-after" v-if="response.data.isEnable==1">
+                                                活动
+                                            </div>
+                                            <div class="item-after" v-if="response.data.isEnable==0">
+                                                禁用
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li v-if="response.data.description" class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                备注
+                                            </div>
+                                            <div class="item-after">
+                                                {{response.data.description}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

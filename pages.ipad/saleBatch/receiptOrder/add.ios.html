@@ -1,0 +1,172 @@
+
+<div class="pages">
+  <div data-page="saleBatch_receiptOrder_add" class="page">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"> 
+              <i class="icon icon-back"></i>
+              退出
+            </a>
+        </div>
+        <div class="center sliding">收款单录入</div>
+        <div class="right">
+            <a v-on:click="save" href="#" class="link"> 
+              保存
+            </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="page-content">
+      
+      <div class="content-block-title">客户</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-customer :source="response.customers" 
+                           :data.sync="request.customerId"
+                           max="1" edit-status=true></select-customer>
+        </div>
+      </div>
+
+      <div class="content-block-title">收款信息</div>
+      <div class="list-block inset">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  收款日期
+                </div>
+                <div class="item-input">
+                  <input id="receiptDate" v-model="request.receiptDate | date" type="text" />
+                </div>
+              </div>
+            </div>
+          </li>          
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+                <i class="fa fa-sticky-note"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title label">
+                  备注
+                </div>
+                <div class="item-input">
+                  <textarea placeholder="备注" v-model="request.description" class="resizable"></textarea>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="content-block-title">收入类型</div>
+        <div class="content-block inset">
+          <div class="content-block-inner">
+            <select-revenue :source="response.revenueTypes" 
+                            :data.sync="request.costTypeId"
+                            max="1"></select-revenue>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <div class="row no-gutter">
+            <div class="col-auto">
+              <div v-on:click="selectOrder">
+                <div class="text-center">
+                  <i class="fa fa-bars fa-3x"></i>
+                </div>
+                <div class="text-center">收款单据</div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div v-on:click="selectAccount">
+                <div class="text-center">
+                  <i class="fa fa-address-book-o fa-3x"></i>
+                </div>
+                <div class="text-center">收款账户</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <div class="content-block-title text-right">
+            收款单据(总额:<span>{{totalReceiptMoney | currency}}</span>)
+          </div>
+          <div class="list-block media-list inset">
+            <ul>
+              <li v-for="item in request.sourceDetailList">
+                <a v-on:click="updateOrder(item)" class="item-content item-link" href="#">
+                  <div class="item-media">
+                    <img :src="item.userLogo">
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">
+                        {{item.sourceTypeName}}
+                      </div>
+                      <div class="item-after">
+                        收:{{item.receiptMoney | currency}}
+                      </div>
+                    </div>
+                    <div class="item-subtitle">
+                        单据号码:<span>{{item.sourceNo}}</span> 
+                    </div>
+                    <div class="item-text">
+                      未收金额:<span>{{item.unreceivedMoney | currency}}</span> |
+                      已收金额:<span>{{item.receivedMoney | currency}}</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="content-block-title text-right">
+            收款账户(总额:<span>{{totalAccountMoney | currency}}</span>)
+          </div>
+          <div class="list-block inset">
+            <ul>
+              <li v-for="item in request.detailList">
+                <a v-on:click="updateAccount(item)" href="#" class="item-content item-link">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      {{item.accountName}}
+                    </div>
+                    <div class="item-after">
+                      {{item.receiptMoney | currency}}
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block-title">经手人</div>
+      <div class="content-block inset">
+        <div class="content-block-inner">
+          <select-user :source="response.users"
+                       :data.sync="request.sponsorId" max="1">
+          </select-user>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

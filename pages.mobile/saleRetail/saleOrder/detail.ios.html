@@ -1,0 +1,198 @@
+<div class="pages">
+  <div data-page="saleRetail_saleOrder_detail" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="back link">
+            <i class="icon iconfont icon-fanhui"></i>
+          </a>
+        </div>
+        <div class="center sliding">零售单明细</div>
+        <div class="right">
+          <a href="saleBatch/common/print.ios.html?orderType=saleRetailOrder&orderId={{response.data.saleOrderId}}" class="link">
+            <i class="icon iconfont icon-print"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content pull-to-refresh-content">
+      
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+
+      <div class="list-block" style="margin:0px 0">
+              <ul>
+                  <li >
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">{{response.data.saleOrderNo}}</div>
+                        <div class="item-after"></div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
+        </div>
+        <div class="list-block" style="margin:8px 0">
+            <ul>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    零售日期
+                  </div>
+                  <div class="item-after">
+                    {{response.data.saleDate|date}}
+                  </div>
+                </div>
+              </li>
+              <li v-if="response.data.memberCard_MemberName" class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    会员信息
+                  </div>
+                  <div class="item-after">
+                    {{response.data.memberCard_MemberName}} /{{response.data.memberCardNo}}
+                  </div>
+                </div>
+              </li>
+              </ul>
+           </div>
+           
+           <div  v-if="response.data.length!=0" class="content-block-title">
+               货品信息(总数:{{response.data.detailList | arraySum 'saleAmount'}},总额:{{response.data.detailList | arraySum 'saleMoney'}})
+            </div>
+
+            <div class="list-block media-list" v-if="response.data.length!=0"> 
+              <ul> 
+               <li v-for="item in response.data.detailList" class="swipeout"> 
+                <div class="swipeout-content"> 
+                  <a href="#" class="item-content" v-on:click="detail($event,item)"> 
+                    <div class="item-media"> 
+                     <div> 
+                      <kind-img :kind-id="item.kindId" :color-id="item.colorId"></kind-img> 
+                     </div> 
+                    </div> 
+                    <div class="item-inner"> 
+                     <div class="item-title-row"> 
+                      <div class="item-title">
+                       {{item.kindName}}({{item.kindNo}})
+                      </div> 
+                      <div class="item-after"> 
+                      </div> 
+                     </div> 
+                     <div class="item-subtitle"> 
+                     </div>
+                       <div class="item-text">
+                          <div class="row no-gutter">
+                              <span  class="col-33">品牌:{{item.brandName}}</span>
+                              <span  class="col-33">颜色:{{item.colorName}}</span>
+                              <span  class="col-33">尺码:{{item.sizeText}}</span>
+                          </div>
+                          <div class="row no-gutter"> 
+                           <span  class="col-33" >数量:{{item.saleAmount}}</span> 
+                           <span  class="col-33">单价:{{(item.retailPrice )|currencys}}</span> 
+                           <span  class="col-33">金额:{{(item.saleMoney )|currencys}}</span>
+                          </div>
+                        </div>
+                    </div> 
+                  </a> 
+                </div> 
+               </li> 
+              </ul> 
+            </div>    
+
+
+           <div class="list-block" style="margin:8px 0">
+            <ul>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    零售金额
+                  </div>
+                  <div class="item-after">
+                    {{response.data.detailSummary.saleMoney}}
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    促销金额
+                  </div>
+                  <div class="item-after">
+                    {{response.data.detailSummary.performanceMoney}}
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    应收金额
+                  </div>
+                  <div class="item-after">
+                    {{response.data.detailSummary.saleMoney | currency}}
+                  </div>
+                </div>
+              </li>
+             </ul>
+            </div>
+            <div class="list-block" style="margin:8px 0">
+            <ul>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    积分抵扣
+                  </div>
+                  <div class="item-after">
+                    {{response.data.accountScoreMoney | currencys}}
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    代金券
+                  </div>
+                  <div class="item-after">
+                    {{response.data.accountTicketMoney | currencys}}
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    实收金额
+                  </div>
+                  <div class="item-after">
+                    {{response.data.detailSummary.actualMoney | currencys}}
+                  </div>
+                </div>
+              </li>
+              
+            </ul>
+        </div>
+        
+        <div class="list-block">
+          <ul>
+            <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">制单人</div>
+                    <div class="item-after">{{response.data.creatorName}}</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">制单时间</div>
+                    <div class="item-after">{{response.data.createTime | dateTime}}</div>
+                  </div>
+                </div>
+              </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

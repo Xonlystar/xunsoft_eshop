@@ -1,0 +1,137 @@
+<div class="pages">
+	<div data-page="saleRetail_memberCard_filter" class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link">
+						<i class="icon iconfont icon-fanhui"></i>
+					</a>
+				</div>
+				<div class="center sliding">筛选</div>
+				<div class="right">
+					<a v-on:click="save" href="#" class="link">
+						<i class="icon iconfont icon-save1"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+			<div class="content-block-title">建卡日期范围</div>
+			<div class="list-block">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">起始日期</div>
+								<div class="item-input">
+									<input v-model="request.openDateFrom" id="startDate" type="text" placeholder="起始日期">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">截止日期</div>
+								<div class="item-input">
+									<input v-model="request.openDateTo" id="endDate" type="text" placeholder="截止日期">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">最近消费金额范围</div>
+			<div class="list-block">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">最小金额</div>
+								<div class="item-input">
+									<input v-model="request.recentMoneyFrom" type="text" placeholder="最小金额">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">最大金额</div>
+								<div class="item-input">
+									<input v-model="request.recentMoneyTo" type="text" placeholder="最大金额">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content-block-title">其他信息</div>
+			<div class="list-block">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">
+									卡号
+								</div>
+								<div class="item-input">
+									<input v-model="request.memberCardNo" type="text" class="" placeholder="卡号">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">
+									姓名
+								</div>
+								<div class="item-input">
+									<input v-model="request.member_MemberName" type="text" class="" placeholder="姓名">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">
+									最近消费日期
+								</div>
+								<div class="item-input">
+									<input v-model="request.recentDate" id="recentDate" type="text" placeholder="最近消费日期">
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li> 
+			             <a href="#" class="item-link smart-select" data-navbar-theme="white" > 
+			                  <select v-model="request.sponsorId" id="userId">
+			                      <option v-for="item in response.users" value="{{item.userId}}"> {{item.employeeName}}</option>
+			                  </select> 
+			               <div class="item-content"> 
+			                <div class="item-inner"> 
+			                 <div class="item-title">
+			                  操作员
+			                 </div> 
+			                </div> 
+			               </div>
+			             </a> 
+			        </li>
+				</ul>
+			</div>
+
+			
+			<div class="content-block">
+	          <a v-on:click="clear" href="#" class="button form-from-json"> 清空已选条件</a>
+	        </div>
+		</div>
+	</div>
+</div>

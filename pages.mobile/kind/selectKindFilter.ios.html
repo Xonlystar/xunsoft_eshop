@@ -1,0 +1,51 @@
+<div class="pages">
+	
+	<div class="page" data-page="kind_selectKindFilter">
+		
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link">
+						 <i class="icon iconfont icon-fanhui"></i>
+					</a>
+				</div>
+				<div class="center sliding">筛选</div>
+				<div class="right">
+					<a v-on:click="save" href="#" class="link">
+						<i class="icon iconfont icon-save1"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+			<div class="list-block ">
+				<ul>
+					<li>
+						<a href="#" class="item-link smart-select" data-navbar-theme="white" >
+							<select v-model="request.brandId">
+								<option v-for="item in response.brands"  value="{{item.brandId}}">   {{item.brandName}}</option>
+							</select>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title">品牌</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="item-link smart-select" data-navbar-theme="white" >
+							<select v-model="request.kindClassId">
+								<option v-for="item in response.kindClass"  value="{{item.kindClassId}}">   {{item.kindClassName}}</option>
+							</select>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title">分类</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

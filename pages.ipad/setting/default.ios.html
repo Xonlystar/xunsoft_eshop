@@ -1,0 +1,100 @@
+
+
+<div class="pages">
+  <div data-page="setting_default" class="page no-swipeback">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="dashboard.ios.html"  class="link">
+            <i class="fa fa-home fa-lg"></i>
+          </a>
+        </div>
+        <div class="center sliding">系统设置</div>
+        <div class="right">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      
+      <div class="content-block inset">
+        <div class="row">
+          <div class="col-auto">
+            <div v-on:click="itemClick('account/user.ios.html')" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-user fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                我的信息
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div v-on:click="itemClick('setting/feedback.ios.html')" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-envelope fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                反馈信息
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+             <div v-on:click="itemClick('setting/about.ios.html')" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-facebook fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                关于讯商
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div v-on:click="itemClick('setting/option.ios.html')" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-wrench fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                软件设置
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-auto">
+            <div v-on:click="loginOut" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-sign-out fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                退出登录
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div v-on:click="itemClick('setting/help.ios.html')" class="setting_default_item">
+              <div class="text-center">
+                <i class="fa fa-handshake-o fa-4x"></i>
+              </div>
+              <div class="setting_default_item_title text-center">
+                功能介绍
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            
+          </div>
+          <div class="col-auto">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

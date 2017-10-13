@@ -1,0 +1,121 @@
+<div class="pages">
+	<div class="page" data-page="purchase_receiveOrder_editKindPrice">
+		 <!--导航栏-->
+	  <div class="navbar">
+		    <div class="navbar-inner">
+		    <div class="left">
+		        <a href="#" class="back link"> 
+		         <i class="icon icon-back"></i>
+		          返回
+		        </a>
+		    </div>
+		    <div class="center sliding">修改信息</div>
+		    <div class="right">
+		         <a v-on:click="save" href="#" class="link"> 
+		            确认修改
+		         </a>
+		    </div>
+		  </div>
+      </div>
+      <!--内容区-->
+      <div class="page-content">
+      	  <div class="content-block-title">收货信息</div>
+      	 <div  class="list-block inset">
+      	 	  <ul>
+      	 	  	 <li>
+		      	   <div class="item-content">
+	                 <div class="item-media">
+	                        <i class="fa fa-jpy"></i>
+	                 </div>
+	                 <div class="item-inner">
+	                    <div class="item-title label">单价</div>
+	                      <div class="item-input">
+	                        <input type="number"  v-model="request.receivePrice" v-on:keyup="calculate">
+	                    </div>
+	                 </div>
+		            </div>
+      	 	  	 </li>
+      	 	  	 <li>
+		      	   <div class="item-content">
+	                 <div class="item-media">
+	                      <i class="fa fa-shopping-basket"></i>
+	                 </div>
+	                 <div class="item-inner">
+	                    <div class="item-title label">数量</div>
+	                      <div class="item-input">
+	                        <input type="number" v-model="request.receiveAmount" v-on:keyup="calculate">
+	                    </div>
+	                 </div>
+		            </div>
+      	 	  	 </li>
+      	 	  	 <li>
+		      	   <div class="item-content">
+	                 <div class="item-media">
+	                      <i class="fa fa-area-chart"></i>
+	                 </div>
+	                 <div class="item-inner">
+	                    <div class="item-title label">折扣率%</div>
+	                      <div class="item-input">
+	                        <input type="number" v-model='request.discountRate' v-on:keyup="calculate">
+	                    </div>
+	                 </div>
+		            </div>
+      	 	  	 </li>	      	    	 		      	 	
+      	 	  </ul> 
+      	 	  <div class="list-block-label">
+		          <p class="text-right">
+		            吊牌价:<span>{{request.salePrice | currency}}</span>
+		            &nbsp;&nbsp;
+		            金额:<span>{{request.receiveMoney | currency}}</span>
+		          </p>
+		      </div>    	
+      	 </div>    
+
+      	 <div class="content-block-title">税务信息</div>	
+      	 <div  class="list-block inset">
+      	 	<ul>
+      	 		<li>
+	  	 			 <div class="item-content">
+	                 <div class="item-media">
+	                      <i class="fa fa-area-chart"></i>
+	                 </div>
+	                 <div class="item-inner">
+	                    <div class="item-title label">税率</div>
+	                      <div class="item-input">
+	                        <input type="number" v-model="request.taxRate"  v-on:keyup="calculate">
+	                    </div>
+	                 </div>
+		            </div>
+      	 		</li>      	 		
+      	 	</ul>
+      	 	<div class="list-block-label">
+		          <p class="text-right">
+		            税额:<span>{{request.taxMoney | currency}}</span>
+		            &nbsp;&nbsp;
+		            金额(去税):<span>{{(request.receiveMoney-request.taxMoney) | currency}}</span>
+		          </p>
+		     </div>
+      	 </div> 
+
+      	 <div class="content-block-title">其他</div>
+      	 <div  class="list-block inset">
+      	 	<ul>
+      	 		<li>
+      	 			 <div class="item-content">
+	                 <div class="item-media">
+	                       <i class="fa fa-sticky-note"></i>
+	                 </div>
+	                 <div class="item-inner">
+	                    <div class="item-title label">备注</div>
+	                      <div class="item-input">
+	                        <input type="text" v-model="request.description"  name="name" placeholder="备注">
+	                    </div>
+	                 </div>
+		            </div>
+      	 		</li>
+      	 	</ul>
+      	 </div>    
+
+      </div>
+	</div>
+</div>

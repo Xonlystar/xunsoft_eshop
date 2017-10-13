@@ -1,0 +1,72 @@
+<div class="pages">
+    <div data-page="warehouse_shopStock_list" class="page">
+        <!--搜索栏-->
+        <form class="searchbar searchbar-init" data-custom-search="true" data-search-list=".list-block-search">
+            <div class="searchbar-input">
+                <input v-model="request.query.kindText" type="search" placeholder="请输入货品名称或货号">
+                <a href="#" class="searchbar-clear"></a>
+            </div> <a v-on:click="refresh" href="#" class="searchbar-cancel">检索</a>
+
+        </form>
+        <div class="searchbar-overlay"></div>
+        <!--导航栏-->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link"> <i class="icon iconfont icon-fanhui"></i>
+                    </a>
+                </div>
+                <div class="center sliding">店铺库存({{response.total}})</div>
+                <div class="right"></div>
+            </div>
+        </div>
+        <!--内容区-->
+        <div class="page-content pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div>
+                <div class="card" style="margin:0">
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li v-for="item in response.data">
+                                        <a href="warehouse/shopStock/detail.ios.html?kindId={{item.kind.kindId}}&sizeId={{item.size.sizeId}}&colorId={{item.color.colorId}}" class="item-content item-link">
+                                            <div>
+                                                <kind-img :kind-id="item.kind.kindId" :color-id="item.colorId"></kind-img>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title" style="margin-left: 20px">{{item.kind.kindName}}</div>
+                                                    <div class="item-after">{{item.qty}}</div>
+                                                </div>
+                                                <div class="item-text" style="font-size: 13px">
+                                                    <div> <span style="display: inline-block;width: 100px;margin-left: 20px">
+                              品牌 {{item.kind.brandName}}
+                              </span>
+                                                        <span style="margin-left: 20px;"> 货号:{{item.kind.kindNo}}</span>
+
+                                                    </div>
+                                                    <div>
+                                                        <span style="display: inline-block;width: 100px;margin-left: 20px" "=" "> 颜色:{{item.color.colorName}} </span> 
+                              <span style="margin-left: 20px; ">尺码:{{item.size.sizeText}}     </span>
+                            </div>
+                          </div>
+                                                  </div>
+                      </a>
+                    </li>
+                  </ul>
+               </div>
+            </div>
+          </div>
+        </div>
+ 
+        <div>
+           <load-more-normal :total="response.total" :data="response.data" v-on:load="load"></load-more-normal>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
